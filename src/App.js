@@ -8,27 +8,52 @@ import TodoList from './components/TodoList';
 function App() {
   const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState([]);
-  const [status, setStatus] = useState("Completed");
+  const [status, setStatus] = useState("All");
   const [completedTodos, setCompletedTodos] = useState([]);
 
+  //RUN ONCE when the app starts
   useEffect(() => {
-    console.log("Hey");
+    console.log('getLocalTodos Effect');
+    getLocalTodos();
+  }, []);
+  
+  // Use Effect
+  useEffect(() => {
+    console.log("saveLocalTodos Effect");
     filterHandler();
-  }, [todos, status])
+    saveLocalTodos();
+  }, [todos, status]);
+  
   
   const filterHandler = () => {
     switch (status) {
       case "Completed":
         setCompletedTodos(todos.filter(item => item.completed === true));
         break;
-      case "Uncompleted":
-        setCompletedTodos(todos.filter(item => item.completed === false));
-        break;
-      default:
+        case "Uncompleted":
+          setCompletedTodos(todos.filter(item => item.completed === false));
+          break;
+      case "All":
         setCompletedTodos(todos);
         break;
     }
   }
+
+  // Save to local
+  // 01:23:00
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+  
+  const getLocalTodos = () => {
+    if (localStorage.getItem("todos") === null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      console.log(todoLocal);
+      setTodos(todoLocal);
+    }
+  };
 
 
   return (
