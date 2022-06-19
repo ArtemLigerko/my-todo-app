@@ -10,29 +10,30 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("All");
   const [completedTodos, setCompletedTodos] = useState([]);
+  const [edit, setEdit] = useState(false);
 
   //RUN ONCE when the app starts
   useEffect(() => {
     console.log('getLocalTodos Effect');
     getLocalTodos();
   }, []);
-  
+
   // Use Effect
   useEffect(() => {
     console.log("saveLocalTodos Effect");
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
-  
-  
+
+
   const filterHandler = () => {
     switch (status) {
       case "Completed":
         setCompletedTodos(todos.filter(item => item.completed === true));
         break;
-        case "Uncompleted":
-          setCompletedTodos(todos.filter(item => item.completed === false));
-          break;
+      case "Uncompleted":
+        setCompletedTodos(todos.filter(item => item.completed === false));
+        break;
       case "All":
         setCompletedTodos(todos);
         break;
@@ -44,7 +45,7 @@ function App() {
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
-  
+
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));

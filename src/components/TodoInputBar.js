@@ -9,7 +9,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus }) {
         e.preventDefault();
         setTodos([
             ...todos,
-            { text: inputText, completed: false, id: Math.random() * 1000 }
+            { text: inputText, completed: false, id: Math.random() * 1000, edit: false }
         ]);
         setInputText("");
     }
@@ -25,7 +25,9 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus }) {
                 onChange={inputTextHandler}
                 type="text"
                 placeholder="type you task..." />
-            <button onClick={submitHandler} type="submit">+</button>
+            <button onClick={submitHandler} type="submit">
+                +
+            </button>
             <div >
                 <select className="select" onChange={statusHandler}>
                     <option>All</option>
