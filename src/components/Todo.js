@@ -1,6 +1,6 @@
 import React from "react";
 
-function Todo({ text, todos, setTodos, todo, setInputText }) {
+function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     }
@@ -18,42 +18,50 @@ function Todo({ text, todos, setTodos, todo, setInputText }) {
     }
 
     const editHandler = () => {
-        setTodos(todos.map((item) => {
-            if (item.id === todo.id) {
-                return {
-                    ...item, edit: !item.edit,
+        if (!todo.edit) {
+            setTodos(todos.map((item) => {
+                if (item.id === todo.id) {
+                    return {
+                        ...item, edit: !item.edit,
+                    }
                 }
-            }
-            return item;
-        }))
+                return item;
+            }))
+
+        } else {
+            setTodos(todos.map((item) => {
+                if (item.id === todo.id) {
+                    return {
+                        ...item, edit: !item.edit, text: editText,
+                    }
+                }
+                return item;
+            }))
+
+        }
+        
+
+
     }
 
-    const saveHandler = () => {
-        console.log('save');
-        // setInputText(e.target.value);
 
+    const inputEditTextHandler = (e) => {
+        setEditText(e.target.value);
     }
 
     return (
         <div className="todo">
             {/* <li className={todo.completed ? "todoCompleted" : ""}>{text}</li> */}
-            {/* <input
-                // className={todo.completed ? "todoCompleted" : ""}
-                type="text"
-                value={text}
-                // onChange={editHandler}
-                // readOnly
-                // disabled
-                // contenteditable
-            /> */}
-            {/* {todo.edit ? console.log('save') : console.log('edit')} */}
 
             {
                 todo.edit ?
-                    <input type="text" defaultValue={text}/> :
+                    <input
+                        type="text"
+                        defaultValue={text}
+                        onChange={inputEditTextHandler} 
+                        /> :
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
-
 
 
             <button onClick={completedHandler}>
@@ -67,7 +75,6 @@ function Todo({ text, todos, setTodos, todo, setInputText }) {
             </button>
         </div>
     )
-
 }
 
 export default Todo;

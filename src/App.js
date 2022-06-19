@@ -10,7 +10,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("All");
   const [completedTodos, setCompletedTodos] = useState([]);
-  const [edit, setEdit] = useState(false);
+  const [editText, setEditText] = useState('');
 
   //RUN ONCE when the app starts
   useEffect(() => {
@@ -74,7 +74,9 @@ function App() {
       <TodoList
         todos={todos}
         setTodos={setTodos}
-        completedTodos={completedTodos} />
+        completedTodos={completedTodos}
+        setEditText={setEditText}
+        editText={editText} />
     </div>
   );
 }
