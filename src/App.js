@@ -34,7 +34,7 @@ function App() {
       case "Uncompleted":
         setCompletedTodos(todos.filter(item => item.completed === false));
         break;
-      case "All":
+      default:
         setCompletedTodos(todos);
         break;
     }

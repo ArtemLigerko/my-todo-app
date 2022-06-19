@@ -18,7 +18,19 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
     }
 
     const editHandler = () => {
-        if (!todo.edit) {
+        setEditText(todo.text);
+        if (todo.edit) {
+            setTodos(todos.map((item) => {
+                if (item.id === todo.id) {
+                    return {
+                        ...item, edit: !item.edit, text: editText,
+                    }
+                }
+                return item;
+            }))
+            setEditText(todo.text);
+            
+        } else {
             setTodos(todos.map((item) => {
                 if (item.id === todo.id) {
                     return {
@@ -28,22 +40,8 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                 return item;
             }))
 
-        } else {
-            setTodos(todos.map((item) => {
-                if (item.id === todo.id) {
-                    return {
-                        ...item, edit: !item.edit, text: editText,
-                    }
-                }
-                return item;
-            }))
-
         }
-        
-
-
     }
-
 
     const inputEditTextHandler = (e) => {
         setEditText(e.target.value);
@@ -62,7 +60,6 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                         /> :
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
-
 
             <button onClick={completedHandler}>
                 <b>V</b>
