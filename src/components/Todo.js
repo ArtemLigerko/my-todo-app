@@ -1,6 +1,6 @@
 import React from "react";
 
-function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
+function Todo({ text, todos, setTodos, todo, setEditText, editText, setEditTexts, editTexts }) {
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     }
@@ -17,8 +17,11 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
         }))
     }
 
+
     const editHandler = () => {
+        // console.log(todos.indexOf(todo));
         setEditText(todo.text);
+        
         if (todo.edit) {
             setTodos(todos.map((item) => {
                 if (item.id === todo.id) {
@@ -28,7 +31,6 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                 }
                 return item;
             }))
-            setEditText(todo.text);
             
         } else {
             setTodos(todos.map((item) => {
@@ -39,12 +41,14 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                 }
                 return item;
             }))
-
+            
         }
     }
 
+
     const inputEditTextHandler = (e) => {
         setEditText(e.target.value);
+
     }
 
     return (
@@ -56,8 +60,8 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                     <input
                         type="text"
                         defaultValue={text}
-                        onChange={inputEditTextHandler} 
-                        /> :
+                        onChange={inputEditTextHandler}
+                    /> :
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
 

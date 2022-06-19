@@ -11,16 +11,17 @@ function App() {
   const [status, setStatus] = useState("All");
   const [completedTodos, setCompletedTodos] = useState([]);
   const [editText, setEditText] = useState('');
+  const [editTexts, setEditTexts] = useState([]);  // in develop
 
   //RUN ONCE when the app starts
   useEffect(() => {
-    console.log('getLocalTodos Effect');
+    // console.log('getLocalTodos Effect');
     getLocalTodos();
   }, []);
 
   // Use Effect
   useEffect(() => {
-    console.log("saveLocalTodos Effect");
+    // console.log("saveLocalTodos Effect");
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
@@ -76,7 +77,10 @@ function App() {
         setTodos={setTodos}
         completedTodos={completedTodos}
         setEditText={setEditText}
-        editText={editText} />
+        editText={editText}
+        setEditTexts={setEditTexts}
+        editTexts={editTexts}
+      />
     </div>
   );
 }
