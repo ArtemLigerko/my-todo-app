@@ -18,31 +18,19 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText, setEditTexts
     }
 
 
+
     const editHandler = () => {
         // console.log(todos.indexOf(todo));
         setEditText(todo.text);
         
-        if (todo.edit) {
             setTodos(todos.map((item) => {
                 if (item.id === todo.id) {
                     return {
-                        ...item, edit: !item.edit, text: editText,
+                        ...item, edit: !item.edit, text: [todo.edit ? editText : todo.text],
                     }
                 }
                 return item;
             }))
-            
-        } else {
-            setTodos(todos.map((item) => {
-                if (item.id === todo.id) {
-                    return {
-                        ...item, edit: !item.edit,
-                    }
-                }
-                return item;
-            }))
-            
-        }
     }
 
 
