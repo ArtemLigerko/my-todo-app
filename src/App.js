@@ -12,6 +12,8 @@ function App() {
   const [completedTodos, setCompletedTodos] = useState([]);
   const [editText, setEditText] = useState('');
   const [editTexts, setEditTexts] = useState([]);  // in develop
+  // const [disableEditButtons, setDisableEditButtons] = useState([]);
+
 
   //RUN ONCE when the app starts
   useEffect(() => {
@@ -71,6 +73,9 @@ function App() {
         todos={todos}
         setTodos={setTodos}
         setStatus={setStatus}
+        // disableEditButtons={disableEditButtons}
+        // setDisableEditButtons={setDisableEditButtons}
+
       />
       <TodoList
         todos={todos}

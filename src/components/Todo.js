@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Todo({ text, todos, setTodos, todo, setEditText, editText, setEditTexts, editTexts }) {
+function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
+    const [disableEditButtons, setDisableEditButtons] = useState([]);
+    
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     }
@@ -22,15 +24,19 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText, setEditTexts
     const editHandler = () => {
         // console.log(todos.indexOf(todo));
         setEditText(todo.text);
-        
-            setTodos(todos.map((item) => {
-                if (item.id === todo.id) {
-                    return {
-                        ...item, edit: !item.edit, text: [todo.edit ? editText : todo.text],
-                    }
+
+       
+        setTodos(todos.map((item) => {
+            if (item.id === todo.id) {
+                return {
+                    ...item,
+                    edit: !item.edit,
+                    text: todo.edit ? editText : todo.text,
+                    // disableEditButton: !item.disableEditButton,
                 }
-                return item;
-            }))
+            }
+            return item;
+        }))        
     }
 
 
@@ -38,6 +44,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText, setEditTexts
         setEditText(e.target.value);
 
     }
+
 
     return (
         <div className="todo">
@@ -59,7 +66,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText, setEditTexts
             <button onClick={deleteHandler}>
                 <b>X</b>
             </button>
-            <button onClick={editHandler}>
+            <button onClick={editHandler} disabled={todo.disableEditButton}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
             </button>
         </div>
