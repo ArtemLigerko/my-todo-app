@@ -1,7 +1,7 @@
 import React from "react";
 import '../App.css';
 
-function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus, setDisableEditButtons }) {
+function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus }) {
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
     }
@@ -11,15 +11,12 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus, set
             ...todos,
             {
                 text: inputText,
-                completed: false, 
-                id: Math.random() * 1000, 
+                completed: false,
+                id: Math.random() * 1000,
                 edit: false, editText: '',
-                // disableEditButton: false,
+                disableEditButton: false,
             }
         ]);
-        // setDisableEditButtons([
-        //     ...setDisableEditButtons, false,
-        // ])
         setInputText("");
     }
 
