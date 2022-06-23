@@ -1,12 +1,12 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(186, 255, 159);
+    background-color: rgb(252, 218, 155);
     display: flex;
     justify-content: center;
 }
 
 .head {
-    color: rgb(99, 99, 99)
+    color: rgb(255, 255, 255)
 }
 
 .App {
@@ -16,12 +16,41 @@ body {
     align-items: center;
 }
 
-.todo{
+.todoInputForm {
     display: flex;
-    padding: 5px 0;
+    flex-direction: row;
+    height: 1, 5em;
+    border: none;
+    /* font-size: 2em; */
+
 }
-.todoCompleted{
-    text-decoration-line: line-through;
+
+.inputBar {
+    padding: 0.3rem;
+    font-size: 1.2em;
+    border-style: none;
+    background: white;
+    width: 250px;
+}
+.inputBar:focus {
+    outline: none;
+}
+.inputButton{
+    font-size: 1.6em;
+    width: 1.6em;
+    background-color: rgb(255, 175, 25);
+    border: none;
+}
+
+.select {
+    padding: 0.3rem;
+    margin-left: 3mm;
+    height: 2em;
+    border: none;
+    font-size: 1.2em;
+}
+.select:focus {
+    outline: none;
 }
 
 .todo-list {
@@ -33,18 +62,20 @@ body {
     margin: 10px 0;
 }
 
+.todo {
+    display: flex;
+    padding: 5px 0;
+}
+
+.todoCompleted {
+    background-color: aquamarine;
+    text-decoration-line: line-through;
+}
+
+
 li {
     background-color: white;
     width: 10em;
     list-style-type: none;
     text-align: left;
-}
-
-.todoInputBar {
-    display: flex;
-    flex-direction: row;
-}
-
-.select {
-    margin-left: 3mm;
 }

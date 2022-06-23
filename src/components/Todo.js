@@ -1,14 +1,12 @@
 import React from "react";
 
-function Todo({ text, todos, setTodos, todo, setEditText, editText, 
-    disableEditButtons, setDisableEditButtons, }) {
+function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
     
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     }
 
     const completedHandler = () => {
-        // console.log( todos.filter((el) => el.id === todo.id) );
         setTodos(todos.map((item) => {
             if (item.id === todo.id) {
                 return {
@@ -35,10 +33,9 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
             if (item.id !== todo.id) {
                 return {
                     ...item,
-                    disableEditButton: !item.disableEditButton,
+                    disableButtons: !item.disableButtons,
                 }
             }
-
             return item;
         }))  
     }
@@ -51,8 +48,6 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
 
     return (
         <div className="todo">
-            {/* <li className={todo.completed ? "todoCompleted" : ""}>{text}</li> */}
-
             {
                 todo.edit ?
                     <input
@@ -63,13 +58,13 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
 
-            <button onClick={completedHandler} disabled={todo.disableEditButton || todo.edit}>
+            <button onClick={completedHandler} disabled={todo.disableButtons || todo.edit}>
                 <b>V</b>
             </button>
-            <button onClick={deleteHandler} disabled={todo.disableEditButton || todo.edit}>
+            <button onClick={deleteHandler} disabled={todo.disableButtons || todo.edit}>
                 <b>X</b>
             </button>
-            <button onClick={handleEditClick} disabled={todo.disableEditButton}>
+            <button onClick={handleEditClick} disabled={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
             </button>
         </div>

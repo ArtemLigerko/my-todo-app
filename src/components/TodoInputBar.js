@@ -14,7 +14,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus }) {
                 completed: false,
                 id: Math.random() * 1000,
                 edit: false, editText: '',
-                disableEditButton: false,
+                disableButtons: false,
             }
         ]);
         setInputText("");
@@ -25,13 +25,14 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus }) {
     }
 
     return (
-        <form className="todoInputBar">
+        <form className="todoInputForm">
             <input
+                className="inputBar"
                 value={inputText}
                 onChange={inputTextHandler}
                 type="text"
                 placeholder="type you task..." />
-            <button onClick={submitHandler} type="submit">
+            <button className="inputButton" onClick={submitHandler} type="submit">
                 +
             </button>
             <div >
