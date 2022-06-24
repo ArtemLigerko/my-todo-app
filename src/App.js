@@ -11,8 +11,7 @@ function App() {
   const [status, setStatus] = useState("All");
   const [completedTodos, setCompletedTodos] = useState([]);
   const [editText, setEditText] = useState('');
-  const [editTexts, setEditTexts] = useState([]);  // in develop
-
+  const [disableInputButton, setDisableInputButton] = useState(false);
 
   //RUN ONCE when the app starts
   useEffect(() => {
@@ -53,7 +52,7 @@ function App() {
       localStorage.setItem("todos", JSON.stringify([]));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      console.log(todoLocal);
+      // console.log(todoLocal);
       setTodos(todoLocal);
     }
   };
@@ -72,7 +71,7 @@ function App() {
         todos={todos}
         setTodos={setTodos}
         setStatus={setStatus}
-
+        disableInputButton={disableInputButton}
       />
       <TodoList
         todos={todos}
@@ -80,8 +79,8 @@ function App() {
         completedTodos={completedTodos}
         setEditText={setEditText}
         editText={editText}
-        setEditTexts={setEditTexts}
-        editTexts={editTexts}
+        setDisableInputButton={setDisableInputButton}
+        disableInputButton={disableInputButton}
       />
     </div>
   );

@@ -1,11 +1,13 @@
 import React from "react";
 
-function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
+function Todo({ text, todos, setTodos, todo, setEditText, editText,
+    setDisableInputButton,  disableInputButton}) {
 
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     }
 
+    
     const completedHandler = () => {
         setTodos(todos.map((item) => {
             if (item.id === todo.id) {
@@ -21,7 +23,6 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
 
     const handleEditClick = () => {
         setEditText(todo.text);
-
         setTodos(todos.map((item) => {
             if (item.id === todo.id) {
                 return {
@@ -38,6 +39,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
             }
             return item;
         }))
+        setDisableInputButton(!disableInputButton);
     }
 
 
