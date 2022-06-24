@@ -1,7 +1,7 @@
 import React from "react";
 
 function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
-    
+
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
     }
@@ -29,7 +29,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                     edit: !item.edit,
                     text: todo.edit ? editText : todo.text,
                 }
-            } 
+            }
             if (item.id !== todo.id) {
                 return {
                     ...item,
@@ -37,7 +37,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                 }
             }
             return item;
-        }))  
+        }))
     }
 
 
@@ -51,6 +51,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
             {
                 todo.edit ?
                     <input
+                        className="todoEditInput"
                         type="text"
                         defaultValue={text}
                         onChange={inputEditTextHandler}
@@ -58,13 +59,20 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText }) {
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
 
-            <button onClick={completedHandler} disabled={todo.disableButtons || todo.edit}>
+            <button
+                className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "doneTodoButton"}
+                onClick={completedHandler}
+                disabled={todo.disableButtons || todo.edit}>
                 <b>V</b>
             </button>
-            <button onClick={deleteHandler} disabled={todo.disableButtons || todo.edit}>
+            <button className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "delTodoButton"}
+                onClick={deleteHandler}
+                disabled={todo.disableButtons || todo.edit}>
                 <b>X</b>
             </button>
-            <button onClick={handleEditClick} disabled={todo.disableButtons}>
+            <button className={todo.disableButtons ? "editTodoButtonDisabled" : "editTodoButton"}
+                onClick={handleEditClick}
+                disabled={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
             </button>
         </div>

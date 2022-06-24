@@ -63,7 +63,7 @@ function App() {
     <div className="App">
       <header>
         <h1 className="head">
-          My Todo App
+          Artem's Todo App
         </h1>
       </header>
       <TodoInputBar
