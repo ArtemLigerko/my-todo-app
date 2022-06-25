@@ -15,18 +15,16 @@ function App() {
 
   //RUN ONCE when the app starts
   useEffect(() => {
-    // console.log('getLocalTodos Effect');
     getLocalTodos();
   }, []);
-
+  
   // Use Effect
   useEffect(() => {
-    // console.log("saveLocalTodos Effect");
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
-
-
+  
+  
   const filterHandler = () => {
     switch (status) {
       case "Completed":
@@ -40,23 +38,24 @@ function App() {
         break;
     }
   }
-
+  
   // Save to local
   // 01:23:00
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
+    console.log("saveLocalTodos Effect");
   };
-
+  
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      // console.log(todoLocal);
       setTodos(todoLocal);
+      console.log('getLocalTodos Effect');
     }
   };
-
+  
 
   return (
     <div className="App">
