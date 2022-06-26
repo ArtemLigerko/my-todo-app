@@ -1,10 +1,12 @@
 import React from "react";
 import '../App.css';
 
-function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus, disableInputButton }) {
+function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
+    disableInputButton, setCounter, counter }) {
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
     }
+
     const submitHandler = (e) => {
         e.preventDefault();
         setTodos([
@@ -13,11 +15,17 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus, dis
                 text: inputText,
                 id: Math.random() * 1000,
                 completed: false,
-                edit: false, 
+                edit: false,
                 disableButtons: false,
             }
         ]);
         setInputText("");
+        // setCounter([counter[0] + 1, counter[1], counter[2]])
+        setCounter({
+            counterCreated: counter.counterCreated + 1,
+            counterUpdated: counter.counterUpdated,
+            counterDeleted: counter.counterDeleted,
+        })
     }
 
     const statusHandler = (e) => {
@@ -37,7 +45,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus, dis
                 className="inputButton"
                 onClick={submitHandler}
                 type="submit"
-
                 disabled={disableInputButton}
             >
                 +

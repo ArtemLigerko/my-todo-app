@@ -3,6 +3,7 @@ import './App.css';
 // import components
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
+import Statistic from './components/Statistic';
 
 
 function App() {
@@ -12,19 +13,26 @@ function App() {
   const [completedTodos, setCompletedTodos] = useState([]);
   const [editText, setEditText] = useState('');
   const [disableInputButton, setDisableInputButton] = useState(false);
+  // const [counter, setCounter] = useState([0, 0, 0])
+  const [counter, setCounter] = useState({
+    counterCreated: 0,
+    counterUpdated: 0,
+    counterDeleted: 0,
+  })
+
 
   //RUN ONCE when the app starts
   useEffect(() => {
     getLocalTodos();
   }, []);
-  
+
   // Use Effect
   useEffect(() => {
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
-  
-  
+
+
   const filterHandler = () => {
     switch (status) {
       case "Completed":
@@ -38,24 +46,24 @@ function App() {
         break;
     }
   }
-  
+
   // Save to local
   // 01:23:00
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
-    console.log("saveLocalTodos Effect");
+    // console.log("saveLocalTodos Effect");
   };
-  
+
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
       setTodos(todoLocal);
-      console.log('getLocalTodos Effect');
+      // console.log('getLocalTodos Effect');
     }
   };
-  
+
 
   return (
     <div className="App">
@@ -71,6 +79,12 @@ function App() {
         setTodos={setTodos}
         setStatus={setStatus}
         disableInputButton={disableInputButton}
+        setCounter={setCounter}
+        counter={counter}
+      />
+      <Statistic
+        counter={counter}
+        setCounter={setCounter}
       />
       <TodoList
         todos={todos}
@@ -80,6 +94,8 @@ function App() {
         editText={editText}
         setDisableInputButton={setDisableInputButton}
         disableInputButton={disableInputButton}
+        setCounter={setCounter}
+        counter={counter}
       />
     </div>
   );

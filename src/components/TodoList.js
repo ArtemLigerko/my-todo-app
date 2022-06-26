@@ -2,7 +2,8 @@ import React from "react";
 import Todo from './Todo'
 
 function TodoList({
-    todos, setTodos, completedTodos, setEditText, editText, setDisableInputButton, disableInputButton }) {
+    todos, setTodos, completedTodos, setEditText, editText, 
+    setDisableInputButton, disableInputButton, setCounter, counter }) {
     return (
         <div>
             <ul className="todo-list">
@@ -17,6 +18,8 @@ function TodoList({
                         editText={editText}
                         setDisableInputButton={setDisableInputButton}
                         disableInputButton={disableInputButton}
+                        setCounter={setCounter}
+                        counter={counter}
                     />
                 ))}
             </ul>

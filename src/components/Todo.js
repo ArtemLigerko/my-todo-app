@@ -1,10 +1,17 @@
 import React from "react";
 
 function Todo({ text, todos, setTodos, todo, setEditText, editText,
-    setDisableInputButton,  disableInputButton}) {
+    setDisableInputButton,  disableInputButton, setCounter, counter}) {
 
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
+        // setCounter([counter[0], counter[1], counter[2] + 1]);
+        setCounter({
+            counterCreated: counter.counterCreated,
+            counterUpdated: counter.counterUpdated,
+            counterDeleted: counter.counterDeleted + 1,
+        })
+
     }
 
     
@@ -40,6 +47,13 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
             return item;
         }))
         setDisableInputButton(!disableInputButton);
+        // setCounter([counter[0], todo.edit ? (counter[1] + 1) : counter[1], counter[2]]);
+        setCounter({
+            counterCreated: counter.counterCreated,
+            counterUpdated: todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,
+            counterDeleted: counter.counterDeleted,
+        })
+
     }
 
 
