@@ -51,6 +51,7 @@ function App() {
   // 01:23:00
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("counter", JSON.stringify(counter));
     // console.log("saveLocalTodos Effect");
   };
 
@@ -60,6 +61,14 @@ function App() {
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
       setTodos(todoLocal);
+      // console.log('getLocalTodos Effect');
+    }
+
+    if (localStorage.getItem("counter") === null) {
+      localStorage.setItem("counter", JSON.stringify({}));
+    } else {
+      let counterLocal = JSON.parse(localStorage.getItem("counter"));
+      setCounter(counterLocal);
       // console.log('getLocalTodos Effect');
     }
   };
