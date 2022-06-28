@@ -6,12 +6,18 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
     }
-
+    
     const submitHandler = (e) => {
         e.preventDefault();
+        setCounter({
+            counterCreated: counter.counterCreated + 1,
+            counterUpdated: counter.counterUpdated,
+            counterDeleted: counter.counterDeleted,
+        })
         setTodos([
             ...todos,
             {
+                todoNumber: counter.counterCreated,
                 text: inputText,
                 id: Math.random() * 1000,
                 completed: false,
@@ -21,11 +27,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         ]);
         setInputText("");
         // setCounter([counter[0] + 1, counter[1], counter[2]])
-        setCounter({
-            counterCreated: counter.counterCreated + 1,
-            counterUpdated: counter.counterUpdated,
-            counterDeleted: counter.counterDeleted,
-        })
     }
 
     const statusHandler = (e) => {

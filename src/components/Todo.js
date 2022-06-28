@@ -1,7 +1,7 @@
 import React from "react";
 
 function Todo({ text, todos, setTodos, todo, setEditText, editText,
-    setDisableInputButton,  disableInputButton, setCounter, counter}) {
+    setDisableInputButton, disableInputButton, setCounter, counter }) {
 
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
@@ -14,7 +14,6 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
 
     }
 
-    
     const completedHandler = () => {
         setTodos(todos.map((item) => {
             if (item.id === todo.id) {
@@ -25,8 +24,6 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
             return item;
         }));
     }
-
-
 
     const handleEditClick = () => {
         setEditText(todo.text);
@@ -45,25 +42,56 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
                 }
             }
             return item;
-        }))
+        }));
         setDisableInputButton(!disableInputButton);
         // setCounter([counter[0], todo.edit ? (counter[1] + 1) : counter[1], counter[2]]);
         setCounter({
             counterCreated: counter.counterCreated,
             counterUpdated: todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,
             counterDeleted: counter.counterDeleted,
-        })
+        });
 
     }
-
 
     const inputEditTextHandler = (e) => {
         setEditText(e.target.value);
     }
 
+    const handleTodoMoveUp = () => {
+        console.log('Up');
+        setTodos(todos.map((item) => {
+            if (item.id === todo.id) {
+                console.log(todos.indexOf(item));
+                // const todoUp = item
+                // todos.splice(1, 2, todos[2], todos[1]);
+                let todoIndex = todos.indexOf(item);
+                return console.log(todoIndex);
+            }
+            return item;
+        }));
+
+    }
+
+    const handleTodoMoveDown = () => {
+        console.log('Down');
+    }
 
     return (
         <div className="todo">
+            <div className="todoUpDownButtons" >
+                <button
+                    className="todoUpDownButton rotate"
+                    onClick={handleTodoMoveUp}
+                >
+                    <b>v</b>
+                </button>
+                <button
+                    className="todoUpDownButton"
+                    onClick={handleTodoMoveDown}
+                >
+                    <b>v</b>
+                </button>
+            </div>
             {
                 todo.edit ?
                     <input
