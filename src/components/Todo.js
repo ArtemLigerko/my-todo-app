@@ -58,18 +58,13 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
     }
 
     const handleTodoMoveUp = () => {
-        console.log('Up');
-        setTodos(todos.map((item) => {
-            if (item.id === todo.id) {
-                console.log(todos.indexOf(item));
-                // const todoUp = item
-                // todos.splice(1, 2, todos[2], todos[1]);
-                let todoIndex = todos.indexOf(item);
-                return console.log(todoIndex);
-            }
-            return item;
-        }));
-
+        setTodos(todos.slice(
+            todos.splice(
+                (todos.indexOf(todo) - 1), 2,
+                todos[todos.indexOf(todo)],
+                todos[todos.indexOf(todo) - 1]
+            )
+        ));
     }
 
     const handleTodoMoveDown = () => {
