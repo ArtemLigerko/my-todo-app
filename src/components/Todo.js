@@ -58,17 +58,27 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
     }
 
     const handleTodoMoveUp = () => {
-        setTodos(todos.slice(
-            todos.splice(
-                (todos.indexOf(todo) - 1), 2,
-                todos[todos.indexOf(todo)],
-                todos[todos.indexOf(todo) - 1]
-            )
-        ));
+        if (todos.indexOf(todo) > 0) {
+            setTodos(todos.slice(
+                todos.splice(
+                    (todos.indexOf(todo) - 1), 2,
+                    todos[todos.indexOf(todo)],
+                    todos[todos.indexOf(todo) - 1]
+                )
+            ));
+        }
     }
 
     const handleTodoMoveDown = () => {
-        console.log('Down');
+        if (todos.indexOf(todo) < todos.length - 1) {
+            setTodos(todos.slice(
+                todos.splice(
+                    (todos.indexOf(todo)), 2,
+                    todos[todos.indexOf(todo) + 1],
+                    todos[todos.indexOf(todo)]
+                )
+            ));
+        }
     }
 
     return (
