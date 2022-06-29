@@ -25,7 +25,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
             }
         ]);
         setInputText("");
-        // setCounter([counter[0] + 1, counter[1], counter[2]])
     }
 
     const statusHandler = (e) => {
@@ -38,7 +37,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         fetch(url)
             .then(response => response.json())
             .then(getTodos => {
-                console.log(getTodos)
                 setTodos(getTodos.map(item => {
                     return {
                         ...item,
