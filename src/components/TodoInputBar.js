@@ -69,7 +69,10 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
             >
                 +
             </button>
-            <button onClick={fetchTodos}>
+            <button
+                onClick={fetchTodos}
+                className="getButton"
+            >
                 get from server
             </button>
             <div >

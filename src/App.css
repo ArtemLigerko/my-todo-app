@@ -27,7 +27,7 @@ body {
     font-size: 1.2rem;
     padding: 0.3rem;
     width: 14rem;
-    height: 1.8rem;
+    height: 30px;
     border-style: none;
     background: white;
 }
@@ -37,9 +37,19 @@ body {
 .inputButton{
     font-size: 1.6rem;
     width: 2.4rem;
-    height: 2.4rem;
+    height: 40px;
     background-color: rgb(255, 175, 25);
-    border: none;
+    border: rgb(252, 218, 155) solid 1px;
+    color: rgb(130, 130, 130);
+    cursor: pointer;
+}
+.getButton{
+    font-size: 1rem;
+    width: 6rem;
+    /* height: 2.4rem; */
+    height: 40px;
+    background-color: rgb(255, 175, 25);
+    border: rgb(252, 218, 155) solid 1px;
     color: rgb(130, 130, 130);
     cursor: pointer;
 }

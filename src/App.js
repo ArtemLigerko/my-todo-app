@@ -13,7 +13,6 @@ function App() {
   const [completedTodos, setCompletedTodos] = useState([]);
   const [editText, setEditText] = useState('');
   const [disableInputButton, setDisableInputButton] = useState(false);
-  // const [counter, setCounter] = useState([0, 0, 0])
   const [counter, setCounter] = useState({
     counterCreated: 0,
     counterUpdated: 0,
@@ -52,7 +51,6 @@ function App() {
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("counter", JSON.stringify(counter));
-    // console.log("saveLocalTodos Effect");
   };
 
   const getLocalTodos = () => {
@@ -61,7 +59,6 @@ function App() {
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
       setTodos(todoLocal);
-      // console.log('getLocalTodos Effect');
     }
 
     if (localStorage.getItem("counter") === null) {
@@ -69,7 +66,6 @@ function App() {
     } else {
       let counterLocal = JSON.parse(localStorage.getItem("counter"));
       setCounter(counterLocal);
-      // console.log('getLocalTodos Effect');
     }
   };
 
