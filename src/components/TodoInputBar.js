@@ -6,7 +6,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
     }
-    
+
     const submitHandler = (e) => {
         e.preventDefault();
         setCounter({
@@ -17,7 +17,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         setTodos([
             ...todos,
             {
-                todoNumber: counter.counterCreated,
                 text: inputText,
                 id: Math.random() * 1000,
                 completed: false,
@@ -31,6 +30,26 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
 
     const statusHandler = (e) => {
         setStatus(e.target.value);
+    }
+
+    const fetchTodos = (e) => {
+        e.preventDefault();
+        let url = 'https://gist.githubusercontent.com/alexandrtovmach/0c8a29b734075864727228c559fe9f96/raw/c4e4133c9658af4c4b3474475273b23b4a70b4af/todo-task.json'
+        fetch(url)
+            .then(response => response.json())
+            .then(getTodos => {
+                console.log(getTodos)
+                setTodos(getTodos.map(item => {
+                    return {
+                        ...item,
+                        text: item.text,
+                        id: item.id,
+                        completed: item.isCompleted,
+                        edit: false,
+                        disableButtons: false,
+                    }
+                }))
+            });
     }
 
     return (
@@ -49,6 +68,9 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                 disabled={disableInputButton}
             >
                 +
+            </button>
+            <button onClick={fetchTodos}>
+                get from server
             </button>
             <div >
                 <select className="select" onChange={statusHandler}>
