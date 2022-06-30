@@ -10,7 +10,6 @@ body {
 }
 
 .App {
-    /* background-color: aqua; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,45 +18,57 @@ body {
 /* InputForms elements */
 .todoInputForm {
     display: flex;
-    margin-bottom: 2rem;
-    flex-direction: row;
+    flex-direction: column;
+    margin-bottom: 20px;
     border: none;
 }
 .inputBar {
     font-size: 1.2rem;
-    padding: 0.3rem;
-    width: 14rem;
-    height: 30px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    width: 400px;
+    height: 40px;
     border-style: none;
+    /* border: none; */
     background: white;
 }
 .inputBar:focus {
     outline: none;
 }
+
+/* InputForms buttons */
+.buttons {
+   display: flex; 
+}
 .inputButton{
-    font-size: 1.6rem;
-    width: 2.4rem;
+    font-size: 1.2rem;
+    /* line-height: 0; */
+    padding: 0;
+    width: 40px;
     height: 40px;
     background-color: rgb(255, 175, 25);
-    border: rgb(252, 218, 155) solid 1px;
+    /* border: rgb(252, 218, 155) solid 1px; */
+    border: none;
     color: rgb(130, 130, 130);
     cursor: pointer;
 }
 .getButton{
     font-size: 1rem;
-    width: 6rem;
-    /* height: 2.4rem; */
+    margin-right: 5px;
+    width: 80px;
     height: 40px;
-    background-color: rgb(255, 175, 25);
-    border: rgb(252, 218, 155) solid 1px;
+    background-color: rgb(253, 197, 93);
+    /* border: rgb(252, 218, 155) solid 1px; */
+    border: none;
     color: rgb(130, 130, 130);
     cursor: pointer;
 }
 .select {
     font-size: 1.2rem;
     padding: 0.4rem;
-    margin-left: 1rem;
-    /* height: 2 rem; */
+    margin-right: 5px;
+    height: 40px;
+    background-color: rgb(253, 197, 93);
     border: none;
     cursor: pointer;
 }
@@ -82,7 +93,6 @@ body {
 li {
     background-color: white;
     padding: 0.3rem;
-    /* margin-right: 5px; */
     width: 400px;
     /* max-width: 500px; */
     list-style-type: none;
