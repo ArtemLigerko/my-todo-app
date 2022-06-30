@@ -47,7 +47,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                 // Change todos from server:
                 // setTodos(getTodos.map(item => {
                 //     return {
-                //         ...item,
                 //         text: item.text,
                 //         id: item.id,
                 //         completed: item.isCompleted,
@@ -60,7 +59,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                     ...todos,
                     ...getTodos.map(item => {
                         return {
-                            ...item,
                             text: item.text,
                             id: Math.random() * 1000,
                             completed: item.isCompleted,
