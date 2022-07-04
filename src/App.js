@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import './App.css';
 // import components
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
+
+//Style:
+const Wrapper = styled.div`
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(252, 218, 155);
+  display: flex;
+  ${'' /* justify-content: center; */}
+  flex-direction: column;
+  align-items: center;
+`
 
 
 function App() {
@@ -71,7 +82,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <Wrapper>
       <header>
         <h1 className="head">
           Artem's Todo App
@@ -102,7 +113,7 @@ function App() {
         setCounter={setCounter}
         counter={counter}
       />
-    </div>
+    </Wrapper>
   );
 }
 

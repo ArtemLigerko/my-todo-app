@@ -1,4 +1,16 @@
 import React from "react";
+import styled from "styled-components";
+
+//Style:
+const TodoButton = styled.button`
+    font-size: 1rem;
+    width: 2.2rem;
+    height: 2rem;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(100, 255, 212);
+    color: rgb(120, 120, 120);
+`
 
 function Todo({ text, todos, setTodos, todo, setEditText, editText,
     setDisableInputButton, disableInputButton, setCounter, counter }) {
@@ -122,6 +134,9 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
                 disabled={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
             </button>
+            <TodoButton>
+                <b>V</b>
+            </TodoButton>
         </div>
     )
 }

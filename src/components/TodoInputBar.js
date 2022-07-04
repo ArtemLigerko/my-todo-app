@@ -29,8 +29,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
 
     const handleClearTodos = (e) => {
         e.preventDefault();
-        // const isClear = confirm('sx');
-        // alert( isClear );
         setTodos([]);
     }
 
