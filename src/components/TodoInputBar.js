@@ -1,5 +1,68 @@
 import React from "react";
+import styled from 'styled-components';
 import '../App.css';
+
+//Style:
+const TodoInputForm = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: none;
+`
+const InputTodoBar = styled.input`
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    width: 400px;
+    height: 40px;
+    border-style: none;
+    /* border: none; */
+    background: white;
+    &:focus {
+        outline: none;
+    }
+`
+const AddTodoButton = styled.button`
+    font-size: 1.2rem;
+    /* line-height: 0; */
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(255, 175, 25);
+    /* border: rgb(252, 218, 155) solid 1px; */
+    border: none;
+    color: rgb(130, 130, 130);
+    cursor: pointer;
+`
+const OptionButtonsWrapper = styled.div`
+    display: flex;
+`
+const OptionButtons = styled.button`
+    font-size: 1rem;
+    margin-right: 5px;
+    width: 80px;
+    height: 40px;
+    background-color: rgb(253, 197, 93);
+    /* border: rgb(252, 218, 155) solid 1px; */
+    border: none;
+    color: rgb(130, 130, 130);
+    cursor: pointer;
+`
+const AddFromServerButton = styled(OptionButtons)``
+const ClearAllButton = styled(OptionButtons)``
+const FilterTodoSelector = styled.select`
+    font-size: 1.2rem;
+    padding: 0.4rem;
+    margin-right: 5px;
+    height: 40px;
+    background-color: rgb(253, 197, 93);
+    border: none;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+`
+
 
 function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
     disableInputButton, setCounter, counter }) {
@@ -70,47 +133,36 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
     }
 
     return (
-        <form className="todoInputForm">
+        <TodoInputForm>
             <div>
-                <input
-                    className="inputBar"
+                <InputTodoBar
                     value={inputText}
                     onChange={inputTextHandler}
                     type="text"
                     placeholder="type you task..."
                 />
-                <button
-                    className="inputButton"
+                <AddTodoButton
                     onClick={submitHandler}
                     type="submit"
                     disabled={disableInputButton}
                 >
                     +
-                </button>
+                </AddTodoButton>
             </div>
-            <div className="buttons">
-                <button
-                    onClick={handleFetchTodos}
-                    className="getButton"
-                >
+            <OptionButtonsWrapper>
+                <AddFromServerButton onClick={handleFetchTodos}>
                     add from server
-                </button>
-                <button
-                    onClick={handleClearTodos}
-                    className="getButton"
-                >
+                </AddFromServerButton>
+                <ClearAllButton onClick={handleClearTodos}>
                     clear all
-                </button>
-
-                <div >
-                    <select className="select" onChange={statusHandler}>
-                        <option>All</option>
-                        <option>Completed</option>
-                        <option>Uncompleted</option>
-                    </select>
-                </div>
-            </div>
-        </form>
+                </ClearAllButton>
+                <FilterTodoSelector onChange={statusHandler}>
+                    <option>All</option>
+                    <option>Completed</option>
+                    <option>Uncompleted</option>
+                </FilterTodoSelector>
+            </OptionButtonsWrapper>
+        </TodoInputForm>
 
     )
 }

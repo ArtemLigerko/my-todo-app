@@ -5,65 +5,61 @@
     justify-content: center;
 } */
 
-.head {
+/* .head {
     color: rgb(255, 255, 255)
-}
+} */
 
-.App {
+/* .App {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 /* InputForms elements */
-.todoInputForm {
+/* .todoInputForm {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     border: none;
-}
-.inputBar {
+} */
+/* .inputBar {
     font-size: 1.2rem;
     margin-bottom: 10px;
     padding-left: 10px;
     width: 400px;
     height: 40px;
     border-style: none;
-    /* border: none; */
     background: white;
-}
-.inputBar:focus {
+} */
+/* .inputBar:focus {
     outline: none;
-}
+} */
 
 /* InputForms buttons */
-.buttons {
+/* .buttons {
    display: flex; 
-}
-.inputButton{
+} */
+/* .inputButton{
     font-size: 1.2rem;
-    /* line-height: 0; */
     padding: 0;
     width: 40px;
     height: 40px;
     background-color: rgb(255, 175, 25);
-    /* border: rgb(252, 218, 155) solid 1px; */
     border: none;
     color: rgb(130, 130, 130);
     cursor: pointer;
-}
-.getButton{
+} */
+/* .getButton{
     font-size: 1rem;
     margin-right: 5px;
     width: 80px;
     height: 40px;
     background-color: rgb(253, 197, 93);
-    /* border: rgb(252, 218, 155) solid 1px; */
     border: none;
     color: rgb(130, 130, 130);
     cursor: pointer;
-}
-.select {
+} */
+/* .select {
     font-size: 1.2rem;
     padding: 0.4rem;
     margin-right: 5px;
@@ -71,25 +67,25 @@
     background-color: rgb(253, 197, 93);
     border: none;
     cursor: pointer;
-}
-.select:focus {
+} */
+/* .select:focus {
     outline: none;
-}
+} */
 
 /* Todos list elements */
-.todo-list {
+/* .todo-list {
     display: flex;
     flex-direction: column;
     align-items: left;
     padding: 0;
     margin: 10px 0;
-}
-.todo {
+} */
+/* .todo {
     display: flex;
     padding: 0.5rem 0;
     font-size: 1.2rem;
     border-style: none;
-}
+} */
 li {
     background-color: white;
     padding: 0.3rem;
@@ -103,17 +99,20 @@ li {
     background-color: rgb(180, 255, 212);
     text-decoration-line: line-through;
 }
-.todoEditInput {
+/* .todoEditInput {
     padding: 0.3rem;
     width: 400px;
-    height: 20px;
+    height: 32px;
     font-size: 1.2rem;
     border-style: dotted;
     border-width: 1.8px;
-}
-.todoEditInput:focus {
+} */
+/* .todoEditInput:focus {
     outline: none;
-}
+} */
+
+
+
 
 /* Todo buttons */
 .doneTodoButton {

@@ -1,7 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 //Style:
+const TodoLine = styled.div`
+    display: flex;
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    border-style: none;
+`
 const UpDownTodoButtonsWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -21,28 +27,46 @@ const DownTodoButton = styled.button`
 const UpTodoButton = styled(DownTodoButton)`
     transform: rotate(180deg);
 `
-const DoneTodoButton = styled.button`
+const TodoButtons = styled.button`
     font-size: 1rem;
     width: 2.2rem;
     height: 2rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(100, 255, 212);
     color: rgb(120, 120, 120);
-    @{props.}
 `
-const DelTodoButton = styled(DoneTodoButton)`
+const DoneTodoButton = styled(TodoButtons)`
+    background-color: rgb(100, 255, 212);
+    ${props => props.buttonEnabled && css`
+    `}
+    ${props => props.buttonDisabled && css`
+    background-color: rgb(230, 230, 230);
+    color: rgb(180, 180, 180);
+    `}
+`
+const DelTodoButton = styled(TodoButtons)`
     background-color: rgb(255, 144, 100);
 `
-const EditTodoButton = styled(DoneTodoButton)`
+const EditTodoButton = styled(TodoButtons)`
     background-color: rgb(255, 175, 25);
     width: 3rem;
 `
+const TodoEditInput = styled.input`
+    padding: 0.3rem;
+    width: 400px;
+    height: 32px;
+    font-size: 1.2rem;
+    border-style: dotted;
+    border-width: 1.8px;
+    &:focus {
+        outline: none;
+    }
+`
 
 
-function Todo({ text, todos, setTodos, todo, setEditText, editText,
-    setDisableInputButton, disableInputButton, setCounter, counter }) {
+const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
+    setDisableInputButton, disableInputButton, setCounter, counter }) => {
 
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
@@ -121,7 +145,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
     }
 
     return (
-        <div className="todo">
+        <TodoLine>
             <UpDownTodoButtonsWrapper>
                 <UpTodoButton onClick={handleTodoMoveUp}>
                     <b>v</b>
@@ -132,8 +156,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
             </UpDownTodoButtonsWrapper>
             {
                 todo.edit ?
-                    <input
-                        className="todoEditInput"
+                    <TodoEditInput
                         type="text"
                         defaultValue={text}
                         onChange={inputEditTextHandler}
@@ -141,7 +164,7 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
 
-            <button
+            <button 
                 className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "doneTodoButton"}
                 onClick={completedHandler}
                 disabled={todo.disableButtons || todo.edit}>
@@ -157,17 +180,17 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
                 disabled={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
             </button>
-            {/* <DoneTodoButton>
+            {/* <DoneTodoButton {todo.disableButtons || todo.edit ? buttonDisabled : buttonEnabled}>
                 <b>V</b>
-            </DoneTodoButton>
-            <DelTodoButton>
+            </DoneTodoButton> */}
+            {/* <DelTodoButton>
                 <b>X</b>
             </DelTodoButton>
             <EditTodoButton>
                 <b>edit</b>
             </EditTodoButton> */}
 
-        </div>
+        </TodoLine>
     )
 }
 

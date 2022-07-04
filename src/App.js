@@ -7,11 +7,17 @@ import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
 
 //Style:
-const Wrapper = styled.div`
+const Head = styled.h1`
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+  margin: 30px 0px 30px;
+`
+const AppWrapper = styled.div`
+  width: 100%;
+  min-height: 98vh;
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(252, 218, 155);
   display: flex;
-  ${'' /* justify-content: center; */}
   flex-direction: column;
   align-items: center;
 `
@@ -82,11 +88,11 @@ function App() {
 
 
   return (
-    <Wrapper>
+    <AppWrapper>
       <header>
-        <h1 className="head">
+        <Head>
           Artem's Todo App
-        </h1>
+        </Head>
       </header>
       <TodoInputBar
         inputText={inputText}
@@ -113,7 +119,7 @@ function App() {
         setCounter={setCounter}
         counter={counter}
       />
-    </Wrapper>
+    </AppWrapper>
   );
 }
 
