@@ -2,15 +2,44 @@ import React from "react";
 import styled from "styled-components";
 
 //Style:
-const TodoButton = styled.button`
+const UpDownTodoButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+const DownTodoButton = styled.button`
+    font-size: 1rem;
+    width: 2.2rem;
+    height: 1rem;
+    background-color: rgb(155, 218, 255);
+    border: rgb(252, 218, 155) solid;
+    border-width: 1px 0 1px 0;
+    border-radius: 5px;
+    color: rgb(120, 120, 120);
+    cursor: pointer;
+    line-height: 2px;
+`
+const UpTodoButton = styled(DownTodoButton)`
+    transform: rotate(180deg);
+`
+const DoneTodoButton = styled.button`
     font-size: 1rem;
     width: 2.2rem;
     height: 2rem;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     background-color: rgb(100, 255, 212);
     color: rgb(120, 120, 120);
+    @{props.}
 `
+const DelTodoButton = styled(DoneTodoButton)`
+    background-color: rgb(255, 144, 100);
+`
+const EditTodoButton = styled(DoneTodoButton)`
+    background-color: rgb(255, 175, 25);
+    width: 3rem;
+`
+
 
 function Todo({ text, todos, setTodos, todo, setEditText, editText,
     setDisableInputButton, disableInputButton, setCounter, counter }) {
@@ -93,20 +122,14 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
 
     return (
         <div className="todo">
-            <div className="todoUpDownButtons" >
-                <button
-                    className="todoUpDownButton rotate"
-                    onClick={handleTodoMoveUp}
-                >
+            <UpDownTodoButtonsWrapper>
+                <UpTodoButton onClick={handleTodoMoveUp}>
                     <b>v</b>
-                </button>
-                <button
-                    className="todoUpDownButton"
-                    onClick={handleTodoMoveDown}
-                >
+                </UpTodoButton>
+                <DownTodoButton onClick={handleTodoMoveDown}>
                     <b>v</b>
-                </button>
-            </div>
+                </DownTodoButton>
+            </UpDownTodoButtonsWrapper>
             {
                 todo.edit ?
                     <input
@@ -134,9 +157,16 @@ function Todo({ text, todos, setTodos, todo, setEditText, editText,
                 disabled={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
             </button>
-            <TodoButton>
+            {/* <DoneTodoButton>
                 <b>V</b>
-            </TodoButton>
+            </DoneTodoButton>
+            <DelTodoButton>
+                <b>X</b>
+            </DelTodoButton>
+            <EditTodoButton>
+                <b>edit</b>
+            </EditTodoButton> */}
+
         </div>
     )
 }
