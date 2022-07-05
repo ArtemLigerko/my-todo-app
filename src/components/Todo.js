@@ -35,22 +35,38 @@ const TodoButtons = styled.button`
     border-radius: 5px;
     cursor: pointer;
     color: rgb(120, 120, 120);
+    ${'' /* color: ${props => props.color || 'rgb(120, 120, 120)'} */}
+    ${'' /* background-color: ${props => props.background || "grey"} */}
 `
 const DoneTodoButton = styled(TodoButtons)`
     background-color: rgb(100, 255, 212);
+    
+    ${'' /* ${props => props.buttonEnabled && css`
+    `} */}
+    ${props => props.buttonDisabled && css`
+    background-color: rgb(230, 230, 230);
+    color: rgb(180, 180, 180);
+    `};
+`
+const DelTodoButton = styled(TodoButtons)`
+    background-color: rgb(255, 144, 100);
+
+    ${props => props.buttonDisabled && css`
+    background-color: rgb(230, 230, 230);
+    color: rgb(180, 180, 180);
+    `};
+
+`
+const EditTodoButton = styled(TodoButtons)`
+    background-color: rgb(255, 175, 25);
+    ${'' /* background-color: ${props => props.background || 'rgb(255, 175, 25)'} */}
+    width: 3rem;
     ${props => props.buttonEnabled && css`
     `}
     ${props => props.buttonDisabled && css`
     background-color: rgb(230, 230, 230);
     color: rgb(180, 180, 180);
-    `}
-`
-const DelTodoButton = styled(TodoButtons)`
-    background-color: rgb(255, 144, 100);
-`
-const EditTodoButton = styled(TodoButtons)`
-    background-color: rgb(255, 175, 25);
-    width: 3rem;
+    `};
 `
 const TodoEditInput = styled.input`
     padding: 0.3rem;
@@ -164,29 +180,65 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                     <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
             }
 
-            <button 
+            {todo.disableButtons || todo.edit ?
+                <DoneTodoButton buttonDisabled
+                    // {todo.disableButtons || todo.edit ? buttonDisabled : buttonEnabled}
+                    onClick={completedHandler}
+                    disabled={todo.disableButtons || todo.edit}>
+                    <b>V</b>
+                </DoneTodoButton>
+                :
+                <DoneTodoButton
+                    onClick={completedHandler}
+                    disabled={todo.disableButtons || todo.edit}>
+                    <b>V</b>
+                </DoneTodoButton>}
+            {/* <button
                 className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "doneTodoButton"}
                 onClick={completedHandler}
                 disabled={todo.disableButtons || todo.edit}>
                 <b>V</b>
-            </button>
-            <button className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "delTodoButton"}
+            </button> */}
+
+
+            {todo.disableButtons || todo.edit ?
+                <DelTodoButton buttonDisabled
+                    onClick={deleteHandler}
+                    disabled={todo.disableButtons || todo.edit}>
+                    <b>X</b>
+                </DelTodoButton> :
+                <DelTodoButton
+                    onClick={deleteHandler}
+                    disabled={todo.disableButtons || todo.edit}>
+                    <b>X</b>
+                </DelTodoButton>}
+            {/* <button className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "delTodoButton"}
                 onClick={deleteHandler}
                 disabled={todo.disableButtons || todo.edit}>
                 <b>X</b>
-            </button>
-            <button className={todo.disableButtons ? "editTodoButtonDisabled" : "editTodoButton"}
+            </button> */}
+
+            {todo.disableButtons ?
+                <EditTodoButton buttonDisabled
+                    onClick={handleEditClick}
+                    disabled={todo.disableButtons}>
+                    <b>{todo.edit ? 'save' : 'edit'}</b>
+                </EditTodoButton> :
+                <EditTodoButton
+                    onClick={handleEditClick}
+                    disabled={todo.disableButtons}>
+                    <b>{todo.edit ? 'save' : 'edit'}</b>
+                </EditTodoButton>}
+            {/* <button className={todo.disableButtons ? "editTodoButtonDisabled" : "editTodoButton"}
                 onClick={handleEditClick}
                 disabled={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
-            </button>
-            {/* <DoneTodoButton {todo.disableButtons || todo.edit ? buttonDisabled : buttonEnabled}>
-                <b>V</b>
-            </DoneTodoButton> */}
-            {/* <DelTodoButton>
-                <b>X</b>
-            </DelTodoButton>
-            <EditTodoButton>
+            </button> */}
+            {/* <EditTodoButton
+                {todo.disableButtons ? 'buttonDisabled' : 'buttonEnabled'}
+                // color={todo.disableButtons ? "red" : "green"}
+                // background={todo.disableButtons ? "red" : "green"}
+            >
                 <b>edit</b>
             </EditTodoButton> */}
 
