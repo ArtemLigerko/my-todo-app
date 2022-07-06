@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import './App.css';
-import './scss/Styles.scss';
 // import components
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
@@ -15,7 +14,7 @@ const Head = styled.h1`
 `
 const AppWrapper = styled.div`
   width: 100%;
-  min-height: 98vh;
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(252, 218, 155);
   display: flex;
