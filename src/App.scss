@@ -1,9 +1,17 @@
-/* body {
+body {
+    // font-family: Arial, Helvetica, sans-serif;
+    // background-color: rgb(252, 218, 155);
+    // display: flex;
+    // justify-content: center;
+
+    width: 100%;
+    min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(252, 218, 155);
     display: flex;
-    justify-content: center;
-} */
+    flex-direction: column;
+    align-items: center;
+}
 
 /* .head {
     color: rgb(255, 255, 255)
@@ -95,10 +103,12 @@ li {
     text-align: left;
     font-size: 1.2rem;
 }
+
 .todoCompleted {
     background-color: rgb(180, 255, 212);
     text-decoration-line: line-through;
 }
+
 /* .todoEditInput {
     padding: 0.3rem;
     width: 400px;
@@ -124,6 +134,7 @@ li {
     color: rgb(120, 120, 120);
     cursor: pointer;
 }
+
 .delTodoButton {
     font-size: 1rem;
     width: 2.2rem;
@@ -133,6 +144,7 @@ li {
     color: rgb(120, 120, 120);
     cursor: pointer;
 }
+
 .editTodoButton {
     font-size: 1rem;
     width: 3rem;
@@ -142,6 +154,7 @@ li {
     color: rgb(120, 120, 120);
     cursor: pointer;
 }
+
 .todoButtonDisabled {
     font-size: 1rem;
     width: 2.2rem;
@@ -150,6 +163,7 @@ li {
     border: none;
     color: rgb(180, 180, 180);
 }
+
 .editTodoButtonDisabled {
     font-size: 1rem;
     width: 3rem;
@@ -158,6 +172,7 @@ li {
     border: none;
     color: rgb(180, 180, 180);
 }
+
 /* .todoUpDownButton {
     font-size: 1rem;
     width: 2.2rem;

@@ -85,6 +85,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                 completed: false,
                 edit: false,
                 disableButtons: false,
+                colorId: Math.round(Math.random() * 10),
             }
         ]);
         setInputText("");
@@ -105,17 +106,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         fetch(url)
             .then(response => response.json())
             .then(getTodos => {
-                // Change todos from server:
-                // setTodos(getTodos.map(item => {
-                //     return {
-                //         text: item.text,
-                //         id: item.id,
-                //         completed: item.isCompleted,
-                //         edit: false,
-                //         disableButtons: false,
-                //     }
-                // }))
-
                 setTodos([
                     ...todos,
                     ...getTodos.map(item => {
@@ -125,10 +115,10 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                             completed: item.isCompleted,
                             edit: false,
                             disableButtons: false,
+                            colorId: Math.round(Math.random() * 10),
                         }
                     })
                 ])
-
             });
     }
 
