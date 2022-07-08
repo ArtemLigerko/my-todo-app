@@ -17,7 +17,7 @@ const InputTodoBar = styled.input`
     height: 40px;
     border-style: none;
     /* border: none; */
-    background: white;
+    background-color: white;
     &:focus {
         outline: none;
     }

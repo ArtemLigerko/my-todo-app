@@ -13,10 +13,10 @@ const Head = styled.h1`
   margin: 30px 0px 30px;
 `
 const AppWrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(252, 218, 155);
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

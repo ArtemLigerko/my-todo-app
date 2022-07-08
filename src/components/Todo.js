@@ -27,6 +27,11 @@ const DownTodoButton = styled.button`
 const UpTodoButton = styled(DownTodoButton)`
     transform: rotate(180deg);
 `
+const TodoTextArea = styled.li`
+    
+    background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'};
+    text-decoration-line: ${props => props.completed ? 'line-through' : 'none'}
+`
 const TodoButtons = styled.button`
     font-size: 1rem;
     width: 2.2rem;
@@ -177,22 +182,27 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                         defaultValue={text}
                         onChange={inputEditTextHandler}
                     /> :
-                    <li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
+                    //<li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
+                    <TodoTextArea completed={todo.completed}>
+                        {text}
+                    </TodoTextArea>
             }
 
-            {todo.disableButtons || todo.edit ?
-                <DoneTodoButton buttonDisabled
-                    // {todo.disableButtons || todo.edit ? buttonDisabled : buttonEnabled}
-                    onClick={completedHandler}
-                    disabled={todo.disableButtons || todo.edit}>
-                    <b>V</b>
-                </DoneTodoButton>
-                :
-                <DoneTodoButton
-                    onClick={completedHandler}
-                    disabled={todo.disableButtons || todo.edit}>
-                    <b>V</b>
-                </DoneTodoButton>}
+            {
+                todo.disableButtons || todo.edit ?
+                    <DoneTodoButton buttonDisabled
+                        // {todo.disableButtons || todo.edit ? buttonDisabled : buttonEnabled}
+                        onClick={completedHandler}
+                        disabled={todo.disableButtons || todo.edit}>
+                        <b>V</b>
+                    </DoneTodoButton>
+                    :
+                    <DoneTodoButton
+                        onClick={completedHandler}
+                        disabled={todo.disableButtons || todo.edit}>
+                        <b>V</b>
+                    </DoneTodoButton>
+            }
             {/* <button
                 className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "doneTodoButton"}
                 onClick={completedHandler}
@@ -201,34 +211,38 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
             </button> */}
 
 
-            {todo.disableButtons || todo.edit ?
-                <DelTodoButton buttonDisabled
-                    onClick={deleteHandler}
-                    disabled={todo.disableButtons || todo.edit}>
-                    <b>X</b>
-                </DelTodoButton> :
-                <DelTodoButton
-                    onClick={deleteHandler}
-                    disabled={todo.disableButtons || todo.edit}>
-                    <b>X</b>
-                </DelTodoButton>}
+            {
+                todo.disableButtons || todo.edit ?
+                    <DelTodoButton buttonDisabled
+                        onClick={deleteHandler}
+                        disabled={todo.disableButtons || todo.edit}>
+                        <b>X</b>
+                    </DelTodoButton> :
+                    <DelTodoButton
+                        onClick={deleteHandler}
+                        disabled={todo.disableButtons || todo.edit}>
+                        <b>X</b>
+                    </DelTodoButton>
+            }
             {/* <button className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "delTodoButton"}
                 onClick={deleteHandler}
                 disabled={todo.disableButtons || todo.edit}>
                 <b>X</b>
             </button> */}
 
-            {todo.disableButtons ?
-                <EditTodoButton buttonDisabled
-                    onClick={handleEditClick}
-                    disabled={todo.disableButtons}>
-                    <b>{todo.edit ? 'save' : 'edit'}</b>
-                </EditTodoButton> :
-                <EditTodoButton
-                    onClick={handleEditClick}
-                    disabled={todo.disableButtons}>
-                    <b>{todo.edit ? 'save' : 'edit'}</b>
-                </EditTodoButton>}
+            {
+                todo.disableButtons ?
+                    <EditTodoButton buttonDisabled
+                        onClick={handleEditClick}
+                        disabled={todo.disableButtons}>
+                        <b>{todo.edit ? 'save' : 'edit'}</b>
+                    </EditTodoButton> :
+                    <EditTodoButton
+                        onClick={handleEditClick}
+                        disabled={todo.disableButtons}>
+                        <b>{todo.edit ? 'save' : 'edit'}</b>
+                    </EditTodoButton>
+            }
             {/* <button className={todo.disableButtons ? "editTodoButtonDisabled" : "editTodoButton"}
                 onClick={handleEditClick}
                 disabled={todo.disableButtons}>
