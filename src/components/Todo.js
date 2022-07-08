@@ -28,9 +28,43 @@ const UpTodoButton = styled(DownTodoButton)`
     transform: rotate(180deg);
 `
 const TodoTextArea = styled.li`
-    
-    background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'};
-    text-decoration-line: ${props => props.completed ? 'line-through' : 'none'}
+    padding: 0.3rem;
+    width: 400px;
+    list-style-type: none;
+    text-align: left;
+    font-size: 1.2rem;
+    text-decoration-line: ${props => props.completed ? 'line-through' : 'none'};
+    ${'' /* color: ${props => props.completed ? 'rgb(180, 180, 180)' : 'black'}; */}
+    ${'' /* background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'}; */}
+    background-color: ${props => {
+        switch (props.randColor) {
+            case 0: return "#FFE4C4";
+            case 1: return "#FFDEAD";
+            case 2: return "#DEB887";
+            case 3: return "#BC8F8F"; //font-white
+            case 4: return "#DAA520";
+            case 5: return "#B8860B";
+            case 6: return "#D2691E";
+            case 7: return "#8B4513";
+            case 8: return "#A0522D";
+            case 9: return "#A52A2A";
+        }
+    }};
+    color: ${props => {
+        switch (props.randColor) {
+            case 0: return "black";
+            case 1: return "black";
+            case 2: return "black";
+            case 3: return "white"; //font-white
+            case 4: return "white";
+            case 5: return "white";
+            case 6: return "white";
+            case 7: return "white";
+            case 8: return "white";
+            case 9: return "white";
+        }
+    }};
+
 `
 const TodoButtons = styled.button`
     font-size: 1rem;
@@ -39,39 +73,21 @@ const TodoButtons = styled.button`
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    color: rgb(120, 120, 120);
-    ${'' /* color: ${props => props.color || 'rgb(120, 120, 120)'} */}
-    ${'' /* background-color: ${props => props.background || "grey"} */}
 `
 const DoneTodoButton = styled(TodoButtons)`
-    background-color: rgb(100, 255, 212);
+    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
     
-    ${'' /* ${props => props.buttonEnabled && css`
-    `} */}
-    ${props => props.buttonDisabled && css`
-    background-color: rgb(230, 230, 230);
-    color: rgb(180, 180, 180);
-    `};
 `
 const DelTodoButton = styled(TodoButtons)`
-    background-color: rgb(255, 144, 100);
-
-    ${props => props.buttonDisabled && css`
-    background-color: rgb(230, 230, 230);
-    color: rgb(180, 180, 180);
-    `};
+    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
 
 `
 const EditTodoButton = styled(TodoButtons)`
-    background-color: rgb(255, 175, 25);
-    ${'' /* background-color: ${props => props.background || 'rgb(255, 175, 25)'} */}
     width: 3rem;
-    ${props => props.buttonEnabled && css`
-    `}
-    ${props => props.buttonDisabled && css`
-    background-color: rgb(230, 230, 230);
-    color: rgb(180, 180, 180);
-    `};
+    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
 `
 const TodoEditInput = styled.input`
     padding: 0.3rem;
@@ -183,78 +199,33 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                         onChange={inputEditTextHandler}
                     /> :
                     //<li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
-                    <TodoTextArea completed={todo.completed}>
+                    <TodoTextArea
+                        completed={todo.completed}
+                        randColor={todo.colorId}
+                    >
                         {text}
                     </TodoTextArea>
             }
-
-            {
-                todo.disableButtons || todo.edit ?
-                    <DoneTodoButton buttonDisabled
-                        // {todo.disableButtons || todo.edit ? buttonDisabled : buttonEnabled}
-                        onClick={completedHandler}
-                        disabled={todo.disableButtons || todo.edit}>
-                        <b>V</b>
-                    </DoneTodoButton>
-                    :
-                    <DoneTodoButton
-                        onClick={completedHandler}
-                        disabled={todo.disableButtons || todo.edit}>
-                        <b>V</b>
-                    </DoneTodoButton>
-            }
-            {/* <button
-                className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "doneTodoButton"}
+            <DoneTodoButton
                 onClick={completedHandler}
-                disabled={todo.disableButtons || todo.edit}>
+                disabled={todo.disableButtons || todo.edit}
+                disabledTheme={todo.disableButtons || todo.edit}>
                 <b>V</b>
-            </button> */}
+            </DoneTodoButton>
 
-
-            {
-                todo.disableButtons || todo.edit ?
-                    <DelTodoButton buttonDisabled
-                        onClick={deleteHandler}
-                        disabled={todo.disableButtons || todo.edit}>
-                        <b>X</b>
-                    </DelTodoButton> :
-                    <DelTodoButton
-                        onClick={deleteHandler}
-                        disabled={todo.disableButtons || todo.edit}>
-                        <b>X</b>
-                    </DelTodoButton>
-            }
-            {/* <button className={todo.disableButtons || todo.edit ? "todoButtonDisabled" : "delTodoButton"}
+            <DelTodoButton
                 onClick={deleteHandler}
-                disabled={todo.disableButtons || todo.edit}>
+                disabled={todo.disableButtons || todo.edit}
+                disabledTheme={todo.disableButtons || todo.edit}>
                 <b>X</b>
-            </button> */}
+            </DelTodoButton>
 
-            {
-                todo.disableButtons ?
-                    <EditTodoButton buttonDisabled
-                        onClick={handleEditClick}
-                        disabled={todo.disableButtons}>
-                        <b>{todo.edit ? 'save' : 'edit'}</b>
-                    </EditTodoButton> :
-                    <EditTodoButton
-                        onClick={handleEditClick}
-                        disabled={todo.disableButtons}>
-                        <b>{todo.edit ? 'save' : 'edit'}</b>
-                    </EditTodoButton>
-            }
-            {/* <button className={todo.disableButtons ? "editTodoButtonDisabled" : "editTodoButton"}
+            <EditTodoButton
                 onClick={handleEditClick}
-                disabled={todo.disableButtons}>
+                disabled={todo.disableButtons}
+                disabledTheme={todo.disableButtons}>
                 <b>{todo.edit ? 'save' : 'edit'}</b>
-            </button> */}
-            {/* <EditTodoButton
-                {todo.disableButtons ? 'buttonDisabled' : 'buttonEnabled'}
-                // color={todo.disableButtons ? "red" : "green"}
-                // background={todo.disableButtons ? "red" : "green"}
-            >
-                <b>edit</b>
-            </EditTodoButton> */}
+            </EditTodoButton>
 
         </TodoLine>
     )

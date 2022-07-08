@@ -115,7 +115,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                             completed: item.isCompleted,
                             edit: false,
                             disableButtons: false,
-                            colorId: Math.round(Math.random() * 10),
+                            colorId: Math.floor(Math.random() * 10),
                         }
                     })
                 ])
