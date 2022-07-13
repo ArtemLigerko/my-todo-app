@@ -1,8 +1,13 @@
 import React from "react";
+import styled from "styled-components";
+
+const StatisticBar = styled.div`
+  color: rgb(130, 130, 130);
+`
 
 function Statistic({ counter }) {
     return (
-        <div>
+        <StatisticBar>
             <b>Statistic: </b>
             {/* created: {counter[0]};
             updated: {counter[1]};
@@ -10,7 +15,7 @@ function Statistic({ counter }) {
             created: {counter.counterCreated};
             updated: {counter.counterUpdated};
             deleted: {counter.counterDeleted};
-        </div>
+        </StatisticBar>
     )
 }
 

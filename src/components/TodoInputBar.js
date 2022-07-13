@@ -16,6 +16,7 @@ const InputTodoBar = styled.input`
     width: 400px;
     height: 40px;
     border-style: none;
+    border-radius: 5px 0 0 5px;
     /* border: none; */
     background-color: white;
     &:focus {
@@ -31,6 +32,7 @@ const AddTodoButton = styled.button`
     background-color: rgb(255, 175, 25);
     /* border: rgb(252, 218, 155) solid 1px; */
     border: none;
+    border-radius: 0 5px 5px 0;
     color: rgb(130, 130, 130);
     cursor: pointer;
 `
@@ -43,6 +45,7 @@ const OptionButtons = styled.button`
     width: 80px;
     height: 40px;
     background-color: rgb(253, 197, 93);
+    border-radius: 5px;
     /* border: rgb(252, 218, 155) solid 1px; */
     border: none;
     color: rgb(130, 130, 130);
@@ -55,8 +58,10 @@ const FilterTodoSelector = styled.select`
     padding: 0.4rem;
     margin-right: 5px;
     height: 40px;
+    color: rgb(130, 130, 130);
     background-color: rgb(253, 197, 93);
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     &:focus {
         outline: none;

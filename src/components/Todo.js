@@ -29,10 +29,12 @@ const UpTodoButton = styled(DownTodoButton)`
 `
 const TodoTextArea = styled.li`
     padding: 0.3rem;
+    margin: 0 5px;
     width: 400px;
     list-style-type: none;
     text-align: left;
     font-size: 1.2rem;
+    border-radius: 5px;
     text-decoration-line: ${props => props.completed ? 'line-through' : 'none'};
     ${'' /* color: ${props => props.completed ? 'rgb(180, 180, 180)' : 'black'}; */}
     ${'' /* background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'}; */}
@@ -73,6 +75,7 @@ const TodoButtons = styled.button`
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 2px;
 `
 const DoneTodoButton = styled(TodoButtons)`
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
@@ -89,13 +92,16 @@ const EditTodoButton = styled(TodoButtons)`
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
 `
+
 const TodoEditInput = styled.input`
     padding: 0.3rem;
+    margin: 0 5px;
     width: 400px;
     height: 32px;
     font-size: 1.2rem;
     border-style: dotted;
     border-width: 1.8px;
+    border-radius: 5px;
     &:focus {
         outline: none;
     }

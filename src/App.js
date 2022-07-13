@@ -22,7 +22,6 @@ const AppWrapper = styled.div`
   align-items: center;
 `
 
-
 function App() {
   const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState([]);
