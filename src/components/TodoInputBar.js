@@ -98,6 +98,11 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
 
     const handleClearTodos = (e) => {
         e.preventDefault();
+        setCounter({
+            counterCreated: counter.counterCreated,
+            counterUpdated: counter.counterUpdated,
+            counterDeleted: counter.counterDeleted + todos.length,
+        });
         setTodos([]);
     }
 
@@ -123,8 +128,14 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                             colorId: Math.floor(Math.random() * 10),
                         }
                     })
-                ])
+                ]);
+                setCounter({
+                    counterCreated: counter.counterCreated + getTodos.length,
+                    counterUpdated: counter.counterUpdated,
+                    counterDeleted: counter.counterDeleted,
+                });
             });
+
     }
 
     return (

@@ -118,9 +118,6 @@ function App() {
         setCounter={setCounter}
         counter={counter}
       />
-      <div className="end">
-        The End!
-      </div>
     </AppWrapper>
   );
 }

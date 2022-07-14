@@ -153,10 +153,11 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
         setDisableInputButton(!disableInputButton);
         setCounter({
             counterCreated: counter.counterCreated,
-            counterUpdated: todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,
+            counterUpdated: editText !== todo.text && todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,
             counterDeleted: counter.counterDeleted,
         });
-
+        
+        // editText !== todo.text ? console.log(true) : console.log(false);
     }
 
     const inputEditTextHandler = (e) => {
