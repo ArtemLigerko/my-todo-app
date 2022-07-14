@@ -75,6 +75,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         setInputText(e.target.value);
     }
 
+
     const submitHandler = (e) => {
         e.preventDefault();
         setCounter({
@@ -95,6 +96,32 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         ]);
         setInputText("");
     }
+
+    //-------------
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            // return {submitHandler};
+            setCounter({
+                counterCreated: counter.counterCreated + 1,
+                counterUpdated: counter.counterUpdated,
+                counterDeleted: counter.counterDeleted,
+            })
+            setTodos([
+                ...todos,
+                {
+                    text: inputText,
+                    id: Math.random() * 1000,
+                    completed: false,
+                    edit: false,
+                    disableButtons: false,
+                    colorId: Math.round(Math.random() * 10),
+                }
+            ]);
+            setInputText("");
+        }
+    }
+    //------------
 
     const handleClearTodos = (e) => {
         e.preventDefault();
@@ -144,6 +171,14 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                 <InputTodoBar
                     value={inputText}
                     onChange={inputTextHandler}
+                    onKeyPress={handleKeyPress}
+                    // onKeyPress={e => {
+                    //     if (e.key === 'Enter') {
+                    //         console.log('Enter');
+                    //         return {submitHandler};
+                    //     }
+                    //     }
+                    // }
                     type="text"
                     placeholder="type you task..."
                 />
