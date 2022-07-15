@@ -156,7 +156,7 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
             counterUpdated: editText !== todo.text && todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,
             counterDeleted: counter.counterDeleted,
         });
-        
+
         // editText !== todo.text ? console.log(true) : console.log(false);
     }
 
@@ -204,6 +204,10 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                         type="text"
                         defaultValue={text}
                         onChange={inputEditTextHandler}
+                        // onKeyPress={e => {
+                        //     if (e.key === 'Enter') { console.log('Edit') }
+                        // }}
+
                     /> :
                     //<li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
                     <TodoTextArea
