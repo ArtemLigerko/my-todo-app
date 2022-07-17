@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useDispatch } from "react-redux";
+import { addUpdateCountAction, addDeleteCountAction } from "../store/statisticReducer";
 
 //Style:
 const TodoLine = styled.div`
@@ -111,8 +113,13 @@ const TodoEditInput = styled.input`
 const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
     setDisableInputButton, disableInputButton, setCounter, counter }) => {
 
+    const dispatch = useDispatch();
+    
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
+
+        dispatch( addDeleteCountAction(1) );  //Redux
+
         setCounter({
             counterCreated: counter.counterCreated,
             counterUpdated: counter.counterUpdated,
@@ -151,6 +158,9 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
             return item;
         }));
         setDisableInputButton(!disableInputButton);
+
+        dispatch( addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0) );  //Redux
+
         setCounter({
             counterCreated: counter.counterCreated,
             counterUpdated: editText !== todo.text && todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,

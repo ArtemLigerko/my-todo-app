@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
 import '../App.css';
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { addCreateCountAction, addUpdateCountAction, addDeleteCountAction } from "../store/statisticReducer";
 
 //Style:
 const TodoInputForm = styled.div`
@@ -71,13 +73,19 @@ const FilterTodoSelector = styled.select`
 
 function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
     disableInputButton, setCounter, counter }) {
+
+    const dispatch = useDispatch();  //Redux
+    //const counterCreated = useSelector(state => state.statistic.counterCreated); //Redux
+
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
     }
 
-
     const submitHandler = (e) => {
         e.preventDefault();
+
+        dispatch( addCreateCountAction(1) );  //Redux
+
         setCounter({
             counterCreated: counter.counterCreated + 1,
             counterUpdated: counter.counterUpdated,
@@ -99,6 +107,9 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
 
     const handleClearTodos = (e) => {
         e.preventDefault();
+        
+        dispatch( addDeleteCountAction(todos.length) );  //Redux
+
         setCounter({
             counterCreated: counter.counterCreated,
             counterUpdated: counter.counterUpdated,
@@ -130,6 +141,9 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                         }
                     })
                 ]);
+
+                dispatch( addCreateCountAction(getTodos.length) );  //Redux
+
                 setCounter({
                     counterCreated: counter.counterCreated + getTodos.length,
                     counterUpdated: counter.counterUpdated,
@@ -158,6 +172,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                 >
                     +
                 </AddTodoButton>
+
             </div>
             <OptionButtonsWrapper>
                 <AddFromServerButton onClick={handleFetchTodos}>
