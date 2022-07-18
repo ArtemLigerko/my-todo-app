@@ -1,8 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
-import '../App.css';
-import { useDispatch, useSelector } from "react-redux/es/exports";
-import { addCreateCountAction, addUpdateCountAction, addDeleteCountAction } from "../store/statisticReducer";
+import '../App.scss';
+import { useDispatch } from "react-redux/es/exports";
+import { addCreateCountAction, addDeleteCountAction } from "../store/statisticReducer";
 
 //Style:
 const TodoInputForm = styled.div`
@@ -85,12 +85,12 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
         e.preventDefault();
 
         dispatch( addCreateCountAction(1) );  //Redux
-
         setCounter({
             counterCreated: counter.counterCreated + 1,
             counterUpdated: counter.counterUpdated,
             counterDeleted: counter.counterDeleted,
         })
+
         setTodos([
             ...todos,
             {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import './App.css';
+import './App.scss';
 // import components
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';

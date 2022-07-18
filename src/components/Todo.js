@@ -52,6 +52,7 @@ const TodoTextArea = styled.li`
             case 7: return "#8B4513";
             case 8: return "#A0522D";
             case 9: return "#A52A2A";
+            default: return "white";
         }
     }};
     color: ${props => {
@@ -66,6 +67,7 @@ const TodoTextArea = styled.li`
             case 7: return "white";
             case 8: return "white";
             case 9: return "white";
+            default: return "black";
         }
     }};
 
@@ -114,11 +116,11 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
     setDisableInputButton, disableInputButton, setCounter, counter }) => {
 
     const dispatch = useDispatch();
-    
+
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
 
-        dispatch( addDeleteCountAction(1) );  //Redux
+        dispatch(addDeleteCountAction(1));  //Redux
 
         setCounter({
             counterCreated: counter.counterCreated,
@@ -129,6 +131,8 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
     }
 
     const completedHandler = () => {
+                // Redux
+
         setTodos(todos.map((item) => {
             if (item.id === todo.id) {
                 return {
@@ -159,7 +163,7 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
         }));
         setDisableInputButton(!disableInputButton);
 
-        dispatch( addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0) );  //Redux
+        dispatch(addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0));  //Redux
 
         setCounter({
             counterCreated: counter.counterCreated,
@@ -167,7 +171,6 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
             counterDeleted: counter.counterDeleted,
         });
 
-        // editText !== todo.text ? console.log(true) : console.log(false);
     }
 
     const inputEditTextHandler = (e) => {
@@ -214,9 +217,9 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                         type="text"
                         defaultValue={text}
                         onChange={inputEditTextHandler}
-                        // onKeyPress={e => {
-                        //     if (e.key === 'Enter') { console.log('Edit') }
-                        // }}
+                    // onKeyPress={e => {
+                    //     if (e.key === 'Enter') { console.log('Edit') }
+                    // }}
 
                     /> :
                     //<li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
@@ -233,6 +236,13 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                 disabledTheme={todo.disableButtons || todo.edit}>
                 <b>V</b>
             </DoneTodoButton>
+
+            {/* <DoneTodoButton //Redux
+                onClick={completedHandler}
+                disabled={todo.disableButtons || todo.edit}
+                disabledTheme={todo.disableButtons || todo.edit}>
+                <b>V</b>
+            </DoneTodoButton> */}
 
             <DelTodoButton
                 onClick={deleteHandler}
