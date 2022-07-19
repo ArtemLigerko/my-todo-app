@@ -1,197 +1,21 @@
-$font-stack: Arial, Helvetica, sans-serif;
-$background: rgb(252, 218, 155);
 
 body {
-    width: 100%;
-    min-height: 100vh;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    justify-content: center;
+    .appWrapper {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(255, 232, 190);
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .todoListWrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            padding: 0;
+            margin: 10px 0;
+        }
+    }
+  }
 
-    // font-family: Arial, Helvetica, sans-serif;
-    font-family: $font-stack;
-    // background-color: rgb(252, 218, 155);
-    background-color: $background;
-}
-
-/* .head {
-    color: rgb(255, 255, 255)
-} */
-
-// .App {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-// }
-
-/* InputForms elements */
-/* .todoInputForm {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    border: none;
-} */
-/* .inputBar {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    width: 400px;
-    height: 40px;
-    border-style: none;
-    background: white;
-} */
-/* .inputBar:focus {
-    outline: none;
-} */
-
-/* InputForms buttons */
-/* .buttons {
-   display: flex; 
-} */
-/* .inputButton{
-    font-size: 1.2rem;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    background-color: rgb(255, 175, 25);
-    border: none;
-    color: rgb(130, 130, 130);
-    cursor: pointer;
-} */
-/* .getButton{
-    font-size: 1rem;
-    margin-right: 5px;
-    width: 80px;
-    height: 40px;
-    background-color: rgb(253, 197, 93);
-    border: none;
-    color: rgb(130, 130, 130);
-    cursor: pointer;
-} */
-/* .select {
-    font-size: 1.2rem;
-    padding: 0.4rem;
-    margin-right: 5px;
-    height: 40px;
-    background-color: rgb(253, 197, 93);
-    border: none;
-    cursor: pointer;
-} */
-/* .select:focus {
-    outline: none;
-} */
-
-/* Todos list elements */
-/* .todo-list {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    padding: 0;
-    margin: 10px 0;
-} */
-/* .todo {
-    display: flex;
-    padding: 0.5rem 0;
-    font-size: 1.2rem;
-    border-style: none;
-} */
-// li {
-//     background-color: white;
-//     padding: 0.3rem;
-//     width: 400px;
-//     /* max-width: 500px; */
-//     list-style-type: none;
-//     text-align: left;
-//     font-size: 1.2rem;
-// }
-
-// .todoCompleted {
-//     background-color: rgb(180, 255, 212);
-//     text-decoration-line: line-through;
-// }
-
-/* .todoEditInput {
-    padding: 0.3rem;
-    width: 400px;
-    height: 32px;
-    font-size: 1.2rem;
-    border-style: dotted;
-    border-width: 1.8px;
-} */
-/* .todoEditInput:focus {
-    outline: none;
-} */
-
-
-
-
-/* Todo buttons */
-// .doneTodoButton {
-//     font-size: 1rem;
-//     width: 2.2rem;
-//     height: 2rem;
-//     background-color: rgb(100, 255, 212);
-//     border: none;
-//     color: rgb(120, 120, 120);
-//     cursor: pointer;
-//     margin-right: 1px;
-// }
-
-// .delTodoButton {
-//     font-size: 1rem;
-//     width: 2.2rem;
-//     height: 2rem;
-//     background-color: rgb(255, 144, 100);
-//     border: none;
-//     color: rgb(120, 120, 120);
-//     cursor: pointer;
-// }
-
-// .editTodoButton {
-//     font-size: 1rem;
-//     width: 3rem;
-//     height: 2rem;
-//     background-color: rgb(255, 175, 25);
-//     border: none;
-//     color: rgb(120, 120, 120);
-//     cursor: pointer;
-// }
-
-// .todoButtonDisabled {
-//     font-size: 1rem;
-//     width: 2.2rem;
-//     height: 2rem;
-//     background-color: rgb(230, 230, 230);
-//     border: none;
-//     color: rgb(180, 180, 180);
-// }
-
-// .editTodoButtonDisabled {
-//     font-size: 1rem;
-//     width: 3rem;
-//     height: 2rem;
-//     background-color: rgb(230, 230, 230);
-//     border: none;
-//     color: rgb(180, 180, 180);
-// }
-
-/* .todoUpDownButton {
-    font-size: 1rem;
-    width: 2.2rem;
-    height: 1rem;
-    background-color: rgb(155, 218, 255);
-    border: rgb(252, 218, 155) solid;
-    border-width: 1px 0 1px 0;
-    color: rgb(120, 120, 120);
-    cursor: pointer;
-    line-height: 2px;
-}
-.todoUpDownButtons {
-    display: flex;
-    flex-direction: column;
-}
-
-.rotate {
-    transform: rotate(180deg);
-} */

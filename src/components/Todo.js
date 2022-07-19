@@ -38,6 +38,7 @@ const TodoTextArea = styled.li`
     font-size: 1.2rem;
     border-radius: 5px;
     text-decoration-line: ${props => props.completed ? 'line-through' : 'none'};
+    text-decoration-thickness: ${props => props.completed ? '2px' : 'none'};
     ${'' /* color: ${props => props.completed ? 'rgb(180, 180, 180)' : 'black'}; */}
     ${'' /* background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'}; */}
     background-color: ${props => {
@@ -113,7 +114,9 @@ const TodoEditInput = styled.input`
 
 
 const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
-    setDisableInputButton, disableInputButton, setCounter, counter }) => {
+    setDisableInputButton, disableInputButton, setCounter, counter,
+    todoIndexOf, setTodoIndexOf }) => {
+
 
     const dispatch = useDispatch();
 
@@ -131,7 +134,7 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
     }
 
     const completedHandler = () => {
-                // Redux
+        // Redux
 
         setTodos(todos.map((item) => {
             if (item.id === todo.id) {
@@ -201,8 +204,66 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
         }
     }
 
+    //Drag'n'Drop
+    const dragStartHandler = (e, todo) => {
+        // e.preventDefault();
+        setTodoIndexOf(todos.indexOf(todo));
+        console.log('DragStart, ', todoIndexOf);
+
+    }
+    const dragLeaveHandler = (e) => {
+        // console.log('DragLeave');
+    }
+    const dragOverHandler = (e) => {
+        e.preventDefault();
+        // e.target.style.background = 'lightgray';
+        // console.log('DragOver');
+    }
+    const dropHandler = (e, todo) => {
+        e.preventDefault();
+        console.log('Drop', todos.indexOf(todo));
+
+        // setTodos(todos.map(item => {
+        //     if (item.id === todo.id) {
+
+        //     }
+        // }))
+        // function swap(arr, a, b) {
+        //     arr[a] = arr.splice(b, 1, arr[a])[0];
+        //   }
+
+        // setTodos(            swap(todos, 1, 2).slice()
+        // );
+        
+        // setTodos(todos.slice(
+        //     todos.splice(
+        //         (todos.indexOf(todo)), 1,
+        //         todos[todoIndexOf]
+        //     )
+        // ));
+        // setTodos(todos.slice(
+        //     todos.splice(
+        //         (todoIndexOf), 1,
+        //         todos[todos.indexOf(todo)]
+        //     )
+        // ));
+
+    }
+    const dragEndHandler = (e) => {
+        // e.target.style.background = 'white';
+        // console.log('DragEnd');
+    }
+
+
     return (
-        <TodoLine>
+        <TodoLine
+            draggable={true}
+            onDragStart={(e) => dragStartHandler(e, todo)}
+            onDragLeave={(e) => dragLeaveHandler(e)}
+            onDragOver={(e) => dragOverHandler(e)}
+            onDrop={(e) => dropHandler(e, todo)}
+            onDragEnd={(e) => dragEndHandler(e)}
+        >
             <UpDownTodoButtonsWrapper>
                 <UpTodoButton onClick={handleTodoMoveUp}>
                     <b>v</b>
@@ -217,12 +278,7 @@ const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
                         type="text"
                         defaultValue={text}
                         onChange={inputEditTextHandler}
-                    // onKeyPress={e => {
-                    //     if (e.key === 'Enter') { console.log('Edit') }
-                    // }}
-
                     /> :
-                    //<li className={todo.completed ? "todoCompleted" : ""}>{text}</li>
                     <TodoTextArea
                         completed={todo.completed}
                         randColor={todo.colorId}

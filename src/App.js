@@ -15,15 +15,15 @@ const Head = styled.h1`
   font-size: 3rem;
   margin: 30px 0px 30px;
 `
-const AppWrapper = styled.div`
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(252, 218, 155);
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
+// const AppWrapper = styled.div`
+//   font-family: Arial, Helvetica, sans-serif;
+//   background-color: rgb(252, 218, 155);
+//   width: 100%;
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// `
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -36,21 +36,22 @@ function App() {
     counterCreated: 0,
     counterUpdated: 0,
     counterDeleted: 0,
-  })
-  
-  
+  });
+  const [todoIndexOf, setTodoIndexOf] = useState(0);
+
+
   //RUN ONCE when the app starts
   useEffect(() => {
     getLocalTodos();
   }, []);
-  
+
   // Use Effect
   useEffect(() => {
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
-  
-  
+
+
   function filterHandler() {
     switch (status) {
       case "Completed":
@@ -68,15 +69,15 @@ function App() {
   // Save to local
   // 01:23:00
   const statisticState = useSelector(state => state.statistic);  //Redux
-  
+
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("counter", JSON.stringify(counter));
     localStorage.setItem("counter (redux)", JSON.stringify(statisticState)); //Redux
   };
-  // console.log(useSelector(state => state.statistic));
-  
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch(); //Redux
+
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));
@@ -93,19 +94,21 @@ function App() {
     }
 
     //Redux
-    if (localStorage.getItem("counter (redux)") === null) {   
+    if (localStorage.getItem("counter (redux)") === null) {
       localStorage.setItem("counter (redux)", JSON.stringify({}));
     } else {
       let counterLocalRedux = JSON.parse(localStorage.getItem("counter (redux)"));
-      dispatch ( addCreateCountAction(counterLocalRedux.counterCreated) );
-      dispatch ( addUpdateCountAction(counterLocalRedux.counterUpdated) );
-      dispatch ( addDeleteCountAction(counterLocalRedux.counterDeleted) );
+      dispatch(addCreateCountAction(counterLocalRedux.counterCreated));
+      dispatch(addUpdateCountAction(counterLocalRedux.counterUpdated));
+      dispatch(addDeleteCountAction(counterLocalRedux.counterDeleted));
     }
   };
 
 
   return (
-    <AppWrapper>
+    // <AppWrapper>
+    <div className='appWrapper'>
+
       <header>
         <Head>
           Artem's Todo App
@@ -135,8 +138,12 @@ function App() {
         disableInputButton={disableInputButton}
         setCounter={setCounter}
         counter={counter}
+        todoIndexOf={todoIndexOf}
+        setTodoIndexOf={setTodoIndexOf}
       />
-    </AppWrapper>
+
+    </div>
+    // </AppWrapper>
   );
 }
 

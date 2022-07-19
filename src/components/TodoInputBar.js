@@ -75,7 +75,6 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
     disableInputButton, setCounter, counter }) {
 
     const dispatch = useDispatch();  //Redux
-    //const counterCreated = useSelector(state => state.statistic.counterCreated); //Redux
 
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
@@ -100,6 +99,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                 edit: false,
                 disableButtons: false,
                 colorId: Math.round(Math.random() * 10),
+                // index: todos.length,
             }
         ]);
         setInputText("");
@@ -138,6 +138,7 @@ function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
                             edit: false,
                             disableButtons: false,
                             colorId: Math.floor(Math.random() * 10),
+                            // index: todos.indexOf(item),
                         }
                     })
                 ]);
