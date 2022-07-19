@@ -5,6 +5,9 @@ import './App.scss';
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
+import { useSelector, useDispatch } from 'react-redux';
+import { addCreateCountAction, addUpdateCountAction, addDeleteCountAction } from './store/statisticReducer';
+
 
 //Style:
 const Head = styled.h1`
@@ -34,21 +37,21 @@ function App() {
     counterUpdated: 0,
     counterDeleted: 0,
   })
-
-
+  
+  
   //RUN ONCE when the app starts
   useEffect(() => {
     getLocalTodos();
   }, []);
-
+  
   // Use Effect
   useEffect(() => {
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
-
-
-  const filterHandler = () => {
+  
+  
+  function filterHandler() {
     switch (status) {
       case "Completed":
         setCompletedTodos(todos.filter(item => item.completed === true));
@@ -64,11 +67,16 @@ function App() {
 
   // Save to local
   // 01:23:00
+  const statisticState = useSelector(state => state.statistic);  //Redux
+  
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("counter", JSON.stringify(counter));
+    localStorage.setItem("counter (redux)", JSON.stringify(statisticState)); //Redux
   };
-
+  // console.log(useSelector(state => state.statistic));
+  
+  const dispatch = useDispatch();
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));
@@ -82,6 +90,16 @@ function App() {
     } else {
       let counterLocal = JSON.parse(localStorage.getItem("counter"));
       setCounter(counterLocal);
+    }
+
+    //Redux
+    if (localStorage.getItem("counter (redux)") === null) {   
+      localStorage.setItem("counter (redux)", JSON.stringify({}));
+    } else {
+      let counterLocalRedux = JSON.parse(localStorage.getItem("counter (redux)"));
+      dispatch ( addCreateCountAction(counterLocalRedux.counterCreated) );
+      dispatch ( addUpdateCountAction(counterLocalRedux.counterUpdated) );
+      dispatch ( addDeleteCountAction(counterLocalRedux.counterDeleted) );
     }
   };
 
