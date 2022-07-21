@@ -147,4 +147,4 @@ function App() {
   );
 }
 
-export default App;
+export default () => <div>Hello</div>;
