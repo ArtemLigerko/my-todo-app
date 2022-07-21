@@ -13,7 +13,7 @@ const Global = createGlobalStyle`
 }
 `
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as any);
 root.render(
   // <React.StrictMode>
   <>
