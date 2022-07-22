@@ -113,7 +113,7 @@ const TodoEditInput = styled.input`
 `
 
 
-const Todo = ({ text, todos, setTodos, todo, setEditText, editText,
+const Todo: React.FC = ({ text, todos, setTodos, todo, setEditText, editText,
     setDisableInputButton, disableInputButton, setCounter, counter,
     todoIndexOf, setTodoIndexOf }) => {
 

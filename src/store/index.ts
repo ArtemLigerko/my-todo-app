@@ -1,12 +1,6 @@
-import {createStore, combineReducers} from "redux";
-import { statisticReducer } from "./statisticReducer";
-// import { todoReducer } from "./todoReducer"
-// import { composeWithDevTools } from "redux-devtools-extention";
+import { legacy_createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { rootReducer } from './reducers'
 
-const rootReducer = combineReducers({
-    statistic: statisticReducer,
-    // todo: todoReducer,
-})
 
-export const store = createStore(rootReducer);
-
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

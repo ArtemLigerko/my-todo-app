@@ -7,6 +7,7 @@ import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCreateCountAction, addUpdateCountAction, addDeleteCountAction } from './store/statisticReducer';
+import { useTypedSelector } from './hooks/useTypedSelector';
 
 
 //Style:
@@ -68,7 +69,7 @@ function App() {
 
   // Save to local
   // 01:23:00
-  const statisticState = useSelector(state => state.statistic);  //Redux
+  const statisticState = useTypedSelector (state => state.statistic);  //Redux
 
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));

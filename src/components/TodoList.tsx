@@ -10,10 +10,10 @@ import styled from 'styled-components';
 //     margin: 10px 0;
 // `
 
-function TodoList({
+const TodoList: React.FC = ({
     todos, setTodos, completedTodos, setEditText, editText,
     setDisableInputButton, disableInputButton, setCounter, counter,
-    todoIndexOf, setTodoIndexOf }) {
+    todoIndexOf, setTodoIndexOf }) => {
     return (
         <div className="todoListWrapper">
             {/* <TodoListWrapper> */}

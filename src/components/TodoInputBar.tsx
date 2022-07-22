@@ -71,8 +71,8 @@ const FilterTodoSelector = styled.select`
 `
 
 
-function TodoInputBar({ inputText, setInputText, todos, setTodos, setStatus,
-    disableInputButton, setCounter, counter }) {
+const TodoInputBar: React.FC = ({ inputText, setInputText, todos, setTodos, setStatus,
+    disableInputButton, setCounter, counter }) => {
 
     const dispatch = useDispatch();  //Redux
 

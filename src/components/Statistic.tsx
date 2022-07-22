@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const StatisticBar = styled.div`
   color: rgb(130, 130, 130);
@@ -8,12 +9,13 @@ const StatisticBar = styled.div`
 
 
 
-function Statistic({ counter }) {
+// function Statistic: React.FC ({ counter }) {
+const Statistic: React.FC = ({ counter }) => {
 
     //Redux. Start
-    const counterCreated = useSelector(state => state.statistic.counterCreated)
-    const counterUpdated = useSelector(state => state.statistic.counterUpdated)
-    const counterDeleted = useSelector(state => state.statistic.counterDeleted)
+    const counterCreated = useTypedSelector(state => state.statistic.counterCreated)
+    const counterUpdated = useTypedSelector(state => state.statistic.counterUpdated)
+    const counterDeleted = useTypedSelector(state => state.statistic.counterDeleted)
     //Redux. End
 
     return (
