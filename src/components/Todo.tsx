@@ -1,9 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { useDispatch } from "react-redux";
-import { addUpdateCountAction, addDeleteCountAction } from "../store/statisticReducer";
-
+// import { useDispatch } from "react-redux";
+import { useActions } from "../hooks/useActions";
+import { ITodo } from './types/ITodo';
+import { Icounter } from "./types/Icounter";
+ 
 //Style:
+
 const TodoLine = styled.div`
     display: flex;
     padding: 0.5rem 0;
@@ -112,18 +115,44 @@ const TodoEditInput = styled.input`
     }
 `
 
+interface ITodoProps {
+    text: string,
+    setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>,
+    todos: ITodo[],
+    setEditText: React.Dispatch<React.SetStateAction<string>>,
+    todo: ITodo,
+    setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
+    disableInputButton: boolean,
+    editText: string,
+    setCounter: React.Dispatch<React.SetStateAction<Icounter>>,
+    counter: Icounter,
+    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
+    todoIndexOf: number,
+}
 
-const Todo: React.FC = ({ text, todos, setTodos, todo, setEditText, editText,
-    setDisableInputButton, disableInputButton, setCounter, counter,
-    todoIndexOf, setTodoIndexOf }) => {
+const Todo: React.FC = ({
+    text,
+    setTodos,
+    todos,
+    setEditText,
+    todo,
+    setDisableInputButton,
+    disableInputButton,
+    editText,
+    setCounter,
+    counter,
+    setTodoIndexOf,
+    todoIndexOf,
+}: ITodoProps) => {
 
 
-    const dispatch = useDispatch();
+    const { addDeleteCountAction } = useActions();
+    const { addUpdateCountAction } = useActions();
 
-    const deleteHandler = () => {
+    const deleteHandler = ():void => {
         setTodos(todos.filter((el) => el.id !== todo.id));
 
-        dispatch(addDeleteCountAction(1));  //Redux
+        addDeleteCountAction(1);  //Redux
 
         setCounter({
             counterCreated: counter.counterCreated,
@@ -166,7 +195,7 @@ const Todo: React.FC = ({ text, todos, setTodos, todo, setEditText, editText,
         }));
         setDisableInputButton(!disableInputButton);
 
-        dispatch(addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0));  //Redux
+        addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0);  //Redux
 
         setCounter({
             counterCreated: counter.counterCreated,
@@ -234,7 +263,7 @@ const Todo: React.FC = ({ text, todos, setTodos, todo, setEditText, editText,
 
         // setTodos(            swap(todos, 1, 2).slice()
         // );
-        
+
         // setTodos(todos.slice(
         //     todos.splice(
         //         (todos.indexOf(todo)), 1,
@@ -249,20 +278,20 @@ const Todo: React.FC = ({ text, todos, setTodos, todo, setEditText, editText,
         // ));
 
     }
-    const dragEndHandler = (e) => {
-        // e.target.style.background = 'white';
-        // console.log('DragEnd');
-    }
+    // const dragEndHandler = (e) => {
+    //     e.target.style.background = 'white';
+    //     console.log('DragEnd');
+    // }
 
 
     return (
         <TodoLine
             draggable={true}
-            onDragStart={(e) => dragStartHandler(e, todo)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
-            onDragOver={(e) => dragOverHandler(e)}
-            onDrop={(e) => dropHandler(e, todo)}
-            onDragEnd={(e) => dragEndHandler(e)}
+            // onDragStart={(e) => dragStartHandler(e, todo)}
+            // onDragLeave={(e) => dragLeaveHandler(e)}
+            // onDragOver={(e) => dragOverHandler(e)}
+            // onDrop={(e) => dropHandler(e, todo)}
+            // onDragEnd={(e) => dragEndHandler(e)}
         >
             <UpDownTodoButtonsWrapper>
                 <UpTodoButton onClick={handleTodoMoveUp}>

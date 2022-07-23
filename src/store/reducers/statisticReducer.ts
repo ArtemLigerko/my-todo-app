@@ -1,4 +1,4 @@
-import {StatisticActionTypes, StatisticState, StatisticAction} from './types/statistic'
+import {StatisticActionTypes, StatisticState, StatisticAction} from '../types/statistic'
 
 
 const defaultState: StatisticState = {
@@ -24,6 +24,3 @@ export const statisticReducer = (state = defaultState, action: StatisticAction):
 
 
 
-export const addCreateCountAction = (payload: number) => ({ type: StatisticActionTypes.CREATE_COUNT, payload });
-export const addUpdateCountAction = (payload: number) => ({ type: StatisticActionTypes.UPDATE_COUNT, payload });
-export const addDeleteCountAction = (payload: number) => ({ type: StatisticActionTypes.DELETE_COUNT, payload });

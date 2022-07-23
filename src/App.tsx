@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import './App.scss';
-// import components
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
-import { useSelector, useDispatch } from 'react-redux';
-import { addCreateCountAction, addUpdateCountAction, addDeleteCountAction } from './store/statisticReducer';
+// import { useSelector, useDispatch } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
+import { useActions } from './hooks/useActions';
+import { ITodo } from './components/types/ITodo';
+import { Icounter } from "./components/types/Icounter";
 
 
 //Style:
@@ -26,34 +27,35 @@ const Head = styled.h1`
 //   align-items: center;
 // `
 
-function App() {
-  const [inputText, setInputText] = useState('');
-  const [todos, setTodos] = useState([]);
-  const [status, setStatus] = useState("All");
-  const [completedTodos, setCompletedTodos] = useState([]);
-  const [editText, setEditText] = useState('');
-  const [disableInputButton, setDisableInputButton] = useState(false);
-  const [counter, setCounter] = useState({
+
+const App: React.FC = () => {
+  const [inputText, setInputText] = useState<string>('');
+  const [todos, setTodos] = useState<ITodo[]>([]);
+  const [status, setStatus] = useState<string>("All");
+  const [completedTodos, setCompletedTodos] = useState<ITodo[]>([]);
+  const [editText, setEditText] = useState<string>('');
+  const [disableInputButton, setDisableInputButton] = useState<boolean>(false);
+  const [counter, setCounter] = useState<Icounter>({
     counterCreated: 0,
     counterUpdated: 0,
     counterDeleted: 0,
   });
-  const [todoIndexOf, setTodoIndexOf] = useState(0);
+  const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
 
 
   //RUN ONCE when the app starts
-  useEffect(() => {
+  useEffect(():void => {
     getLocalTodos();
   }, []);
 
   // Use Effect
-  useEffect(() => {
+  useEffect(():void => {
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
 
 
-  function filterHandler() {
+  const filterHandler = ():void => {
     switch (status) {
       case "Completed":
         setCompletedTodos(todos.filter(item => item.completed === true));
@@ -69,7 +71,7 @@ function App() {
 
   // Save to local
   // 01:23:00
-  const statisticState = useTypedSelector (state => state.statistic);  //Redux
+  const statisticState = useTypedSelector(state => state.statistic);  //Redux
 
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -77,7 +79,9 @@ function App() {
     localStorage.setItem("counter (redux)", JSON.stringify(statisticState)); //Redux
   };
 
-  const dispatch = useDispatch(); //Redux
+  const { addCreateCountAction } = useActions(); //Redux
+  const { addUpdateCountAction } = useActions(); //Redux
+  const { addDeleteCountAction } = useActions(); //Redux
 
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
@@ -99,12 +103,22 @@ function App() {
       localStorage.setItem("counter (redux)", JSON.stringify({}));
     } else {
       let counterLocalRedux = JSON.parse(localStorage.getItem("counter (redux)"));
-      dispatch(addCreateCountAction(counterLocalRedux.counterCreated));
-      dispatch(addUpdateCountAction(counterLocalRedux.counterUpdated));
-      dispatch(addDeleteCountAction(counterLocalRedux.counterDeleted));
+      addCreateCountAction(counterLocalRedux.counterCreated);
+      addUpdateCountAction(counterLocalRedux.counterUpdated);
+      addDeleteCountAction(counterLocalRedux.counterDeleted);
     }
   };
 
+  // interface ITodoInputBar {
+  //   inputText: string,
+  //   setInputText: string,
+  //   todos: ITodo,
+  //   setTodos: ITodo,
+  //   setStatus: string,
+  //   disableInputButton: string,
+  //   setCounter: string,
+  //   counter: string,
+  // }
 
   return (
     // <AppWrapper>
