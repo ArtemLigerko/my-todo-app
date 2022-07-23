@@ -6,72 +6,16 @@ import '../App.scss';
 import { useActions } from "../hooks/useActions";
 import { ITodo } from "./types/ITodo";
 import { Icounter } from "./types/Icounter";
+import { 
+    TodoInputForm, 
+    InputTodoBar, 
+    AddTodoButton, 
+    OptionButtonsWrapper, 
+    AddFromServerButton,
+    ClearAllButton,
+    FilterTodoSelector,
+} from './styles/TodoInputBar'
 
-//Style:
-const TodoInputForm = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    border: none;
-`
-const InputTodoBar = styled.input`
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    width: 400px;
-    height: 40px;
-    border-style: none;
-    border-radius: 5px 0 0 5px;
-    /* border: none; */
-    background-color: white;
-    &:focus {
-        outline: none;
-    }
-`
-const AddTodoButton = styled.button`
-    font-size: 1.2rem;
-    /* line-height: 0; */
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    background-color: rgb(255, 175, 25);
-    /* border: rgb(252, 218, 155) solid 1px; */
-    border: none;
-    border-radius: 0 5px 5px 0;
-    color: rgb(130, 130, 130);
-    cursor: pointer;
-`
-const OptionButtonsWrapper = styled.div`
-    display: flex;
-`
-const OptionButtons = styled.button`
-    font-size: 1rem;
-    margin-right: 5px;
-    width: 80px;
-    height: 40px;
-    background-color: rgb(253, 197, 93);
-    border-radius: 5px;
-    /* border: rgb(252, 218, 155) solid 1px; */
-    border: none;
-    color: rgb(130, 130, 130);
-    cursor: pointer;
-`
-const AddFromServerButton = styled(OptionButtons)``
-const ClearAllButton = styled(OptionButtons)``
-const FilterTodoSelector = styled.select`
-    font-size: 1.2rem;
-    padding: 0.4rem;
-    margin-right: 5px;
-    height: 40px;
-    color: rgb(130, 130, 130);
-    background-color: rgb(253, 197, 93);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    &:focus {
-        outline: none;
-    }
-`
 
 interface TodoInputBarProps {
     setInputText: React.Dispatch<React.SetStateAction<string>>,
@@ -84,7 +28,7 @@ interface TodoInputBarProps {
     counter: Icounter,
 }
 
-const TodoInputBar: React.FC = ({
+const TodoInputBar: React.FC<TodoInputBarProps> = ({
     setInputText,
     inputText,
     setTodos,
@@ -93,7 +37,7 @@ const TodoInputBar: React.FC = ({
     disableInputButton,
     setCounter,
     counter,
-}: TodoInputBarProps) => {
+}) => {
 
     const { addCreateCountAction } = useActions();  //Redux
     const { addDeleteCountAction } = useActions();  //Redux

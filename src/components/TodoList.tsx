@@ -3,14 +3,8 @@ import Todo from './Todo'
 // import styled from 'styled-components';
 import { ITodo } from './types/ITodo'
 import { Icounter } from "./types/Icounter";
+// import { TodoListWrapper } from './styles/TodoList'
 
-// const TodoListWrapper = styled.ul`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: left;
-//     padding: 0;
-//     margin: 10px 0;
-// `
 
 interface ITodoList {
     todos: ITodo[],
@@ -26,7 +20,7 @@ interface ITodoList {
     setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
 }
 
-const TodoList: React.FC = ({
+const TodoList: React.FC<ITodoList> = ({
     todos,
     setTodos,
     completedTodos,
@@ -38,7 +32,7 @@ const TodoList: React.FC = ({
     counter,
     todoIndexOf,
     setTodoIndexOf
-}: ITodoList) => {
+}) => {
     return (
         <div className="todoListWrapper">
             {/* <TodoListWrapper> */}

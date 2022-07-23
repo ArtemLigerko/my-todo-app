@@ -7,9 +7,11 @@ import { Icounter } from "./types/Icounter";
 const StatisticBar = styled.div`
   color: rgb(130, 130, 130);
 `
+interface IcounterProps {
+    counter: Icounter,
+}
 
-
-const Statistic: React.FC = ({ counter }: Icounter) => {
+const Statistic: React.FC<IcounterProps> = ({ counter }) => {
 
     //Redux. Start
     const counterCreated = useTypedSelector(state => state.statistic.counterCreated)

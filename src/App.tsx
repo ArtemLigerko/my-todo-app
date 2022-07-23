@@ -109,21 +109,9 @@ const App: React.FC = () => {
     }
   };
 
-  // interface ITodoInputBar {
-  //   inputText: string,
-  //   setInputText: string,
-  //   todos: ITodo,
-  //   setTodos: ITodo,
-  //   setStatus: string,
-  //   disableInputButton: string,
-  //   setCounter: string,
-  //   counter: string,
-  // }
-
   return (
     // <AppWrapper>
     <div className='appWrapper'>
-
       <header>
         <Head>
           Artem's Todo App
@@ -141,7 +129,7 @@ const App: React.FC = () => {
       />
       <Statistic
         counter={counter}
-        setCounter={setCounter}
+        // setCounter={setCounter}
       />
       <TodoList
         todos={todos}
@@ -162,4 +150,4 @@ const App: React.FC = () => {
   );
 }
 
-export default () => <div>Hello</div>;
+export default App;
