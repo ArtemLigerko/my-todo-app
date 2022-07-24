@@ -28,6 +28,16 @@ export const UpTodoButton = styled(DownTodoButton)`
 `
 
 
+// import 'styled-components';
+
+// declare module 'styled-components' {
+//     export interface ITodoTextArea {
+//         padding: string;
+//         margin: string;
+//         width: string;
+//     }
+// }
+
 export const TodoTextArea = styled.li`
     padding: 0.3rem;
     margin: 0 5px;
