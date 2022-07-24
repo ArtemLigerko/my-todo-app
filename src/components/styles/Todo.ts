@@ -28,17 +28,13 @@ export const UpTodoButton = styled(DownTodoButton)`
 `
 
 
-// import 'styled-components';
 
-// declare module 'styled-components' {
-//     export interface ITodoTextArea {
-//         padding: string;
-//         margin: string;
-//         width: string;
-//     }
-// }
+interface ITodoTextArea {
+    completed: boolean,
+    randColor: number,
+}
 
-export const TodoTextArea = styled.li`
+export const TodoTextArea = styled.li<ITodoTextArea>`
     padding: 0.3rem;
     margin: 0 5px;
     width: 400px;
@@ -46,11 +42,9 @@ export const TodoTextArea = styled.li`
     text-align: left;
     font-size: 1.2rem;
     border-radius: 5px;
-    text-decoration-line: ${(props: { completed: boolean; }) => props.completed ? 'line-through' : 'none'};
-    text-decoration-thickness: ${(props: { completed: boolean; }) => props.completed ? '2px' : 'none'};
-    ${'' /* color: ${props => props.completed ? 'rgb(180, 180, 180)' : 'black'}; */}
-    ${'' /* background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'}; */}
-    background-color: ${(props: { randColor: number; }) => {
+    text-decoration-line: ${props => props.completed ? 'line-through' : 'none'};
+    text-decoration-thickness: ${props => props.completed ? '2px' : 'none'};
+    background-color: ${props => {
         switch (props.randColor) {
             case 0: return "#FFE4C4";
             case 1: return "#FFDEAD";
@@ -65,7 +59,7 @@ export const TodoTextArea = styled.li`
             default: return "white";
         }
     }};
-    color: ${(props: { randColor: number; }) => {
+    color: ${props => {
         switch (props.randColor) {
             case 0: return "black";
             case 1: return "black";
@@ -80,8 +74,8 @@ export const TodoTextArea = styled.li`
             default: return "black";
         }
     }};
-
 `
+
 export const TodoButtons = styled.button`
     font-size: 1rem;
     width: 2.2rem;
@@ -96,13 +90,13 @@ export const TodoButtons = styled.button`
 export const DoneTodoButton = styled(TodoButtons)`
     color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
-    
 `
+
 export const DelTodoButton = styled(TodoButtons)`
     color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
-
 `
+
 export const EditTodoButton = styled(TodoButtons)`
     width: 3rem;
     color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};

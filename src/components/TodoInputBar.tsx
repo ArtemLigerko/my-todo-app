@@ -46,7 +46,8 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setInputText(e.target.value);
     }
 
-    const submitHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    const submitHandler = (e: React.MouseEvent<HTMLButtonElement> | 
+        React.KeyboardEvent<HTMLInputElement>): void => {
         e.preventDefault();
 
         addCreateCountAction(1);  //Redux
@@ -83,7 +84,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setTodos([]);
     }
 
-    const statusHandler = (e: React.ChangeEvent<HTMLOptionElement>): void => {
+    const statusHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         setStatus(e.target.value);
     }
 
@@ -125,7 +126,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 <InputTodoBar
                     value={inputText}
                     onChange={inputTextHandler}
-                    onKeyPress={e => {
+                    onKeyPress={(e) => {
                         if (e.key === 'Enter') { submitHandler(e); }
                     }}
                     type="text"

@@ -19,8 +19,8 @@ import {
 
 interface ITodoProps {
     text: string,
-    setTodos: React.Dispatch<React.SetStateAction<ITodo[] | any>>,  // --!!!--
-    todos: ITodo[] | any,                                           // --!!!--
+    setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>,  // --!!!--
+    todos: ITodo[],                                           // --!!!--
     setEditText: React.Dispatch<React.SetStateAction<string>>,
     todo: ITodo,
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
@@ -79,7 +79,7 @@ const Todo: React.FC<ITodoProps> = ({
 
     const handleEditClick = (): void => {
         setEditText(todo.text);
-        setTodos(todos.map((item) => {
+        setTodos(todos.map(item => {
             if (item.id === todo.id) {
                 return {
                     ...item,
@@ -113,25 +113,23 @@ const Todo: React.FC<ITodoProps> = ({
 
     const handleTodoMoveUp = ():void => {
         if (todos.indexOf(todo) > 0) {
-            setTodos(todos.slice(
-                todos.splice(
-                    (todos.indexOf(todo) - 1), 2,
-                    todos[todos.indexOf(todo)],
-                    todos[todos.indexOf(todo) - 1]
-                )
-            ));
+            const todoUp = todos.slice();
+            todoUp.splice(
+                (todoUp.indexOf(todo) - 1), 2,
+                todoUp[todoUp.indexOf(todo)],
+                todoUp[todoUp.indexOf(todo) - 1]);
+            setTodos(todoUp);
         }
     }
 
     const handleTodoMoveDown = ():void => {
         if (todos.indexOf(todo) < todos.length - 1) {
-            setTodos(todos.slice(
-                todos.splice(
-                    (todos.indexOf(todo)), 2,
-                    todos[todos.indexOf(todo) + 1],
-                    todos[todos.indexOf(todo)]
-                )
-            ));
+            const todoDown = todos.slice();
+            todoDown.splice(
+                (todos.indexOf(todo)), 2,
+                todos[todos.indexOf(todo) + 1],
+                todos[todos.indexOf(todo)]);
+            setTodos(todoDown);
         }
     }
 
