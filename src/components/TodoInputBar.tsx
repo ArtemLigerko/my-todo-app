@@ -6,15 +6,15 @@ import '../App.scss';
 import { useActions } from "../hooks/useActions";
 import { ITodo } from "./types/ITodo";
 import { Icounter } from "./types/Icounter";
-import { 
-    TodoInputForm, 
-    InputTodoBar, 
-    AddTodoButton, 
-    OptionButtonsWrapper, 
+import {
+    TodoInputForm,
+    InputTodoBar,
+    AddTodoButton,
+    OptionButtonsWrapper,
     AddFromServerButton,
     ClearAllButton,
     FilterTodoSelector,
-} from './styles/TodoInputBar'
+} from './styles/todoInputBar'
 
 
 interface TodoInputBarProps {
@@ -87,10 +87,10 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setStatus(e.target.value);
     }
 
-    const handleFetchTodos = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let url = 'https://gist.githubusercontent.com/alexandrtovmach/0c8a29b734075864727228c559fe9f96/raw/c4e4133c9658af4c4b3474475273b23b4a70b4af/todo-task.json'
-        fetch(url)
+        await fetch(url)
             .then(response => response.json())
             .then(getTodos => {
                 setTodos([

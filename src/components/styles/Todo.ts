@@ -26,6 +26,8 @@ export const DownTodoButton = styled.button`
 export const UpTodoButton = styled(DownTodoButton)`
     transform: rotate(180deg);
 `
+
+
 export const TodoTextArea = styled.li`
     padding: 0.3rem;
     margin: 0 5px;
@@ -34,11 +36,11 @@ export const TodoTextArea = styled.li`
     text-align: left;
     font-size: 1.2rem;
     border-radius: 5px;
-    text-decoration-line: ${props => props.completed ? 'line-through' : 'none'};
-    text-decoration-thickness: ${props => props.completed ? '2px' : 'none'};
+    text-decoration-line: ${(props: { completed: boolean; }) => props.completed ? 'line-through' : 'none'};
+    text-decoration-thickness: ${(props: { completed: boolean; }) => props.completed ? '2px' : 'none'};
     ${'' /* color: ${props => props.completed ? 'rgb(180, 180, 180)' : 'black'}; */}
     ${'' /* background-color: ${props => props.completed ? 'rgb(180, 255, 212)' : 'white'}; */}
-    background-color: ${props => {
+    background-color: ${(props: { randColor: number; }) => {
         switch (props.randColor) {
             case 0: return "#FFE4C4";
             case 1: return "#FFDEAD";
@@ -53,7 +55,7 @@ export const TodoTextArea = styled.li`
             default: return "white";
         }
     }};
-    color: ${props => {
+    color: ${(props: { randColor: number; }) => {
         switch (props.randColor) {
             case 0: return "black";
             case 1: return "black";
@@ -79,20 +81,22 @@ export const TodoButtons = styled.button`
     cursor: pointer;
     margin-right: 2px;
 `
+
+
 export const DoneTodoButton = styled(TodoButtons)`
-    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
-    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
+    color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
     
 `
 export const DelTodoButton = styled(TodoButtons)`
-    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
-    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
+    color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
 
 `
 export const EditTodoButton = styled(TodoButtons)`
     width: 3rem;
-    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
-    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
+    color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
 `
 
 export const TodoEditInput = styled.input`

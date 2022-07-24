@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+// import styled, { css } from "styled-components";
 // import { useDispatch } from "react-redux";
 import { useActions } from "../hooks/useActions";
 import { ITodo } from './types/ITodo';
@@ -14,7 +14,7 @@ import {
     DoneTodoButton,
     DelTodoButton,
     EditTodoButton,
-} from './styles/Todo'
+} from './styles/todo'
  
 
 interface ITodoProps {
