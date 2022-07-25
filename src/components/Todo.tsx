@@ -19,8 +19,8 @@ import {
 
 interface ITodoProps {
     text: string,
-    setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>,  // --!!!--
-    todos: ITodo[],                                           // --!!!--
+    setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>,  
+    todos: ITodo[], 
     setEditText: React.Dispatch<React.SetStateAction<string>>,
     todo: ITodo,
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
