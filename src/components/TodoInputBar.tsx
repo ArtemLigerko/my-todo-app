@@ -14,7 +14,7 @@ import {
     AddFromServerButton,
     ClearAllButton,
     FilterTodoSelector,
-} from './styles/todoInputBar'
+} from './styles/TodoInputBar'
 
 
 interface TodoInputBarProps {

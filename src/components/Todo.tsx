@@ -14,7 +14,7 @@ import {
     DoneTodoButton,
     DelTodoButton,
     EditTodoButton,
-} from './styles/todo'
+} from './styles/Todo';
  
 
 interface ITodoProps {
