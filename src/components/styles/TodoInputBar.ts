@@ -49,6 +49,7 @@ export const OptionButtons = styled.button`
     color: rgb(130, 130, 130);
     cursor: pointer;
 `
+export const AddTaskButton = styled(OptionButtons)``
 export const AddFromServerButton = styled(OptionButtons)``
 export const ClearAllButton = styled(OptionButtons)``
 export const FilterTodoSelector = styled.select`

@@ -1,0 +1,50 @@
+%modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    // transition: 0.2s;
+    
+}
+
+%modal__content {
+    // padding-top: 20px;
+    margin-top: 20%;
+    border-radius: 5px;
+    // background-color: white;
+    height: 1px;
+    // width: 400px;
+}
+
+.modal {     
+    @extend %modal;
+    // transform: scale(0);
+    opacity: 0;
+    pointer-events: none; //чтобы элементы не перекрывали окно
+    
+    .modal__content {
+        @extend %modal__content;
+        transform: scale(0.5);  //корректно не работает
+        transition: 0.5s all;   //корректно не работает
+    }
+}
+
+.modal__active {
+    @extend %modal;
+    // transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 0.5s;
+    
+    .modal__content__active {
+        @extend %modal__content;
+        transform: scale(1);    //корректно не работает
+    }
+}
+
+

@@ -1,12 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
+// import styled from "styled-components";
+// import { useSelector } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { Icounter } from "./types/Icounter";
+import { StatisticBar } from './styles/Statistic'
  
-const StatisticBar = styled.div`
-  color: rgb(130, 130, 130);
-`
 interface IcounterProps {
     counter: Icounter,
 }

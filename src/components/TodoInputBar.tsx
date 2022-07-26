@@ -11,10 +11,12 @@ import {
     InputTodoBar,
     AddTodoButton,
     OptionButtonsWrapper,
+    AddTaskButton,
     AddFromServerButton,
     ClearAllButton,
     FilterTodoSelector,
-} from './styles/TodoInputBar'
+} from './styles/TodoInputBar';
+import InputModal from './InputModal';
 
 
 interface TodoInputBarProps {
@@ -26,6 +28,8 @@ interface TodoInputBarProps {
     disableInputButton: boolean,
     setCounter: React.Dispatch<React.SetStateAction<Icounter>>,
     counter: Icounter,
+    setActive: React.Dispatch<React.SetStateAction<boolean>>,
+    active: boolean,
 }
 
 const TodoInputBar: React.FC<TodoInputBarProps> = ({
@@ -37,6 +41,8 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     disableInputButton,
     setCounter,
     counter,
+    setActive,
+    active,
 }) => {
 
     const { addCreateCountAction } = useActions();  //Redux
@@ -46,7 +52,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setInputText(e.target.value);
     }
 
-    const submitHandler = (e: React.MouseEvent<HTMLButtonElement> | 
+    const submitHandler = (e: React.MouseEvent<HTMLButtonElement> |
         React.KeyboardEvent<HTMLInputElement>): void => {
         e.preventDefault();
 
@@ -122,6 +128,12 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
 
     return (
         <TodoInputForm>
+            <InputModal
+                active={active}
+                setActive={setActive}
+            >
+
+
             <div>
                 <InputTodoBar
                     value={inputText}
@@ -139,9 +151,19 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 >
                     +
                 </AddTodoButton>
-
             </div>
+
+
+            </InputModal>
+
             <OptionButtonsWrapper>
+                <AddTaskButton
+                    onClick={() => setActive(true)}
+                    type="submit"
+                    disabled={disableInputButton}
+                >
+                    add task (modal)
+                </AddTaskButton>
                 <AddFromServerButton onClick={handleFetchTodos}>
                     add from server
                 </AddFromServerButton>

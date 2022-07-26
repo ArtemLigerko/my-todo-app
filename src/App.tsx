@@ -4,6 +4,7 @@ import './App.scss';
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
+import InputModal from './components/InputModal';
 // import { useSelector, useDispatch } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { useActions } from './hooks/useActions';
@@ -13,9 +14,12 @@ import { Icounter } from "./components/types/Icounter";
 
 //Style:
 const Head = styled.h1`
-  color: rgb(255, 255, 255);
+  color: #A52A2A;
+  // color: rgb(255, 255, 255);
   font-size: 3rem;
   margin: 30px 0px 30px;
+  box-sizing: border-box;
+  text-align: center;
 `
 // const AppWrapper = styled.div`
 //   font-family: Arial, Helvetica, sans-serif;
@@ -41,21 +45,22 @@ const App: React.FC = () => {
     counterDeleted: 0,
   });
   const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
+  const [modalActive, setModalActive] = useState<boolean>(false);
 
 
   //RUN ONCE when the app starts
-  useEffect(():void => {
+  useEffect((): void => {
     getLocalTodos();
   }, []);
 
   // Use Effect
-  useEffect(():void => {
+  useEffect((): void => {
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
 
 
-  const filterHandler = ():void => {
+  const filterHandler = (): void => {
     switch (status) {
       case "Completed":
         setCompletedTodos(todos.filter(item => item.completed === true));
@@ -112,7 +117,10 @@ const App: React.FC = () => {
   return (
     // <AppWrapper>
     <div className='appWrapper'>
-      <header>
+      <header className='header'>
+        <Statistic
+          counter={counter}
+        />
         <Head>
           Artem's Todo App
         </Head>
@@ -126,11 +134,13 @@ const App: React.FC = () => {
         disableInputButton={disableInputButton}
         setCounter={setCounter}
         counter={counter}
+        setActive={setModalActive}
+        active={modalActive}
       />
-      <Statistic
-        counter={counter}
-        // setCounter={setCounter}
-      />
+      {/* <InputModal
+        active={modalActive}
+        setActive={setModalActive}
+      /> */}
       <TodoList
         todos={todos}
         setTodos={setTodos}
