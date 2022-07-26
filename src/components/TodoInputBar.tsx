@@ -72,6 +72,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 edit: false,
                 disableButtons: false,
                 colorId: Math.round(Math.random() * 10),
+                // index: 1,
             }
         ]);
         setInputText("");
@@ -134,24 +135,24 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
             >
 
 
-            <div>
-                <InputTodoBar
-                    value={inputText}
-                    onChange={inputTextHandler}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') { submitHandler(e); }
-                    }}
-                    type="text"
-                    placeholder="type you task..."
-                />
-                <AddTodoButton
-                    onClick={submitHandler}
-                    type="submit"
-                    disabled={disableInputButton}
-                >
-                    +
-                </AddTodoButton>
-            </div>
+                <div>
+                    <InputTodoBar
+                        value={inputText}
+                        onChange={inputTextHandler}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') { submitHandler(e); }
+                        }}
+                        type="text"
+                        placeholder="type you task..."
+                    />
+                    <AddTodoButton
+                        onClick={submitHandler}
+                        type="submit"
+                        disabled={disableInputButton}
+                    >
+                        +
+                    </AddTodoButton>
+                </div>
 
 
             </InputModal>

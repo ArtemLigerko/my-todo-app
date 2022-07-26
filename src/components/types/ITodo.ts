@@ -5,6 +5,7 @@ export interface ITodo {
     edit: boolean,
     disableButtons: boolean,
     colorId: number,
+    index?: number,
 }
 
 

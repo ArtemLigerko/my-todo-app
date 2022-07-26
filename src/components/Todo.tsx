@@ -135,49 +135,27 @@ const Todo: React.FC<ITodoProps> = ({
 
     //Drag'n'Drop
     const dragStartHandler = (e, todo) => {
-        // e.preventDefault();
         setTodoIndexOf(todos.indexOf(todo));
-        console.log('DragStart, ', todoIndexOf);
+        console.log('Drag', todos.indexOf(todo));
+    }
 
-    }
-    const dragLeaveHandler = (e) => {
-        // console.log('DragLeave');
-    }
+    // const dragLeaveHandler = (e) => {
+    //     // console.log('DragLeave');
+    // }
+
     const dragOverHandler = (e) => {
         e.preventDefault();
-        // e.target.style.background = 'lightgray';
-        // console.log('DragOver');
     }
+
     const dropHandler = (e, todo) => {
         e.preventDefault();
-        console.log('Drop', todos.indexOf(todo));
-
-        // setTodos(todos.map(item => {
-        //     if (item.id === todo.id) {
-
-        //     }
-        // }))
-        // function swap(arr, a, b) {
-        //     arr[a] = arr.splice(b, 1, arr[a])[0];
-        //   }
-
-        // setTodos(            swap(todos, 1, 2).slice()
-        // );
-
-        // setTodos(todos.slice(
-        //     todos.splice(
-        //         (todos.indexOf(todo)), 1,
-        //         todos[todoIndexOf]
-        //     )
-        // ));
-        // setTodos(todos.slice(
-        //     todos.splice(
-        //         (todoIndexOf), 1,
-        //         todos[todos.indexOf(todo)]
-        //     )
-        // ));
-
+        // console.log('Drop', todos.indexOf(todo));
+        const todoDrop = todos.slice();
+        todoDrop.splice(todoIndexOf, 1);
+        todoDrop.splice(todos.indexOf(todo), 0, todos[todoIndexOf]);
+        setTodos(todoDrop);
     }
+
     // const dragEndHandler = (e) => {
     //     e.target.style.background = 'white';
     //     console.log('DragEnd');
@@ -187,10 +165,10 @@ const Todo: React.FC<ITodoProps> = ({
     return (
         <TodoLine
             draggable={true}
-            // onDragStart={(e) => dragStartHandler(e, todo)}
+            onDragStart={(e) => dragStartHandler(e, todo)}
             // onDragLeave={(e) => dragLeaveHandler(e)}
-            // onDragOver={(e) => dragOverHandler(e)}
-            // onDrop={(e) => dropHandler(e, todo)}
+            onDragOver={(e) => dragOverHandler(e)}
+            onDrop={(e) => dropHandler(e, todo)}
             // onDragEnd={(e) => dragEndHandler(e)}
         >
             <UpDownTodoButtonsWrapper>

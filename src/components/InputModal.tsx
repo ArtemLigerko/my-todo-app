@@ -12,8 +12,8 @@ const InputModal: React.FC<IInputModalProps> = ({ active, setActive, children })
         <div
             className={active ? "modal__active" : "modal"}
             onClick={() => setActive(false)}
-            onKeyPress ={e => {
-                if (e.key === 'Enter') { setActive(false) }
+            onKeyPress={e => {
+                // if (e.key === 'Enter') { setActive(false) };
             }}
         >
             <div
