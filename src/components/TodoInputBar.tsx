@@ -18,6 +18,7 @@ import {
 } from './styles/TodoInputBar';
 import InputModal from './InputModal';
 import { addFilter } from "../store/reducers/todosFilterReducer";
+import { addTodo } from '../store/reducers/todosReducer';
 // import InputModalBS from './InputModalBS';       //Bootstrap
 
 
@@ -50,9 +51,12 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     // setShow,
     // show,
 }) => {
-
+    
+    //Hooks
     const { addCreateCountAction } = useActions();  //Redux
     const { addDeleteCountAction } = useActions();  //Redux
+    
+    const dispatch = useDispatch();
 
     const inputTextHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setInputText(e.target.value);
@@ -63,12 +67,15 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         e.preventDefault();
 
         addCreateCountAction(1);  //Redux
+        
         setCounter({
             counterCreated: counter.counterCreated + 1,
             counterUpdated: counter.counterUpdated,
             counterDeleted: counter.counterDeleted,
         })
 
+        dispatch( addTodo(inputText) );
+        
         setTodos([
             ...todos,
             {
@@ -82,6 +89,8 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
             }
         ]);
         setInputText("");
+
+
     }
 
     const handleClearTodos = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -101,7 +110,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setStatus(e.target.value);
     }
     
-    const dispatch = useDispatch();
     const filterHandlerRedux: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         dispatch( addFilter(e.target.value) );
     }

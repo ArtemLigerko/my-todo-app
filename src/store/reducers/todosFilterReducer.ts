@@ -1,9 +1,11 @@
 
-const defaultState: string = "All";
+
+
+const defaultState: any = [];
 
 const FILTER = "FILTER";
-const FILTER_COMPLETED = "FILTER_COMPLETED";
-const FILTER_UNCOMPLETED = "FILTER_UNCOMPLETED";
+// const FILTER_COMPLETED = "FILTER_COMPLETED";
+// const FILTER_UNCOMPLETED = "FILTER_UNCOMPLETED";
 
 
 interface todosFilterAction {  //если в action поступают данные разных типов, то необходимо создавать interface для каждого action
@@ -15,10 +17,6 @@ export const todosFilterReducer = (state = defaultState, action: todosFilterActi
     switch (action.type) {
         case FILTER:
             return state;
-        // case FILTER_COMPLETED:
-        //     return state;
-        // case FILTER_UNCOMPLETED:
-        //     return state;
         default:
             return state;
     }
