@@ -11,7 +11,8 @@ export const UpDownTodoButtonsWrapper = styled.div`
     display: flex;
     flex-direction: column;
 `
-export const DownTodoButton = styled.button`
+
+const UpDownTodoButtons = styled.button`
     font-size: 1rem;
     width: 2.2rem;
     height: 1rem;
@@ -23,8 +24,11 @@ export const DownTodoButton = styled.button`
     cursor: pointer;
     line-height: 2px;
 `
-export const UpTodoButton = styled(DownTodoButton)`
+export const DownTodoButton = styled(UpDownTodoButtons)`
+`
+export const UpTodoButton = styled(UpDownTodoButtons)`
     transform: rotate(180deg);
+    // pointer-events: auto;
 `
 
 

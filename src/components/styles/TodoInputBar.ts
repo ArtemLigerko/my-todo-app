@@ -25,7 +25,7 @@ export const AddTodoButton = styled.button`
     font-size: 1.2rem;
     /* line-height: 0; */
     padding: 0;
-    width: 40px;
+    width: 80px;
     height: 40px;
     background-color: rgb(255, 175, 25);
     /* border: rgb(252, 218, 155) solid 1px; */

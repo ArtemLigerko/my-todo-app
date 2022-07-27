@@ -46,6 +46,8 @@ const App: React.FC = () => {
   });
   const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
+  // const [show, setShow] = useState<boolean>(false);        //Bootstrap
+
 
 
   //RUN ONCE when the app starts
@@ -136,6 +138,8 @@ const App: React.FC = () => {
         counter={counter}
         setActive={setModalActive}
         active={modalActive}
+        // show={show}            //Bootstrap
+        // setShow={setShow}      //Bootstrap
       />
       {/* <InputModal
         active={modalActive}

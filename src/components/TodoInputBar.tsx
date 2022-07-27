@@ -1,7 +1,7 @@
 import React from "react";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import '../App.scss';
-// import { useDispatch } from "react-redux/es/exports";
+import { useDispatch } from "react-redux/es/exports";
 // import { addCreateCountAction } from "../store/action-creators/statistic";
 import { useActions } from "../hooks/useActions";
 import { ITodo } from "./types/ITodo";
@@ -17,6 +17,8 @@ import {
     FilterTodoSelector,
 } from './styles/TodoInputBar';
 import InputModal from './InputModal';
+import { addFilter } from "../store/reducers/todosFilterReducer";
+// import InputModalBS from './InputModalBS';       //Bootstrap
 
 
 interface TodoInputBarProps {
@@ -30,6 +32,8 @@ interface TodoInputBarProps {
     counter: Icounter,
     setActive: React.Dispatch<React.SetStateAction<boolean>>,
     active: boolean,
+    // setShow: React.Dispatch<React.SetStateAction<boolean>>,
+    // show: boolean,
 }
 
 const TodoInputBar: React.FC<TodoInputBarProps> = ({
@@ -43,6 +47,8 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     counter,
     setActive,
     active,
+    // setShow,
+    // show,
 }) => {
 
     const { addCreateCountAction } = useActions();  //Redux
@@ -91,8 +97,13 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setTodos([]);
     }
 
-    const statusHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         setStatus(e.target.value);
+    }
+    
+    const dispatch = useDispatch();
+    const filterHandlerRedux: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+        dispatch( addFilter(e.target.value) );
     }
 
     const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -124,7 +135,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                     counterDeleted: counter.counterDeleted,
                 });
             });
-
     }
 
     return (
@@ -134,36 +144,59 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 setActive={setActive}
             >
 
-
-                <div>
-                    <InputTodoBar
-                        value={inputText}
-                        onChange={inputTextHandler}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') { submitHandler(e); }
-                        }}
-                        type="text"
-                        placeholder="type you task..."
-                    />
-                    <AddTodoButton
-                        onClick={submitHandler}
-                        type="submit"
-                        disabled={disableInputButton}
-                    >
-                        +
-                    </AddTodoButton>
-                </div>
-
+                <InputTodoBar
+                    value={inputText}
+                    onChange={inputTextHandler}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') { submitHandler(e); }
+                    }}
+                    type="text"
+                    placeholder="type you task..."
+                />
+                <AddTodoButton
+                    onClick={submitHandler}
+                    type="submit"
+                    disabled={disableInputButton}
+                >
+                    add
+                </AddTodoButton>
 
             </InputModal>
+
+            {/* <InputModalBS               //Bootstrap
+                show={show}
+                setShow={setShow}
+            >
+            </InputModalBS> */}
+
+            {/* <div>
+                <InputTodoBar
+                    value={inputText}
+                    onChange={inputTextHandler}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') { submitHandler(e); }
+                    }}
+                    type="text"
+                    placeholder="type you task..."
+                />
+                <AddTodoButton
+                    onClick={submitHandler}
+                    type="submit"
+                    disabled={disableInputButton}
+                >
+                    +
+                </AddTodoButton>
+            </div> */}
+
 
             <OptionButtonsWrapper>
                 <AddTaskButton
                     onClick={() => setActive(true)}
+                    // onClick={() => setShow(true)} //Bootstrap
                     type="submit"
                     disabled={disableInputButton}
                 >
-                    add task (modal)
+                    add task
                 </AddTaskButton>
                 <AddFromServerButton onClick={handleFetchTodos}>
                     add from server
@@ -171,11 +204,13 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 <ClearAllButton onClick={handleClearTodos}>
                     clear all
                 </ClearAllButton>
-                <FilterTodoSelector onChange={statusHandler}>
+                <FilterTodoSelector onChange={filterHandler}>
                     <option>All</option>
                     <option>Completed</option>
                     <option>Uncompleted</option>
                 </FilterTodoSelector>
+
+
             </OptionButtonsWrapper>
         </TodoInputForm>
 

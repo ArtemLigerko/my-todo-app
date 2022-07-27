@@ -171,14 +171,23 @@ const Todo: React.FC<ITodoProps> = ({
             onDrop={(e) => dropHandler(e, todo)}
             // onDragEnd={(e) => dragEndHandler(e)}
         >
-            <UpDownTodoButtonsWrapper>
+            {/* <UpDownTodoButtonsWrapper>
                 <UpTodoButton onClick={handleTodoMoveUp}>
                     <b>v</b>
                 </UpTodoButton>
                 <DownTodoButton onClick={handleTodoMoveDown}>
                     <b>v</b>
                 </DownTodoButton>
-            </UpDownTodoButtonsWrapper>
+            </UpDownTodoButtonsWrapper> */}
+
+
+            <DoneTodoButton
+                onClick={completedHandler}
+                disabled={todo.disableButtons || todo.edit}
+                disabledTheme={todo.disableButtons || todo.edit}>
+                <b>V</b>
+            </DoneTodoButton>
+
             {
                 todo.edit ?
                     <TodoEditInput
@@ -189,16 +198,11 @@ const Todo: React.FC<ITodoProps> = ({
                     <TodoTextArea
                         completed={todo.completed}
                         randColor={todo.colorId}
+                        // onDoubleClick={handleEditClick}    // необходима доработка
                     >
                         {text}
                     </TodoTextArea>
             }
-            <DoneTodoButton
-                onClick={completedHandler}
-                disabled={todo.disableButtons || todo.edit}
-                disabledTheme={todo.disableButtons || todo.edit}>
-                <b>V</b>
-            </DoneTodoButton>
 
             {/* <DoneTodoButton //Redux
                 onClick={completedHandler}
