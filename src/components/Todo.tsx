@@ -1,6 +1,7 @@
 import React from "react";
 // import styled, { css } from "styled-components";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import { ITodo } from './types/ITodo';
 import { Icounter } from "./types/Icounter";
@@ -15,6 +16,10 @@ import {
     DelTodoButton,
     EditTodoButton,
 } from './styles/Todo';
+import {
+    doneTodo,
+    deleteTodo, 
+} from '../store/reducers/todosReducer';
  
 
 interface ITodoProps {
@@ -47,15 +52,39 @@ const Todo: React.FC<ITodoProps> = ({
     todoIndexOf,
 }) => {
 
+    const dispatch = useDispatch();
 
     const { addDeleteCountAction } = useActions();
     const { addUpdateCountAction } = useActions();
 
+    const showTodos = useTypedSelector(state => state.todosReducer)
+
+    const completedHandler = (): void => {
+        // Redux-->
+        dispatch( doneTodo(todo.id) );
+        console.log(todo.id);
+        // -->Redux
+
+
+        // setTodos(todos.map((item) => {
+        //     if (item.id === todo.id) {
+        //         return {
+        //             ...item, completed: !item.completed,
+        //         };
+        //     }
+        //     return item;
+        // }));
+    }
+
+
     const deleteHandler = ():void => {
-        setTodos(todos.filter((el) => el.id !== todo.id));
-
-        addDeleteCountAction(1);  //Redux
-
+        // Redux-->
+        dispatch( deleteTodo(todo.id) );
+        addDeleteCountAction(1); 
+        // -->Redux
+        
+        // setTodos(todos.filter((el) => el.id !== todo.id));
+        
         setCounter({
             counterCreated: counter.counterCreated,
             counterUpdated: counter.counterUpdated,
@@ -64,38 +93,26 @@ const Todo: React.FC<ITodoProps> = ({
 
     }
 
-    const completedHandler = (): void => {
-        // Redux
-
-        setTodos(todos.map((item) => {
-            if (item.id === todo.id) {
-                return {
-                    ...item, completed: !item.completed,
-                };
-            }
-            return item;
-        }));
-    }
 
     const handleEditClick = (): void => {
-        setEditText(todo.text);
-        setTodos(todos.map(item => {
-            if (item.id === todo.id) {
-                return {
-                    ...item,
-                    edit: !item.edit,
-                    text: todo.edit ? editText : todo.text,
-                }
-            }
-            if (item.id !== todo.id) {
-                return {
-                    ...item,
-                    disableButtons: !item.disableButtons,
-                }
-            }
-            return item;
-        }));
-        setDisableInputButton(!disableInputButton);
+        // setEditText(todo.text);
+        // setTodos(todos.map(item => {
+        //     if (item.id === todo.id) {
+        //         return {
+        //             ...item,
+        //             edit: !item.edit,
+        //             text: todo.edit ? editText : todo.text,
+        //         }
+        //     }
+        //     if (item.id !== todo.id) {
+        //         return {
+        //             ...item,
+        //             disableButtons: !item.disableButtons,
+        //         }
+        //     }
+        //     return item;
+        // }));
+        // setDisableInputButton(!disableInputButton);
 
         addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0);  //Redux
 

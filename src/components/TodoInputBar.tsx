@@ -18,11 +18,12 @@ import {
     FilterTodoSelector,
 } from './styles/TodoInputBar';
 import InputModal from './InputModal';
-import { addFilter } from "../store/reducers/todosFilterReducer";
+import { filterTodos } from "../store/reducers/todosFilterReducer";
 import {
     addTodo,
+    clearTodos,
+    fetchTodo,
 } from '../store/reducers/todosReducer';
-// import InputModalBS from './InputModalBS';       //Bootstrap
 
 
 interface TodoInputBarProps {
@@ -36,8 +37,6 @@ interface TodoInputBarProps {
     counter: Icounter,
     setActive: React.Dispatch<React.SetStateAction<boolean>>,
     active: boolean,
-    // setShow: React.Dispatch<React.SetStateAction<boolean>>,
-    // show: boolean,
 }
 
 const TodoInputBar: React.FC<TodoInputBarProps> = ({
@@ -51,8 +50,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     counter,
     setActive,
     active,
-    // setShow,
-    // show,
 }) => {
 
     //Hooks
@@ -61,7 +58,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
 
     const dispatch = useDispatch();
 
-    const showTodo = useTypedSelector(state => state.todos);
 
     const inputTextHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setInputText(e.target.value);
@@ -71,41 +67,43 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         React.KeyboardEvent<HTMLInputElement>): void => {
         e.preventDefault();
 
+        // Redux -->
+        dispatch(addTodo(inputText));
+        addCreateCountAction(1);
+        // <-- Redux
+
+
         setCounter({
             counterCreated: counter.counterCreated + 1,
             counterUpdated: counter.counterUpdated,
             counterDeleted: counter.counterDeleted,
         })
-        
-        
-        setTodos([
-            ...todos,
-            {
-                text: inputText,
-                id: Math.random() * 1000,
-                completed: false,
-                edit: false,
-                disableButtons: false,
-                colorId: Math.round(Math.random() * 10),
-                // index: 1,
-            }
-        ]);
+
+
+        // setTodos([
+        //     ...todos,
+        //     {
+        //         text: inputText,
+        //         id: Math.random() * 1000,
+        //         completed: false,
+        //         edit: false,
+        //         disableButtons: false,
+        //         colorId: Math.round(Math.random() * 10),
+        //         // index: 1,
+        //     }
+        // ]);
+
         setInputText("");
 
-        // Redux -->
-        addCreateCountAction(1);
-        console.log( showTodo );
-        dispatch( addTodo(inputText) );
-        // <-- Redux
 
-        
-    }    
-    
+    }
+
     const handleClearTodos = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
 
         // Redux -->
-        addDeleteCountAction(todos.length);  //Redux
+        dispatch(clearTodos());
+        addDeleteCountAction(todos.length);
         // <-- Redux
 
         setCounter({
@@ -113,7 +111,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
             counterUpdated: counter.counterUpdated,
             counterDeleted: counter.counterDeleted + todos.length,
         });
-        setTodos([]);
+        // setTodos([]);
     }
 
     const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
@@ -121,7 +119,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     }
 
     const filterHandlerRedux: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-        dispatch(addFilter(e.target.value));
+        dispatch(filterTodos(e.target.value));
     }
 
     const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -130,20 +128,16 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         await fetch(url)
             .then(response => response.json())
             .then(getTodos => {
-                setTodos([
-                    ...todos,
-                    ...getTodos.map(item => {
-                        return {
-                            text: item.text,
-                            id: Math.random() * 1000,
-                            completed: item.isCompleted,
-                            edit: false,
-                            disableButtons: false,
-                            colorId: Math.floor(Math.random() * 10),
-                            // index: todos.indexOf(item),
-                        }
-                    })
-                ]);
+                const todos = getTodos.map(item => {
+                    return {
+                        id: Math.random() * 1000,
+                        text: item.text,
+                        completed: item.isCompleted,
+                        edit: false,
+                        disableButtons: false,
+                        colorId: Math.floor(Math.random() * 10),
+                    }
+                })
 
                 addCreateCountAction(getTodos.length);  //Redux
 
@@ -152,6 +146,8 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                     counterUpdated: counter.counterUpdated,
                     counterDeleted: counter.counterDeleted,
                 });
+                
+                dispatch(fetchTodo(todos));
             });
     }
 
@@ -161,7 +157,9 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 active={active}
                 setActive={setActive}
             >
+            </InputModal>
 
+            <div>
                 <InputTodoBar
                     value={inputText}
                     onChange={inputTextHandler}
@@ -178,33 +176,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 >
                     add
                 </AddTodoButton>
-
-            </InputModal>
-
-            {/* <InputModalBS               //Bootstrap
-                show={show}
-                setShow={setShow}
-            >
-            </InputModalBS> */}
-
-            {/* <div>
-                <InputTodoBar
-                    value={inputText}
-                    onChange={inputTextHandler}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') { submitHandler(e); }
-                    }}
-                    type="text"
-                    placeholder="type you task..."
-                />
-                <AddTodoButton
-                    onClick={submitHandler}
-                    type="submit"
-                    disabled={disableInputButton}
-                >
-                    +
-                </AddTodoButton>
-            </div> */}
+            </div>
 
 
             <OptionButtonsWrapper>

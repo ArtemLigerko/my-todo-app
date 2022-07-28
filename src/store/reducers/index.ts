@@ -6,8 +6,8 @@ import { todosReducer } from "./todosReducer";
 
 export const rootReducer = combineReducers({
     statistic: statisticReducer,
-    todosFilter: todosFilterReducer,
-    todos: todosReducer,
+    todosFilterReducer: todosFilterReducer,
+    todosReducer: todosReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,19 +1,60 @@
-import { ITodo } from '../../components/types/ITodo'
+// import { ITodo } from '../../components/types/ITodo'
 
-// const defaultState: ITodo[] = [];
+enum TodosActionTypes {
+    ADD_TODO = "ADD_TODO",
+    FETCH_TODOS = "FETCH_TODOS",
+    CLEAR_TODOS = "CLEAR_TODOS",
+    DONE_TODO = "DONE_TODO",
+    DELETE_TODO = "DELETE_TODO",
+    EDIT_TODO = "EDIT_TODO",
+    MOVE_TODOS = "MOVE_TODOS",
+}       // для типизации на замену typeof ADD_TODO...
 
-const ADD_TODO = "ADD_TODO";
-const FETCH_TODOS = "FETCH_TODOS";
-const CLEAR_TODOS = "CLEAR_TODOS";
-const DONE_TODO = "DONE_TODO";
-const DELTE_TODO = "DELETE_TODO";
-const EDIT_TODO = "EDIT_TODO";
-const MOVE_TODOS = "MOVE_TODOS";
+
+interface AddTodo {
+    type: TodosActionTypes.ADD_TODO,
+    payload?: string,
+}
+interface FetchTodo {
+    type: TodosActionTypes.FETCH_TODOS,
+    payload?: any,
+}
+interface ClearTodos {
+    type: TodosActionTypes.CLEAR_TODOS,
+}
+interface DoneTodo {
+    type: TodosActionTypes.DONE_TODO,
+    payload?: number,
+}
+interface DeleteTodo {
+    type: TodosActionTypes.DELETE_TODO,
+    payload?: number,
+}
+interface EditTodo {
+    type: TodosActionTypes.EDIT_TODO,
+    payload?: any,
+}
+interface MoveTodo {
+    type: TodosActionTypes.MOVE_TODOS,
+    payload?: any,
+}
+
+type TodoAction = AddTodo | FetchTodo | ClearTodos |
+    DoneTodo | DeleteTodo | EditTodo | MoveTodo;
+
+// const defaultState: ITodo = {
+//     id: null,
+//     text: '',
+//     completed: false,
+//     edit: false,
+//     disableButtons: false,
+//     colorId: null,
+// };
 
 
-export const todosReducer = (state = [], action) => {
+export const todosReducer = (state = [], action: TodoAction): any => {
     switch (action.type) {
-        case ADD_TODO:
+        case TodosActionTypes.ADD_TODO:
             return [
                 ...state,
                 {
@@ -23,30 +64,59 @@ export const todosReducer = (state = [], action) => {
                     edit: false,
                     disableButtons: false,
                     colorId: Math.round(Math.random() * 10),
-                    // index: 1,
                 }
             ];
 
 
-        case FETCH_TODOS:
-            return state;
+        case TodosActionTypes.FETCH_TODOS:
+            return [
+                ...state,
+                ...action.payload,
+            ]
 
-        case CLEAR_TODOS:
+
+        case TodosActionTypes.CLEAR_TODOS:
+            // setTodos([]);
             return [];
 
-        case DONE_TODO:
+        case TodosActionTypes.DONE_TODO:
+            return (
+                state.map(item => {
+                    if (item.id === action.payload) {
+                        return {
+                            ...item, completed: !item.completed,
+                        };
+                    }
+                    return item;
+                })
+            )
+
+        case TodosActionTypes.DELETE_TODO:
+            return state.filter(el => el.id !== action.payload);
+
+        case TodosActionTypes.EDIT_TODO:
+            // setEditText(todo.text);
+            // setTodos(todos.map(item => {
+            //     if (item.id === todo.id) {
+            //         return {
+            //             ...item,
+            //             edit: !item.edit,
+            //             text: todo.edit ? editText : todo.text,
+            //         }
+            //     }
+            //     if (item.id !== todo.id) {
+            //         return {
+            //             ...item,
+            //             disableButtons: !item.disableButtons,
+            //         }
+            //     }
+            //     return item;
+            // }));
+            // setDisableInputButton(!disableInputButton);
+
             return state;
 
-        case DELTE_TODO:
-            return state;
-
-        case EDIT_TODO:
-            return state;
-
-        case DELTE_TODO:
-            return state;
-
-        case MOVE_TODOS:
+        case TodosActionTypes.MOVE_TODOS:
             return state;
 
         default:
@@ -55,4 +125,8 @@ export const todosReducer = (state = [], action) => {
 }
 
 //Actions
-export const addTodo = (payload: string) => ({ type: ADD_TODO, payload });
+export const addTodo = (payload: string) => ({ type: TodosActionTypes.ADD_TODO, payload });
+export const fetchTodo = (payload: any) => ({ type: TodosActionTypes.FETCH_TODOS, payload })
+export const clearTodos = () => ({ type: TodosActionTypes.CLEAR_TODOS });
+export const doneTodo = (payload: number) => ({ type: TodosActionTypes.DONE_TODO, payload });
+export const deleteTodo = (payload: number) => ({ type: TodosActionTypes.DELETE_TODO, payload });

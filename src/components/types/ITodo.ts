@@ -1,11 +1,10 @@
 export interface ITodo {
-    text: string,
     id: number,
+    text: string,
     completed: boolean,
     edit: boolean,
     disableButtons: boolean,
     colorId: number,
-    index?: number,
 }
 
 

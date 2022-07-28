@@ -10,6 +10,8 @@ import { useTypedSelector } from './hooks/useTypedSelector';
 import { useActions } from './hooks/useActions';
 import { ITodo } from './components/types/ITodo';
 import { Icounter } from "./components/types/Icounter";
+import { todosReducer } from './store/reducers/todosReducer';
+import { useDispatch } from 'react-redux';
 
 
 //Style:
@@ -48,7 +50,7 @@ const App: React.FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   // const [show, setShow] = useState<boolean>(false);        //Bootstrap
 
-
+  const showTodos = useTypedSelector(state => state.todosReducer);
 
   //RUN ONCE when the app starts
   useEffect((): void => {
@@ -59,19 +61,19 @@ const App: React.FC = () => {
   useEffect((): void => {
     filterHandler();
     saveLocalTodos();
-  }, [todos, status]);
+  }, [todos, status, showTodos]);
 
 
   const filterHandler = (): void => {
     switch (status) {
       case "Completed":
-        setCompletedTodos(todos.filter(item => item.completed === true));
+        setCompletedTodos(showTodos.filter(item => item.completed === true));
         break;
       case "Uncompleted":
-        setCompletedTodos(todos.filter(item => item.completed === false));
+        setCompletedTodos(showTodos.filter(item => item.completed === false));
         break;
       default:
-        setCompletedTodos(todos);
+        setCompletedTodos(showTodos);
         break;
     }
   }

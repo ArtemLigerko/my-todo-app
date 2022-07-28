@@ -10,7 +10,7 @@ const FILTER = "FILTER";
 
 interface todosFilterAction {  //если в action поступают данные разных типов, то необходимо создавать interface для каждого action
     type: string;
-    payload?: string;
+    payload?: any;
 }
 
 export const todosFilterReducer = (state = defaultState, action: todosFilterAction) => {
@@ -24,4 +24,4 @@ export const todosFilterReducer = (state = defaultState, action: todosFilterActi
 }
 
 //Actions
-export const addFilter = (payload: string) => ({ type: FILTER, payload });
+export const filterTodos = (payload: string) => ({ type: FILTER, payload });

@@ -4,7 +4,8 @@ import Todo from './Todo'
 import { ITodo } from './types/ITodo'
 import { Icounter } from "./types/Icounter";
 // import { TodoListWrapper } from './styles/TodoList'
-
+import { filterTodos, todosFilterReducer } from "../store/reducers/todosFilterReducer";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 interface ITodoList {
     todos: ITodo[],
@@ -33,28 +34,59 @@ const TodoList: React.FC<ITodoList> = ({
     todoIndexOf,
     setTodoIndexOf
 }) => {
+
+    // const showTodo = useTypedSelector(state => state.todosFilterReducer);
+
     return (
-        <div className="todoListWrapper">
-            {/* <TodoListWrapper> */}
-            {completedTodos.map((todo) => (
-                <Todo
-                    text={todo.text}
-                    key={todo.id}
-                    todo={todo}
-                    todos={todos}
-                    setTodos={setTodos}
-                    setEditText={setEditText}
-                    editText={editText}
-                    setDisableInputButton={setDisableInputButton}
-                    disableInputButton={disableInputButton}
-                    setCounter={setCounter}
-                    counter={counter}
-                    todoIndexOf={todoIndexOf}
-                    setTodoIndexOf={setTodoIndexOf}
-                />
-            ))}
-            {/* </TodoListWrapper> */}
+        <div>
+
+
+            <div className="todoListWrapper">
+                {/* <TodoListWrapper> */}
+                {/* {completedTodos.map((todo) => (
+                    <Todo
+                        text={todo.text}
+                        key={todo.id}
+                        todo={todo}
+                        todos={todos}
+                        setTodos={setTodos}
+                        setEditText={setEditText}
+                        editText={editText}
+                        setDisableInputButton={setDisableInputButton}
+                        disableInputButton={disableInputButton}
+                        setCounter={setCounter}
+                        counter={counter}
+                        todoIndexOf={todoIndexOf}
+                        setTodoIndexOf={setTodoIndexOf}
+                    />
+                ))} */}
+                {/* </TodoListWrapper> */}
+            </div>
+
+
+            <div className="todoListWrapper">
+                {completedTodos.map((todo) => (
+                    <Todo
+                        text={todo.text}
+                        key={todo.id}
+                        todo={todo}
+                        todos={todos}
+                        setTodos={setTodos}
+                        setEditText={setEditText}
+                        editText={editText}
+                        setDisableInputButton={setDisableInputButton}
+                        disableInputButton={disableInputButton}
+                        setCounter={setCounter}
+                        counter={counter}
+                        todoIndexOf={todoIndexOf}
+                        setTodoIndexOf={setTodoIndexOf}
+                    />
+                ))}
+            </div>
+
+
         </div>
+
     )
 };
 
