@@ -12,13 +12,13 @@ const MOVE_TODOS = "MOVE_TODOS";
 
 
 export const todosReducer = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ADD_TODO:
             return [
                 ...state,
                 {
                     id: Math.random() * 1000,
-                    text: action.text,
+                    text: action.payload,
                     completed: false,
                     edit: false,
                     disableButtons: false,
@@ -27,10 +27,32 @@ export const todosReducer = (state = [], action) => {
                 }
             ];
 
+
+        case FETCH_TODOS:
+            return state;
+
+        case CLEAR_TODOS:
+            return [];
+
+        case DONE_TODO:
+            return state;
+
+        case DELTE_TODO:
+            return state;
+
+        case EDIT_TODO:
+            return state;
+
+        case DELTE_TODO:
+            return state;
+
+        case MOVE_TODOS:
+            return state;
+
         default:
             return state;
     }
 }
 
 //Actions
-export const addTodo = (text: string) => ({ type: ADD_TODO, text });
+export const addTodo = (payload: string) => ({ type: ADD_TODO, payload });

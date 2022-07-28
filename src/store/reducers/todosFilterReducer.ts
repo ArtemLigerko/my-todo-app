@@ -16,7 +16,8 @@ interface todosFilterAction {  //если в action поступают данн�
 export const todosFilterReducer = (state = defaultState, action: todosFilterAction) => {
     switch (action.type) {
         case FILTER:
-            return state;
+            const completedTodos = state.slice();
+            return completedTodos;
         default:
             return state;
     }
@@ -24,5 +25,3 @@ export const todosFilterReducer = (state = defaultState, action: todosFilterActi
 
 //Actions
 export const addFilter = (payload: string) => ({ type: FILTER, payload });
-// export const addFilterCompleted = (payload: string) => ({ type: FILTER_COMPLETED, payload });
-// export const addFilterUncompleted = (payload: string) => ({ type: FILTER_UNCOMPLETED, payload });
