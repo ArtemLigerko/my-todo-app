@@ -71,31 +71,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         dispatch(addTodo(inputText));
         addCreateCountAction(1);
         // <-- Redux
-
-
-        setCounter({
-            counterCreated: counter.counterCreated + 1,
-            counterUpdated: counter.counterUpdated,
-            counterDeleted: counter.counterDeleted,
-        })
-
-
-        // setTodos([
-        //     ...todos,
-        //     {
-        //         text: inputText,
-        //         id: Math.random() * 1000,
-        //         completed: false,
-        //         edit: false,
-        //         disableButtons: false,
-        //         colorId: Math.round(Math.random() * 10),
-        //         // index: 1,
-        //     }
-        // ]);
-
         setInputText("");
-
-
     }
 
     const handleClearTodos = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -106,12 +82,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         addDeleteCountAction(todos.length);
         // <-- Redux
 
-        setCounter({
-            counterCreated: counter.counterCreated,
-            counterUpdated: counter.counterUpdated,
-            counterDeleted: counter.counterDeleted + todos.length,
-        });
-        // setTodos([]);
     }
 
     const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
@@ -141,12 +111,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
 
                 addCreateCountAction(getTodos.length);  //Redux
 
-                setCounter({
-                    counterCreated: counter.counterCreated + getTodos.length,
-                    counterUpdated: counter.counterUpdated,
-                    counterDeleted: counter.counterDeleted,
-                });
-                
                 dispatch(fetchTodo(todos));
             });
     }
@@ -178,7 +142,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 </AddTodoButton>
             </div>
 
-
             <OptionButtonsWrapper>
                 <AddTaskButton
                     onClick={() => setActive(true)}
@@ -199,7 +162,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                     <option>Completed</option>
                     <option>Uncompleted</option>
                 </FilterTodoSelector>
-
 
             </OptionButtonsWrapper>
         </TodoInputForm>

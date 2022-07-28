@@ -65,15 +65,6 @@ const Todo: React.FC<ITodoProps> = ({
         console.log(todo.id);
         // -->Redux
 
-
-        // setTodos(todos.map((item) => {
-        //     if (item.id === todo.id) {
-        //         return {
-        //             ...item, completed: !item.completed,
-        //         };
-        //     }
-        //     return item;
-        // }));
     }
 
 
@@ -82,14 +73,6 @@ const Todo: React.FC<ITodoProps> = ({
         dispatch( deleteTodo(todo.id) );
         addDeleteCountAction(1); 
         // -->Redux
-        
-        // setTodos(todos.filter((el) => el.id !== todo.id));
-        
-        setCounter({
-            counterCreated: counter.counterCreated,
-            counterUpdated: counter.counterUpdated,
-            counterDeleted: counter.counterDeleted + 1,
-        })
 
     }
 
@@ -115,12 +98,6 @@ const Todo: React.FC<ITodoProps> = ({
         // setDisableInputButton(!disableInputButton);
 
         addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0);  //Redux
-
-        setCounter({
-            counterCreated: counter.counterCreated,
-            counterUpdated: editText !== todo.text && todo.edit ? counter.counterUpdated + 1 : counter.counterUpdated,
-            counterDeleted: counter.counterDeleted,
-        });
 
     }
 
@@ -220,13 +197,6 @@ const Todo: React.FC<ITodoProps> = ({
                         {text}
                     </TodoTextArea>
             }
-
-            {/* <DoneTodoButton //Redux
-                onClick={completedHandler}
-                disabled={todo.disableButtons || todo.edit}
-                disabledTheme={todo.disableButtons || todo.edit}>
-                <b>V</b>
-            </DoneTodoButton> */}
 
             <DelTodoButton
                 onClick={deleteHandler}

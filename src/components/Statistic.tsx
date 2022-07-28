@@ -20,12 +20,6 @@ const Statistic: React.FC<IcounterProps> = ({ counter }) => {
     return (
         <StatisticBar>
             <div>
-                <b>Statistic: </b>
-                created: {counter.counterCreated};
-                updated: {counter.counterUpdated};
-                deleted: {counter.counterDeleted};
-            </div>
-            <div>
                 <b>Statistic (redux): </b>
                 created: {counterCreated};
                 updated: {counterUpdated};

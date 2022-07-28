@@ -39,31 +39,6 @@ const TodoList: React.FC<ITodoList> = ({
 
     return (
         <div>
-
-
-            <div className="todoListWrapper">
-                {/* <TodoListWrapper> */}
-                {/* {completedTodos.map((todo) => (
-                    <Todo
-                        text={todo.text}
-                        key={todo.id}
-                        todo={todo}
-                        todos={todos}
-                        setTodos={setTodos}
-                        setEditText={setEditText}
-                        editText={editText}
-                        setDisableInputButton={setDisableInputButton}
-                        disableInputButton={disableInputButton}
-                        setCounter={setCounter}
-                        counter={counter}
-                        todoIndexOf={todoIndexOf}
-                        setTodoIndexOf={setTodoIndexOf}
-                    />
-                ))} */}
-                {/* </TodoListWrapper> */}
-            </div>
-
-
             <div className="todoListWrapper">
                 {completedTodos.map((todo) => (
                     <Todo
@@ -83,10 +58,7 @@ const TodoList: React.FC<ITodoList> = ({
                     />
                 ))}
             </div>
-
-
         </div>
-
     )
 };
 
