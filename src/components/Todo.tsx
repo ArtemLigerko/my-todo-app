@@ -18,7 +18,8 @@ import {
 } from './styles/Todo';
 import {
     doneTodo,
-    deleteTodo, 
+    deleteTodo,
+    editTodo, 
 } from '../store/reducers/todosReducer';
  
 
@@ -78,7 +79,8 @@ const Todo: React.FC<ITodoProps> = ({
 
 
     const handleEditClick = (): void => {
-        // setEditText(todo.text);
+        setEditText(todo.text);
+        dispatch(editTodo(todo.id, todo.text, todo.edit, editText));
         // setTodos(todos.map(item => {
         //     if (item.id === todo.id) {
         //         return {
@@ -95,7 +97,7 @@ const Todo: React.FC<ITodoProps> = ({
         //     }
         //     return item;
         // }));
-        // setDisableInputButton(!disableInputButton);
+        setDisableInputButton(!disableInputButton);
 
         addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0);  //Redux
 

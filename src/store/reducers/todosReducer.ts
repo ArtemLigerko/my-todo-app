@@ -32,7 +32,10 @@ interface DeleteTodo {
 }
 interface EditTodo {
     type: TodosActionTypes.EDIT_TODO,
-    payload?: any,
+    id?: number,
+    text?: string,
+    edit?: boolean,
+    editText: string,
 }
 interface MoveTodo {
     type: TodosActionTypes.MOVE_TODOS,
@@ -95,26 +98,22 @@ export const todosReducer = (state = [], action: TodoAction): any => {
             return state.filter(el => el.id !== action.payload);
 
         case TodosActionTypes.EDIT_TODO:
-            // setEditText(todo.text);
-            // setTodos(todos.map(item => {
-            //     if (item.id === todo.id) {
-            //         return {
-            //             ...item,
-            //             edit: !item.edit,
-            //             text: todo.edit ? editText : todo.text,
-            //         }
-            //     }
-            //     if (item.id !== todo.id) {
-            //         return {
-            //             ...item,
-            //             disableButtons: !item.disableButtons,
-            //         }
-            //     }
-            //     return item;
-            // }));
-            // setDisableInputButton(!disableInputButton);
-
-            return state;
+            return state.map(item => {
+                if (item.id === action.id) {
+                    return {
+                        ...item,
+                        edit: !item.edit,
+                        text: action.edit ? action.editText : action.text,
+                    }
+                }
+                if (item.id !== action.id) {
+                    return {
+                        ...item,
+                        disableButtons: !item.disableButtons,
+                    }
+                }
+                return item;
+            });
 
         case TodosActionTypes.MOVE_TODOS:
             return state;
@@ -130,3 +129,6 @@ export const fetchTodo = (payload: any) => ({ type: TodosActionTypes.FETCH_TODOS
 export const clearTodos = () => ({ type: TodosActionTypes.CLEAR_TODOS });
 export const doneTodo = (payload: number) => ({ type: TodosActionTypes.DONE_TODO, payload });
 export const deleteTodo = (payload: number) => ({ type: TodosActionTypes.DELETE_TODO, payload });
+export const editTodo = (id: number, text: string, edit: boolean, editText: string) => (
+    { type: TodosActionTypes.EDIT_TODO, id, text, edit, editText}
+);
