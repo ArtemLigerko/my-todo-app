@@ -45,7 +45,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     const [inputText, setInputText] = useState<string>('');
     
     const dispatch = useDispatch();
-    const showTodos = useTypedSelector(state => state.todosReducer);
+    const todos = useTypedSelector(state => state.todosReducer);
 
     const { addCreateCountAction } = useActions();  //Redux
     const { addDeleteCountAction } = useActions();  //Redux
@@ -65,7 +65,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     const handleClearTodos = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         dispatch(clearTodos());
-        addDeleteCountAction(showTodos.length);
+        addDeleteCountAction(todos.length);
     }
 
     const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {

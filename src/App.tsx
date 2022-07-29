@@ -38,16 +38,14 @@ const Head = styled.h1`
 
 
 const App: React.FC = () => {
-  // const [inputText, setInputText] = useState<string>('');
   const [status, setStatus] = useState<string>("All");
   const [completedTodos, setCompletedTodos] = useState<ITodo[]>([]);
-  const [editText, setEditText] = useState<string>('');
   const [disableInputButton, setDisableInputButton] = useState<boolean>(false);
-  const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
+  // const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  const showTodos = useTypedSelector(state => state.todosReducer);
+  const todos = useTypedSelector(state => state.todosReducer);
   
   const { addCreateCountAction } = useActions(); //Redux
   const { addUpdateCountAction } = useActions(); //Redux
@@ -62,19 +60,19 @@ const App: React.FC = () => {
   useEffect((): void => {
     filterHandler();
     saveLocalTodos();
-  }, [status, showTodos]);
+  }, [status, todos]);
 
 
   const filterHandler = (): void => {
     switch (status) {
       case "Completed":
-        setCompletedTodos(showTodos.filter(item => item.completed === true));
+        setCompletedTodos(todos.filter(item => item.completed === true));
         break;
       case "Uncompleted":
-        setCompletedTodos(showTodos.filter(item => item.completed === false));
+        setCompletedTodos(todos.filter(item => item.completed === false));
         break;
       default:
-        setCompletedTodos(showTodos);
+        setCompletedTodos(todos);
         break;
     }
   }
@@ -83,7 +81,7 @@ const App: React.FC = () => {
   const statisticState = useTypedSelector(state => state.statistic);  //Redux
 
   const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(showTodos));
+    localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("counter", JSON.stringify(statisticState)); //Redux
   };
 
@@ -125,12 +123,10 @@ const App: React.FC = () => {
       />
       <TodoList
         completedTodos={completedTodos}
-        setEditText={setEditText}
-        editText={editText}
         setDisableInputButton={setDisableInputButton}
         disableInputButton={disableInputButton}
-        todoIndexOf={todoIndexOf}
-        setTodoIndexOf={setTodoIndexOf}
+        // todoIndexOf={todoIndexOf}
+        // setTodoIndexOf={setTodoIndexOf}
       />
 
     </div>

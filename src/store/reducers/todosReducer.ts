@@ -130,9 +130,6 @@ export const todosReducer = (state = [], action: TodoAction): any => {
                 return item;
             });
 
-        case TodosActionTypes.MOVE_TODOS:
-            return state;
-
         default:
             return state;
     }

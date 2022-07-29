@@ -1,7 +1,7 @@
 //React:
-import React from "react";
+import React, { useState } from "react";
 //Styles:
-import { 
+import {
     TodoLine,
     TodoEditInput,
     TodoTextArea,
@@ -12,56 +12,56 @@ import {
 //Types:
 import { ITodo } from './types/ITodo';
 //Redux:
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import {
     putTodos,
     doneTodo,
     deleteTodo,
-    editTodo, 
+    editTodo,
 } from '../store/reducers/todosReducer';
- 
+
 interface ITodoProps {
-    text: string,
-    setEditText: React.Dispatch<React.SetStateAction<string>>,
+    // text: string,
     todo: ITodo,
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
     disableInputButton: boolean,
-    editText: string,
-    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
-    todoIndexOf: number,
+    // setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
+    // todoIndexOf: number,
 }
 
 const Todo: React.FC<ITodoProps> = ({
-    text,
-    setEditText,
+    // text,
     todo,
     setDisableInputButton,
     disableInputButton,
-    editText,
-    setTodoIndexOf,
-    todoIndexOf,
+    // setTodoIndexOf,
+    // todoIndexOf,
 }) => {
 
-    const dispatch = useDispatch();
+    const [editText, setEditText] = useState<string>('');
+    const [todoDrag, setTodoDrag] = useState<number>(0);
+    const [todoDrop, setTodoDrop] = useState<number>(0);
 
+    const dispatch = useDispatch();
     const { addDeleteCountAction } = useActions();
     const { addUpdateCountAction } = useActions();
-
-    const showTodos = useTypedSelector(state => state.todosReducer)
+    const todos = useTypedSelector(state => state.todosReducer)
 
     const completedHandler = (): void => {
-        dispatch( doneTodo(todo.id) );
+        dispatch(doneTodo(todo.id));
         console.log(todo.id);
     }
 
-    const deleteHandler = ():void => {
-        dispatch( deleteTodo(todo.id) );
-        addDeleteCountAction(1); 
+    const deleteHandler = (): void => {
+        dispatch(deleteTodo(todo.id));
+        addDeleteCountAction(1);
     }
 
     const handleEditClick = (): void => {
+        // setEditText(todo.text);
+        // dispatch(editTodo(todo.id, todo.text, todo.edit, editText));        //Redux
         setEditText(todo.text);
         dispatch(editTodo(todo.id, todo.text, todo.edit, editText));        //Redux
         setDisableInputButton(!disableInputButton);
@@ -75,8 +75,8 @@ const Todo: React.FC<ITodoProps> = ({
 
     //Drag'n'Drop
     const dragStartHandler = (e, todo) => {
-        // console.log('Drag', showTodos.indexOf(todo));
-        setTodoIndexOf(showTodos.indexOf(todo));
+        setTodoDrag(todos.indexOf(todo));
+        console.log('Drag', todoDrag);
     }
 
     // const dragLeaveHandler = (e) => {
@@ -89,18 +89,18 @@ const Todo: React.FC<ITodoProps> = ({
 
     const dropHandler = (e, todo) => {
         e.preventDefault();
-        // console.log('Drop', showTodos.indexOf(todo));
-        const todoDrop = showTodos.slice();
-        todoDrop.splice(todoIndexOf, 1);
-        todoDrop.splice(showTodos.indexOf(todo), 0, showTodos[todoIndexOf]);
-        // setTodos(todoDrop);
-        dispatch(putTodos(todoDrop));
+        setTodoDrop(todos.indexOf(todo));
+        console.log('Drop', todoDrop);
+        
     }
 
-    // const dragEndHandler = (e) => {
-    //     e.target.style.background = 'white';
-    //     console.log('DragEnd');
-    // }
+    const dragEndHandler = (e) => {
+        const todosDrop = todos.slice();
+        todosDrop.splice(todoDrag, 1);
+        todosDrop.splice(todoDrop, 0, todos[todoDrag]);
+        dispatch(putTodos(todosDrop));
+        // console.log(todosDrop);
+    }
 
     return (
         <TodoLine
@@ -109,7 +109,7 @@ const Todo: React.FC<ITodoProps> = ({
             // onDragLeave={(e) => dragLeaveHandler(e)}
             onDragOver={(e) => dragOverHandler(e)}
             onDrop={(e) => dropHandler(e, todo)}
-            // onDragEnd={(e) => dragEndHandler(e)}
+            onDragEnd={(e) => dragEndHandler(e)}
         >
             <DoneTodoButton
                 onClick={completedHandler}
@@ -122,15 +122,15 @@ const Todo: React.FC<ITodoProps> = ({
                 todo.edit ?
                     <TodoEditInput
                         type="text"
-                        defaultValue={text}
+                        defaultValue={todo.text}
                         onChange={inputEditTextHandler}
                     /> :
                     <TodoTextArea
                         completed={todo.completed}
                         randColor={todo.colorId}
-                        // onDoubleClick={handleEditClick}    // необходима доработка
+                    // onDoubleClick={handleEditClick}    // необходима доработка
                     >
-                        {text}
+                        {todo.text}
                     </TodoTextArea>
             }
 
