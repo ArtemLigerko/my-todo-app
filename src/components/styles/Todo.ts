@@ -12,24 +12,24 @@ export const UpDownTodoButtonsWrapper = styled.div`
     flex-direction: column;
 `
 
-const UpDownTodoButtons = styled.button`
-    font-size: 1rem;
-    width: 2.2rem;
-    height: 1rem;
-    background-color: rgb(155, 218, 255);
-    border: rgb(252, 218, 155) solid;
-    border-width: 1px 0 1px 0;
-    border-radius: 5px;
-    color: rgb(120, 120, 120);
-    cursor: pointer;
-    line-height: 2px;
-`
-export const DownTodoButton = styled(UpDownTodoButtons)`
-`
-export const UpTodoButton = styled(UpDownTodoButtons)`
-    transform: rotate(180deg);
-    // pointer-events: auto;
-`
+// const UpDownTodoButtons = styled.button`
+//     font-size: 1rem;
+//     width: 2.2rem;
+//     height: 1rem;
+//     background-color: rgb(155, 218, 255);
+//     border: rgb(252, 218, 155) solid;
+//     border-width: 1px 0 1px 0;
+//     border-radius: 5px;
+//     color: rgb(120, 120, 120);
+//     cursor: pointer;
+//     line-height: 2px;
+// `
+// export const DownTodoButton = styled(UpDownTodoButtons)`
+// `
+// export const UpTodoButton = styled(UpDownTodoButtons)`
+//     transform: rotate(180deg);
+//     // pointer-events: auto;
+// `
 
 
 

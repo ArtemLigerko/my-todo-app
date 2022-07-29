@@ -1,21 +1,16 @@
+//React:
 import React from "react";
-// import styled from "styled-components";
-// import { useSelector } from "react-redux";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { Icounter } from "./types/Icounter";
+//Styles:
 import { StatisticBar } from './styles/Statistic'
+//Redux:
+import { useTypedSelector } from "../hooks/useTypedSelector";
  
-interface IcounterProps {
-    counter: Icounter,
-}
 
-const Statistic: React.FC<IcounterProps> = ({ counter }) => {
+const Statistic: React.FC = () => {
 
-    //Redux. Start
     const counterCreated = useTypedSelector(state => state.statistic.counterCreated)
     const counterUpdated = useTypedSelector(state => state.statistic.counterUpdated)
     const counterDeleted = useTypedSelector(state => state.statistic.counterDeleted)
-    //Redux. End
 
     return (
         <StatisticBar>

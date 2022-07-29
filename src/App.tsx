@@ -1,18 +1,21 @@
+//React:
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import './App.scss';
+//Components:
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
 import InputModal from './components/InputModal';
-// import { useSelector, useDispatch } from 'react-redux';
-import { useTypedSelector } from './hooks/useTypedSelector';
+//Styles:
+import styled from 'styled-components';
+import './App.scss';
+//Hooks:
 import { useActions } from './hooks/useActions';
+//Types:
 import { ITodo } from './components/types/ITodo';
-import { Icounter } from "./components/types/Icounter";
-import { todosReducer } from './store/reducers/todosReducer';
+//Redux:
 import { useDispatch } from 'react-redux';
-
+import { useTypedSelector } from './hooks/useTypedSelector';
+import { getLocalStorageTodos } from './store/reducers/todosReducer';
 
 //Style:
 const Head = styled.h1`
@@ -35,23 +38,21 @@ const Head = styled.h1`
 
 
 const App: React.FC = () => {
-  const [inputText, setInputText] = useState<string>('');
-  const [todos, setTodos] = useState<ITodo[]>([]);
+  // const [inputText, setInputText] = useState<string>('');
   const [status, setStatus] = useState<string>("All");
   const [completedTodos, setCompletedTodos] = useState<ITodo[]>([]);
   const [editText, setEditText] = useState<string>('');
   const [disableInputButton, setDisableInputButton] = useState<boolean>(false);
-  const [counter, setCounter] = useState<Icounter>({
-    counterCreated: 0,
-    counterUpdated: 0,
-    counterDeleted: 0,
-  });
   const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
-  // const [show, setShow] = useState<boolean>(false);        //Bootstrap
 
+  const dispatch = useDispatch();
   const showTodos = useTypedSelector(state => state.todosReducer);
-
+  
+  const { addCreateCountAction } = useActions(); //Redux
+  const { addUpdateCountAction } = useActions(); //Redux
+  const { addDeleteCountAction } = useActions(); //Redux
+  
   //RUN ONCE when the app starts
   useEffect((): void => {
     getLocalTodos();
@@ -61,7 +62,7 @@ const App: React.FC = () => {
   useEffect((): void => {
     filterHandler();
     saveLocalTodos();
-  }, [todos, status, showTodos]);
+  }, [status, showTodos]);
 
 
   const filterHandler = (): void => {
@@ -79,39 +80,27 @@ const App: React.FC = () => {
   }
 
   // Save to local
-  // 01:23:00
   const statisticState = useTypedSelector(state => state.statistic);  //Redux
 
   const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-    localStorage.setItem("counter", JSON.stringify(counter));
-    localStorage.setItem("counter (redux)", JSON.stringify(statisticState)); //Redux
+    localStorage.setItem("todos", JSON.stringify(showTodos));
+    localStorage.setItem("counter", JSON.stringify(statisticState)); //Redux
   };
 
-  const { addCreateCountAction } = useActions(); //Redux
-  const { addUpdateCountAction } = useActions(); //Redux
-  const { addDeleteCountAction } = useActions(); //Redux
 
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify([]));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
-    }
-
-    if (localStorage.getItem("counter") === null) {
-      localStorage.setItem("counter", JSON.stringify({}));
-    } else {
-      let counterLocal = JSON.parse(localStorage.getItem("counter"));
-      setCounter(counterLocal);
+      dispatch(getLocalStorageTodos(todoLocal));
     }
 
     //Redux
-    if (localStorage.getItem("counter (redux)") === null) {
-      localStorage.setItem("counter (redux)", JSON.stringify({}));
+    if (localStorage.getItem("counter") === null) {
+      localStorage.setItem("counter", JSON.stringify({}));
     } else {
-      let counterLocalRedux = JSON.parse(localStorage.getItem("counter (redux)"));
+      let counterLocalRedux = JSON.parse(localStorage.getItem("counter"));
       addCreateCountAction(counterLocalRedux.counterCreated);
       addUpdateCountAction(counterLocalRedux.counterUpdated);
       addDeleteCountAction(counterLocalRedux.counterDeleted);
@@ -123,40 +112,23 @@ const App: React.FC = () => {
     <div className='appWrapper'>
       <header className='header'>
         <Statistic
-          counter={counter}
         />
         <Head>
           Artem's Todo App
         </Head>
       </header>
       <TodoInputBar
-        inputText={inputText}
-        setInputText={setInputText}
-        todos={todos}
-        setTodos={setTodos}
         setStatus={setStatus}
         disableInputButton={disableInputButton}
-        setCounter={setCounter}
-        counter={counter}
         setActive={setModalActive}
         active={modalActive}
-        // show={show}            //Bootstrap
-        // setShow={setShow}      //Bootstrap
       />
-      {/* <InputModal
-        active={modalActive}
-        setActive={setModalActive}
-      /> */}
       <TodoList
-        todos={todos}
-        setTodos={setTodos}
         completedTodos={completedTodos}
         setEditText={setEditText}
         editText={editText}
         setDisableInputButton={setDisableInputButton}
         disableInputButton={disableInputButton}
-        setCounter={setCounter}
-        counter={counter}
         todoIndexOf={todoIndexOf}
         setTodoIndexOf={setTodoIndexOf}
       />
