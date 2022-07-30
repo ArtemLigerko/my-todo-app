@@ -41,11 +41,11 @@ const App: React.FC = () => {
   const [status, setStatus] = useState<string>("All");
   const [completedTodos, setCompletedTodos] = useState<ITodo[]>([]);
   const [disableInputButton, setDisableInputButton] = useState<boolean>(false);
-  // const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
 
   const dispatch = useDispatch();
-  const todos = useTypedSelector(state => state.todosReducer);
+  const todos = useTypedSelector(state => state.todos);
   
   const { addCreateCountAction } = useActions(); //Redux
   const { addUpdateCountAction } = useActions(); //Redux
@@ -125,8 +125,8 @@ const App: React.FC = () => {
         completedTodos={completedTodos}
         setDisableInputButton={setDisableInputButton}
         disableInputButton={disableInputButton}
-        // todoIndexOf={todoIndexOf}
-        // setTodoIndexOf={setTodoIndexOf}
+        todoIndexOf={todoIndexOf}
+        setTodoIndexOf={setTodoIndexOf}
       />
 
     </div>

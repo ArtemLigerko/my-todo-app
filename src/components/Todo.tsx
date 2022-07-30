@@ -23,35 +23,34 @@ import {
 } from '../store/reducers/todosReducer';
 
 interface ITodoProps {
-    // text: string,
     todo: ITodo,
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
     disableInputButton: boolean,
-    // setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
-    // todoIndexOf: number,
+    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
+    todoIndexOf: number,
 }
 
 const Todo: React.FC<ITodoProps> = ({
-    // text,
     todo,
     setDisableInputButton,
     disableInputButton,
-    // setTodoIndexOf,
-    // todoIndexOf,
+    setTodoIndexOf,
+    todoIndexOf,
 }) => {
 
     const [editText, setEditText] = useState<string>('');
+    // const [currentTodo, setCurrentTodo] = useState<ITodo>('');
     const [todoDrag, setTodoDrag] = useState<number>(0);
     const [todoDrop, setTodoDrop] = useState<number>(0);
 
     const dispatch = useDispatch();
     const { addDeleteCountAction } = useActions();
     const { addUpdateCountAction } = useActions();
-    const todos = useTypedSelector(state => state.todosReducer)
+    const todos = useTypedSelector(state => state.todos)
 
     const completedHandler = (): void => {
         dispatch(doneTodo(todo.id));
-        console.log(todo.id);
+        // console.log(todo.id);
     }
 
     const deleteHandler = (): void => {
@@ -60,8 +59,6 @@ const Todo: React.FC<ITodoProps> = ({
     }
 
     const handleEditClick = (): void => {
-        // setEditText(todo.text);
-        // dispatch(editTodo(todo.id, todo.text, todo.edit, editText));        //Redux
         setEditText(todo.text);
         dispatch(editTodo(todo.id, todo.text, todo.edit, editText));        //Redux
         setDisableInputButton(!disableInputButton);
@@ -75,8 +72,8 @@ const Todo: React.FC<ITodoProps> = ({
 
     //Drag'n'Drop
     const dragStartHandler = (e, todo) => {
-        setTodoDrag(todos.indexOf(todo));
-        console.log('Drag', todoDrag);
+        // console.log('Drag', todos.indexOf(todo));
+        setTodoIndexOf(todos.indexOf(todo));
     }
 
     // const dragLeaveHandler = (e) => {
@@ -89,16 +86,14 @@ const Todo: React.FC<ITodoProps> = ({
 
     const dropHandler = (e, todo) => {
         e.preventDefault();
-        setTodoDrop(todos.indexOf(todo));
-        console.log('Drop', todoDrop);
-        
+        // console.log('Drop', todos.indexOf(todo));
+        const todosDrop = todos.slice();
+        todosDrop.splice(todoIndexOf, 1);
+        todosDrop.splice(todos.indexOf(todo), 0, todos[todoIndexOf]);
+        dispatch(putTodos(todosDrop));
     }
 
     const dragEndHandler = (e) => {
-        const todosDrop = todos.slice();
-        todosDrop.splice(todoDrag, 1);
-        todosDrop.splice(todoDrop, 0, todos[todoDrag]);
-        dispatch(putTodos(todosDrop));
         // console.log(todosDrop);
     }
 

@@ -10,16 +10,16 @@ interface ITodoList {
     completedTodos: ITodo[],
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
     disableInputButton: boolean,
-    // todoIndexOf: number,
-    // setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
+    todoIndexOf: number,
+    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
 }
 
 const TodoList: React.FC<ITodoList> = ({
     completedTodos,
     setDisableInputButton,
     disableInputButton,
-    // todoIndexOf,
-    // setTodoIndexOf
+    todoIndexOf,
+    setTodoIndexOf
 }) => {
 
     return (
@@ -27,13 +27,12 @@ const TodoList: React.FC<ITodoList> = ({
             <div className="todoListWrapper">
                 {completedTodos.map((todo) => (
                     <Todo
-                        // text={todo.text}
                         key={todo.id}
                         todo={todo}
                         setDisableInputButton={setDisableInputButton}
                         disableInputButton={disableInputButton}
-                        // todoIndexOf={todoIndexOf}
-                        // setTodoIndexOf={setTodoIndexOf}
+                        todoIndexOf={todoIndexOf}
+                        setTodoIndexOf={setTodoIndexOf}
                     />
                 ))}
             </div>

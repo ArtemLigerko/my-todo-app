@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 import { statisticReducer } from "./statisticReducer";
 import { todosFilterReducer } from "./todosFilterReducer";
-import { todosReducer } from "./todosReducer";
+import { todos } from "./todosReducer";
  
 
 export const rootReducer = combineReducers({
     statistic: statisticReducer,
-    todosFilterReducer: todosFilterReducer,
-    todosReducer: todosReducer,
+    todosFilter: todosFilterReducer,
+    todos: todos,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

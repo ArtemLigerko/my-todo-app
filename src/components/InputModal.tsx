@@ -1,13 +1,15 @@
-import React from "react";
+//React:
+import React, { FC, Dispatch, ReactNode } from "react";
+//Styles:
 import './styles/InputModal.scss';
 
 interface InputModalProps {
     active: boolean,
-    setActive: React.Dispatch<React.SetStateAction<boolean>>,
-    children: any,
+    setActive: Dispatch<React.SetStateAction<boolean>>,
+    children?: ReactNode,
 }
 
-const InputModal: React.FC<InputModalProps> = ({ active, setActive, children }) => {
+const InputModal: FC<InputModalProps> = ({ active, setActive, children }) => {
     return (
         <div
             className={active ? "modal__active" : "modal"}
@@ -16,11 +18,11 @@ const InputModal: React.FC<InputModalProps> = ({ active, setActive, children }) 
                 // if (e.key === 'Enter') { setActive(false) };
             }}
         >
+            {children}
             <div
                 className={active ? "modal__content__active" : "modal__content"}
                 onClick={e => e.stopPropagation()}
             >
-                {children}
             </div>
         </div>
     )

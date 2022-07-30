@@ -90,21 +90,24 @@ export const TodoButtons = styled.button`
     margin-right: 2px;
 `
 
+interface ITodoButton {
+    disabledTheme: boolean,
+}
 
-export const DoneTodoButton = styled(TodoButtons)`
-    color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
-    background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
+export const DoneTodoButton = styled(TodoButtons)<ITodoButton>`
+    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
 `
 
-export const DelTodoButton = styled(TodoButtons)`
-    color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
-    background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
+export const DelTodoButton = styled(TodoButtons)<ITodoButton>`
+    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
 `
 
-export const EditTodoButton = styled(TodoButtons)`
+export const EditTodoButton = styled(TodoButtons)<ITodoButton>`
     width: 3rem;
-    color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
-    background-color: ${(props: { disabledTheme: boolean; }) => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
+    color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
+    background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
 `
 
 export const TodoEditInput = styled.input`

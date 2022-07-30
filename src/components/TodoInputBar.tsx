@@ -45,7 +45,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     const [inputText, setInputText] = useState<string>('');
     
     const dispatch = useDispatch();
-    const todos = useTypedSelector(state => state.todosReducer);
+    const todos = useTypedSelector(state => state.todos);
 
     const { addCreateCountAction } = useActions();  //Redux
     const { addDeleteCountAction } = useActions();  //Redux

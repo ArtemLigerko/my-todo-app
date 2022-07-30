@@ -66,7 +66,7 @@ type TodoAction = putTodos | getLocalStorageTodos | AddTodo | FetchTodo | ClearT
 // };
 
 
-export const todosReducer = (state = [], action: TodoAction): any => {
+export const todos = (state = [], action: TodoAction): any => {
     switch (action.type) {
         case TodosActionTypes.PUT_TODOS:
             return action.payload;
