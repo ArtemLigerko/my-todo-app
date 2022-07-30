@@ -12,7 +12,7 @@ import {
 //Types:
 import { ITodo } from './types/ITodo';
 //Redux:
-import { useDispatch, useSelector } from "react-redux";
+import { useTypedDispatch } from "../hooks/useTypedDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import {
@@ -39,11 +39,8 @@ const Todo: React.FC<ITodoProps> = ({
 }) => {
 
     const [editText, setEditText] = useState<string>('');
-    // const [currentTodo, setCurrentTodo] = useState<ITodo>('');
-    const [todoDrag, setTodoDrag] = useState<number>(0);
-    const [todoDrop, setTodoDrop] = useState<number>(0);
 
-    const dispatch = useDispatch();
+    const dispatch = useTypedDispatch();
     const { addDeleteCountAction } = useActions();
     const { addUpdateCountAction } = useActions();
     const todos = useTypedSelector(state => state.todos)
@@ -71,7 +68,7 @@ const Todo: React.FC<ITodoProps> = ({
     }
 
     //Drag'n'Drop
-    const dragStartHandler = (e, todo) => {
+    const dragStartHandler = (e, todo): void => {
         // console.log('Drag', todos.indexOf(todo));
         setTodoIndexOf(todos.indexOf(todo));
     }
@@ -80,11 +77,11 @@ const Todo: React.FC<ITodoProps> = ({
     //     // console.log('DragLeave');
     // }
 
-    const dragOverHandler = (e) => {
+    const dragOverHandler = (e): void => {
         e.preventDefault();
     }
 
-    const dropHandler = (e, todo) => {
+    const dropHandler = (e, todo): void => {
         e.preventDefault();
         // console.log('Drop', todos.indexOf(todo));
         const todosDrop = todos.slice();
@@ -93,7 +90,7 @@ const Todo: React.FC<ITodoProps> = ({
         dispatch(putTodos(todosDrop));
     }
 
-    const dragEndHandler = (e) => {
+    const dragEndHandler = (e): void => {
         // console.log(todosDrop);
     }
 

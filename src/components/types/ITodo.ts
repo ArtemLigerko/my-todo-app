@@ -7,4 +7,14 @@ export interface ITodo {
     colorId: number,
 }
 
+export interface ITodoFetch {
+    id: number,
+    text: string,
+    isCompleted: boolean,
+    createdAt: Date | string,
+}
 
+// "id":1,
+// "text":"Nunc purus. Phasellus in felis.",
+// "isCompleted":true,
+// "createdAt":"6/29/2022"

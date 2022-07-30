@@ -13,7 +13,7 @@ import { useActions } from './hooks/useActions';
 //Types:
 import { ITodo } from './components/types/ITodo';
 //Redux:
-import { useDispatch } from 'react-redux';
+import { useTypedDispatch } from "./hooks/useTypedDispatch";
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { getLocalStorageTodos } from './store/reducers/todosReducer';
 
@@ -44,7 +44,7 @@ const App: React.FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
 
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   const todos = useTypedSelector(state => state.todos);
   
   const { addCreateCountAction } = useActions(); //Redux
@@ -66,10 +66,10 @@ const App: React.FC = () => {
   const filterHandler = (): void => {
     switch (status) {
       case "Completed":
-        setCompletedTodos(todos.filter(item => item.completed === true));
+        setCompletedTodos(todos.filter((item: ITodo) => item.completed === true));
         break;
       case "Uncompleted":
-        setCompletedTodos(todos.filter(item => item.completed === false));
+        setCompletedTodos(todos.filter((item: ITodo) => item.completed === false));
         break;
       default:
         setCompletedTodos(todos);

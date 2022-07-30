@@ -7,3 +7,5 @@ export const useActions = () => {
     const dispatch = useDispatch();
     return bindActionCreators(StatisticActionCreators, dispatch)
 }
+
+

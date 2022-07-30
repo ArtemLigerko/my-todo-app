@@ -15,9 +15,9 @@ import {
     FilterTodoSelector,
 } from './styles/TodoInputBar';
 //Types:
-import { ITodo } from "./types/ITodo";
+import { ITodo, ITodoFetch } from "./types/ITodo";
 //Redux:
-import { useDispatch } from 'react-redux';
+import { useTypedDispatch } from '../hooks/useTypedDispatch';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import { filterTodos } from "../store/reducers/todosFilterReducer";
@@ -44,7 +44,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
 }) => {
     const [inputText, setInputText] = useState<string>('');
     
-    const dispatch = useDispatch();
+    const dispatch = useTypedDispatch();
     const todos = useTypedSelector(state => state.todos);
 
     const { addCreateCountAction } = useActions();  //Redux
@@ -82,7 +82,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         await fetch(url)
             .then(response => response.json())
             .then(getTodos => {
-                const todos = getTodos.map(item => {
+                const todos: ITodo[] = getTodos.map((item: ITodoFetch) => {
                     return {
                         id: Math.random() * 1000,
                         text: item.text,
