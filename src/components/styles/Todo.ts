@@ -12,27 +12,6 @@ export const UpDownTodoButtonsWrapper = styled.div`
     flex-direction: column;
 `
 
-// const UpDownTodoButtons = styled.button`
-//     font-size: 1rem;
-//     width: 2.2rem;
-//     height: 1rem;
-//     background-color: rgb(155, 218, 255);
-//     border: rgb(252, 218, 155) solid;
-//     border-width: 1px 0 1px 0;
-//     border-radius: 5px;
-//     color: rgb(120, 120, 120);
-//     cursor: pointer;
-//     line-height: 2px;
-// `
-// export const DownTodoButton = styled(UpDownTodoButtons)`
-// `
-// export const UpTodoButton = styled(UpDownTodoButtons)`
-//     transform: rotate(180deg);
-//     // pointer-events: auto;
-// `
-
-
-
 interface ITodoTextArea {
     completed: boolean,
     randColor: number,
@@ -78,6 +57,7 @@ export const TodoTextArea = styled.li<ITodoTextArea>`
             default: return "black";
         }
     }};
+    cursor: grab;
 `
 
 export const TodoButtons = styled.button`
@@ -94,17 +74,17 @@ interface ITodoButton {
     disabledTheme: boolean,
 }
 
-export const DoneTodoButton = styled(TodoButtons)<ITodoButton>`
+export const DoneTodoButton = styled(TodoButtons) <ITodoButton>`
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
 `
 
-export const DelTodoButton = styled(TodoButtons)<ITodoButton>`
+export const DelTodoButton = styled(TodoButtons) <ITodoButton>`
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
 `
 
-export const EditTodoButton = styled(TodoButtons)<ITodoButton>`
+export const EditTodoButton = styled(TodoButtons) <ITodoButton>`
     width: 3rem;
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};

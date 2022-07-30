@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
-import InputModal from './components/InputModal';
 //Styles:
 import styled from 'styled-components';
 import './App.scss';
@@ -46,11 +45,11 @@ const App: React.FC = () => {
 
   const dispatch = useTypedDispatch();
   const todos = useTypedSelector(state => state.todos);
-  
+
   const { addCreateCountAction } = useActions(); //Redux
   const { addUpdateCountAction } = useActions(); //Redux
   const { addDeleteCountAction } = useActions(); //Redux
-  
+
   //RUN ONCE when the app starts
   useEffect((): void => {
     getLocalTodos();
@@ -109,8 +108,7 @@ const App: React.FC = () => {
     // <AppWrapper>
     <div className='appWrapper'>
       <header className='header'>
-        <Statistic
-        />
+        <Statistic />
         <Head>
           Artem's Todo App
         </Head>

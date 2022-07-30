@@ -6,4 +6,6 @@ export const StatisticBar = styled.div`
   padding: 10px;
   font-size: 0.8rem;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 `

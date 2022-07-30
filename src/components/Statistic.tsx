@@ -15,11 +15,12 @@ const Statistic: React.FC = () => {
     return (
         <StatisticBar>
             <div>
-                <b>Statistic (redux): </b>
-                created: {counterCreated};
-                updated: {counterUpdated};
-                deleted: {counterDeleted};
+                <b>Statistic: </b>
+                created: <b>{counterCreated}</b>;
+                updated: <b>{counterUpdated}</b>;
+                deleted: <b>{counterDeleted}</b>;
             </div>
+            <div>v2.0.0</div>
         </StatisticBar>
     )
 }

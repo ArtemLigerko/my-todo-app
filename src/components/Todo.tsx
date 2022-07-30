@@ -1,5 +1,5 @@
 //React:
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 //Styles:
 import {
     TodoLine,
@@ -68,7 +68,7 @@ const Todo: React.FC<ITodoProps> = ({
     }
 
     //Drag'n'Drop
-    const dragStartHandler = (e, todo): void => {
+    const dragStartHandler = (todo: ITodo): void => {
         // console.log('Drag', todos.indexOf(todo));
         setTodoIndexOf(todos.indexOf(todo));
     }
@@ -77,11 +77,11 @@ const Todo: React.FC<ITodoProps> = ({
     //     // console.log('DragLeave');
     // }
 
-    const dragOverHandler = (e): void => {
+    const dragOverHandler = (e: FormEvent): void => {
         e.preventDefault();
     }
 
-    const dropHandler = (e, todo): void => {
+    const dropHandler = (e: FormEvent, todo: ITodo): void => {
         e.preventDefault();
         // console.log('Drop', todos.indexOf(todo));
         const todosDrop = todos.slice();
@@ -90,18 +90,18 @@ const Todo: React.FC<ITodoProps> = ({
         dispatch(putTodos(todosDrop));
     }
 
-    const dragEndHandler = (e): void => {
+    const dragEndHandler = (): void => {
         // console.log(todosDrop);
     }
 
     return (
         <TodoLine
             draggable={true}
-            onDragStart={(e) => dragStartHandler(e, todo)}
+            onDragStart={() => dragStartHandler(todo)}
             // onDragLeave={(e) => dragLeaveHandler(e)}
             onDragOver={(e) => dragOverHandler(e)}
             onDrop={(e) => dropHandler(e, todo)}
-            onDragEnd={(e) => dragEndHandler(e)}
+            onDragEnd={() => dragEndHandler()}
         >
             <DoneTodoButton
                 onClick={completedHandler}

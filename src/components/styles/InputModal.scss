@@ -9,42 +9,44 @@
     justify-content: center;
     // align-items: center;
     // transition: 0.2s;
-    
 }
 
 %modal__content {
     // padding-top: 20px;
     margin-top: 20%;
     border-radius: 5px;
-    // background-color: rgb(223, 223, 223);
+    background-color: rgb(223, 223, 223);
     height: 1px;
-    // width: 500px;
-    // height: 100px;
+    width: 500px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal {     
     @extend %modal;
-    // transform: scale(0);
+    transform: scale(0);
     opacity: 0;
     pointer-events: none; //чтобы элементы не перекрывали окно
     
     .modal__content {
         @extend %modal__content;
-        transform: scale(0.5);  //корректно не работает
-        transition: 0.5s all;   //корректно не работает
+        // transform: scale(0.5);  //корректно не работает
+        // transition: 0.5s all;   //корректно не работает
     }
 }
 
 .modal__active {
     @extend %modal;
-    // transform: scale(1);
+    transform: scale(1);
     opacity: 1;
     pointer-events: auto;
-    transition: 0.5s;
+    // transition: 0.5s;
     
     .modal__content__active {
         @extend %modal__content;
-        transform: scale(1);    //корректно не работает
+        // transform: scale(1);    //корректно не работает
     }
 }
 

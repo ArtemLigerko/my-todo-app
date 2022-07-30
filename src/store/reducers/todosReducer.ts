@@ -58,7 +58,7 @@ type TodoAction = putTodos | getLocalStorageTodos | AddTodo | FetchTodo | ClearT
     DoneTodo | DeleteTodo | EditTodo | MoveTodo;
 
 
-const initialState = [];
+const initialState: ITodo[] = [];
 
 export const todos = (state = initialState, action: TodoAction): ITodo[] => {
     switch (action.type) {

@@ -43,7 +43,8 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     active,
 }) => {
     const [inputText, setInputText] = useState<string>('');
-    
+
+
     const dispatch = useTypedDispatch();
     const todos = useTypedSelector(state => state.todos);
 
@@ -103,26 +104,26 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 active={active}
                 setActive={setActive}
             >
+                <div>
+                    <InputTodoBar
+                        value={inputText}
+                        onChange={inputTextHandler}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') { submitHandler(e); }
+                        }}
+                        type="text"
+                        placeholder="type you task..."
+                    />
+                    <AddTodoButton
+                        onClick={submitHandler}
+                        type="submit"
+                        disabled={disableInputButton}
+                    >
+                        +
+                    </AddTodoButton>
+                </div>
             </InputModal>
 
-            <div>
-                <InputTodoBar
-                    value={inputText}
-                    onChange={inputTextHandler}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') { submitHandler(e); }
-                    }}
-                    type="text"
-                    placeholder="type you task..."
-                />
-                <AddTodoButton
-                    onClick={submitHandler}
-                    type="submit"
-                    disabled={disableInputButton}
-                >
-                    add
-                </AddTodoButton>
-            </div>
 
             <OptionButtonsWrapper>
                 <AddTaskButton
@@ -130,7 +131,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                     type="submit"
                     disabled={disableInputButton}
                 >
-                    add task
+                    +
                 </AddTaskButton>
                 <AddFromServerButton onClick={handleFetchTodos}>
                     add from server

@@ -18,11 +18,11 @@ const InputModal: FC<InputModalProps> = ({ active, setActive, children }) => {
                 // if (e.key === 'Enter') { setActive(false) };
             }}
         >
-            {children}
             <div
                 className={active ? "modal__content__active" : "modal__content"}
                 onClick={e => e.stopPropagation()}
             >
+                {children}
             </div>
         </div>
     )
