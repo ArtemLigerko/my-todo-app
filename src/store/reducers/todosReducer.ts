@@ -49,13 +49,9 @@ interface EditTodo {
     edit: boolean,
     editText: string,
 }
-interface MoveTodo {
-    type: TodosActionTypes.MOVE_TODOS,
-    payload?: any,
-}
 
 type TodoAction = putTodos | getLocalStorageTodos | AddTodo | FetchTodo | ClearTodos |
-    DoneTodo | DeleteTodo | EditTodo | MoveTodo;
+    DoneTodo | DeleteTodo | EditTodo;
 
 
 const initialState: ITodo[] = [];
