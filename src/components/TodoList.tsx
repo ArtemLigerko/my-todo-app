@@ -1,13 +1,15 @@
 //React:
 import React from "react";
 //Components:
-import Todo from './Todo'
+import Todo from './Todo';
 //Types:
-import { ITodo } from './types/ITodo'
+import { ITodo } from './types/ITodo';
+//Redux:
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 
 interface ITodoList {
-    completedTodos: ITodo[],
+    // completedTodos: ITodo[],
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
     disableInputButton: boolean,
     todoIndexOf: number,
@@ -15,17 +17,19 @@ interface ITodoList {
 }
 
 const TodoList: React.FC<ITodoList> = ({
-    completedTodos,
+    // completedTodos,
     setDisableInputButton,
     disableInputButton,
     todoIndexOf,
     setTodoIndexOf
 }) => {
 
+    const filteredTodos = useTypedSelector(state => state.todosFilter);
+
     return (
         <div>
             <div className="todoListWrapper">
-                {completedTodos.map((todo) => (
+                {filteredTodos.map((todo) => (
                     <Todo
                         key={todo.id}
                         todo={todo}

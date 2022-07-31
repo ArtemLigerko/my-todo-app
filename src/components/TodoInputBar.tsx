@@ -73,10 +73,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
         setStatus(e.target.value);
     }
 
-    const filterHandlerRedux: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-        dispatch(filterTodos(e.target.value));
-    }
-
     const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let url = 'https://gist.githubusercontent.com/alexandrtovmach/0c8a29b734075864727228c559fe9f96/raw/c4e4133c9658af4c4b3474475273b23b4a70b4af/todo-task.json'

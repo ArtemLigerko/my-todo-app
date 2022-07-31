@@ -12,6 +12,7 @@ enum TodosActionTypes {
     DELETE_TODO = "DELETE_TODO",
     EDIT_TODO = "EDIT_TODO",
     MOVE_TODOS = "MOVE_TODOS",
+    FILTERED_TODOS = "FILTERED_TODOS",
 }       // для типизации на замену typeof ADD_TODO...
 
 //Types
@@ -49,9 +50,14 @@ interface EditTodo {
     edit: boolean,
     editText: string,
 }
+interface FilteredTodos {
+    type: TodosActionTypes.FILTERED_TODOS,
+    payload: ITodo[],
+}
+
 
 type TodoAction = putTodos | getLocalStorageTodos | AddTodo | FetchTodo | ClearTodos |
-    DoneTodo | DeleteTodo | EditTodo;
+    DoneTodo | DeleteTodo | EditTodo | FilteredTodos;
 
 
 const initialState: ITodo[] = [];
@@ -119,6 +125,8 @@ export const todos = (state = initialState, action: TodoAction): ITodo[] => {
                 }
                 return item;
             });
+        case TodosActionTypes.FILTERED_TODOS:
+            return
 
         default:
             return state;
@@ -126,13 +134,42 @@ export const todos = (state = initialState, action: TodoAction): ITodo[] => {
 }
 
 //Actions
-export const putTodos = (payload: ITodo[]) => ({ type: TodosActionTypes.PUT_TODOS, payload });
-export const getLocalStorageTodos = (payload: ITodo[]) => ({ type: TodosActionTypes.GET_LOCALSTORAGE_TODOS, payload });
-export const addTodo = (payload: string) => ({ type: TodosActionTypes.ADD_TODO, payload });
-export const fetchTodo = (payload: ITodo[]) => ({ type: TodosActionTypes.FETCH_TODOS, payload })
-export const clearTodos = () => ({ type: TodosActionTypes.CLEAR_TODOS });
-export const doneTodo = (payload: number) => ({ type: TodosActionTypes.DONE_TODO, payload });
-export const deleteTodo = (payload: number) => ({ type: TodosActionTypes.DELETE_TODO, payload });
-export const editTodo = (id: number, text: string, edit: boolean, editText: string) => (
-    { type: TodosActionTypes.EDIT_TODO, id, text, edit, editText }
-);
+export const putTodos = (payload: ITodo[]) => ({
+    type: TodosActionTypes.PUT_TODOS,
+    payload
+});
+export const getLocalStorageTodos = (payload: ITodo[]) => ({
+    type: TodosActionTypes.GET_LOCALSTORAGE_TODOS,
+    payload
+});
+export const addTodo = (payload: string) => ({
+    type: TodosActionTypes.ADD_TODO,
+    payload
+});
+export const fetchTodo = (payload: ITodo[]) => ({
+    type: TodosActionTypes.FETCH_TODOS,
+    payload
+})
+export const clearTodos = () => ({
+    type: TodosActionTypes.CLEAR_TODOS
+});
+export const doneTodo = (payload: number) => ({
+    type: TodosActionTypes.DONE_TODO,
+    payload
+});
+export const deleteTodo = (payload: number) => ({
+    type: TodosActionTypes.DELETE_TODO,
+    payload
+});
+export const editTodo = (id: number, text: string, edit: boolean, editText: string) => ({
+    type: TodosActionTypes.EDIT_TODO,
+    id,
+    text,
+    edit,
+    editText
+});
+export const filteredTodos = (payload: ITodo[]) => ({
+    type: TodosActionTypes.FILTERED_TODOS,
+    payload
+})
+

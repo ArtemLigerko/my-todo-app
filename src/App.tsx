@@ -15,6 +15,7 @@ import { ITodo } from './components/types/ITodo';
 import { useTypedDispatch } from "./hooks/useTypedDispatch";
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { getLocalStorageTodos } from './store/reducers/todosReducer';
+import { filterTodos } from './store/reducers/todosFilterReducer';
 
 //Style:
 const Head = styled.h1`
@@ -38,7 +39,6 @@ const Head = styled.h1`
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<string>("All");
-  const [completedTodos, setCompletedTodos] = useState<ITodo[]>([]);
   const [disableInputButton, setDisableInputButton] = useState<boolean>(false);
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
@@ -63,15 +63,18 @@ const App: React.FC = () => {
 
 
   const filterHandler = (): void => {
+    
+    // dispatch( filterTodos(todos, status) );
     switch (status) {
       case "Completed":
-        setCompletedTodos(todos.filter((item: ITodo) => item.completed === true));
+        dispatch( filterTodos(todos.filter((item: ITodo) => item.completed === true)) );
         break;
       case "Uncompleted":
-        setCompletedTodos(todos.filter((item: ITodo) => item.completed === false));
+        dispatch( filterTodos(todos.filter((item: ITodo) => item.completed === false)) );
+
         break;
       default:
-        setCompletedTodos(todos);
+        dispatch(filterTodos(todos));
         break;
     }
   }
@@ -120,7 +123,6 @@ const App: React.FC = () => {
         active={modalActive}
       />
       <TodoList
-        completedTodos={completedTodos}
         setDisableInputButton={setDisableInputButton}
         disableInputButton={disableInputButton}
         todoIndexOf={todoIndexOf}
