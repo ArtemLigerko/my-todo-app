@@ -30,10 +30,10 @@ import {
 
 
 interface TodoInputBarProps {
-    setStatus: React.Dispatch<React.SetStateAction<string>>,
-    disableInputButton: boolean,
-    setActive: React.Dispatch<React.SetStateAction<boolean>>,
-    active: boolean,
+    setStatus: React.Dispatch<React.SetStateAction<string>>;
+    disableInputButton: boolean;
+    setActive: React.Dispatch<React.SetStateAction<boolean>>;
+    active: boolean;
 }
 
 const TodoInputBar: React.FC<TodoInputBarProps> = ({

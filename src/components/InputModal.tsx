@@ -4,9 +4,9 @@ import React, { FC, Dispatch, ReactNode } from "react";
 import './styles/InputModal.scss';
 
 interface InputModalProps {
-    active: boolean,
-    setActive: Dispatch<React.SetStateAction<boolean>>,
-    children?: ReactNode,
+    active: boolean;
+    setActive: Dispatch<React.SetStateAction<boolean>>;
+    children?: ReactNode;
 }
 
 const InputModal: FC<InputModalProps> = ({ active, setActive, children }) => {

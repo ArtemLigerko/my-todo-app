@@ -23,11 +23,11 @@ import {
 } from '../store/reducers/todosReducer';
 
 interface ITodoProps {
-    todo: ITodo,
-    setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
-    disableInputButton: boolean,
-    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
-    todoIndexOf: number,
+    todo: ITodo;
+    setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>;
+    disableInputButton: boolean;
+    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>;
+    todoIndexOf: number;
 }
 
 const Todo: React.FC<ITodoProps> = ({

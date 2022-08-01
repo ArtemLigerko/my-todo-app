@@ -17,42 +17,42 @@ enum TodosActionTypes {
 
 //Types
 interface putTodos {
-    type: TodosActionTypes.PUT_TODOS,
-    payload: ITodo[],
+    type: TodosActionTypes.PUT_TODOS;
+    payload: ITodo[];
 }
 interface getLocalStorageTodos {
-    type: TodosActionTypes.GET_LOCALSTORAGE_TODOS,
-    payload: ITodo[],
+    type: TodosActionTypes.GET_LOCALSTORAGE_TODOS;
+    payload: ITodo[];
 }
 interface AddTodo {
-    type: TodosActionTypes.ADD_TODO,
-    payload: string,
+    type: TodosActionTypes.ADD_TODO;
+    payload: string;
 }
 interface FetchTodo {
-    type: TodosActionTypes.FETCH_TODOS,
-    payload: ITodo[],
+    type: TodosActionTypes.FETCH_TODOS;
+    payload: ITodo[];
 }
 interface ClearTodos {
-    type: TodosActionTypes.CLEAR_TODOS,
+    type: TodosActionTypes.CLEAR_TODOS;
 }
 interface DoneTodo {
-    type: TodosActionTypes.DONE_TODO,
-    payload: number,
+    type: TodosActionTypes.DONE_TODO;
+    payload: number;
 }
 interface DeleteTodo {
-    type: TodosActionTypes.DELETE_TODO,
-    payload: number,
+    type: TodosActionTypes.DELETE_TODO;
+    payload: number;
 }
 interface EditTodo {
-    type: TodosActionTypes.EDIT_TODO,
-    id: number,
-    text: string,
-    edit: boolean,
-    editText: string,
+    type: TodosActionTypes.EDIT_TODO;
+    id: number;
+    text: string;
+    edit: boolean;
+    editText: string;
 }
 interface FilteredTodos {
-    type: TodosActionTypes.FILTERED_TODOS,
-    payload: ITodo[],
+    type: TodosActionTypes.FILTERED_TODOS;
+    payload: ITodo[];
 }
 
 

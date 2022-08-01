@@ -9,11 +9,11 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 
 
 interface ITodoList {
-    // completedTodos: ITodo[],
-    setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>,
-    disableInputButton: boolean,
-    todoIndexOf: number,
-    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>,
+    // completedTodos: ITodo[];
+    setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>;
+    disableInputButton: boolean;
+    todoIndexOf: number;
+    setTodoIndexOf: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const TodoList: React.FC<ITodoList> = ({

@@ -13,8 +13,8 @@ export const UpDownTodoButtonsWrapper = styled.div`
 `
 
 interface ITodoTextArea {
-    completed: boolean,
-    randColor: number,
+    completed: boolean;
+    randColor: number;
 }
 
 export const TodoTextArea = styled.li<ITodoTextArea>`
@@ -71,20 +71,20 @@ export const TodoButtons = styled.button`
 `
 
 interface ITodoButton {
-    disabledTheme: boolean,
+    disabledTheme: boolean;
 }
 
-export const DoneTodoButton = styled(TodoButtons) <ITodoButton>`
+export const DoneTodoButton = styled(TodoButtons)<ITodoButton>`
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(100, 255, 212)'};
 `
 
-export const DelTodoButton = styled(TodoButtons) <ITodoButton>`
+export const DelTodoButton = styled(TodoButtons)<ITodoButton>`
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 144, 100)'};
 `
 
-export const EditTodoButton = styled(TodoButtons) <ITodoButton>`
+export const EditTodoButton = styled(TodoButtons)<ITodoButton>`
     width: 3rem;
     color: ${props => props.disabledTheme ? 'rgb(180, 180, 180)' : 'rgb(120, 120, 120)'};
     background-color: ${props => props.disabledTheme ? 'rgb(230, 230, 230)' : 'rgb(255, 175, 25)'};
