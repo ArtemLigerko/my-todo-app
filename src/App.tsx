@@ -10,7 +10,7 @@ import './App.scss';
 //Hooks:
 import { useActions } from './hooks/useActions';
 //Types:
-import { ITodo } from './components/types/ITodo';
+// import { ITodo } from './components/types/ITodo';
 //Redux:
 import { useTypedDispatch } from "./hooks/useTypedDispatch";
 import { useTypedSelector } from './hooks/useTypedSelector';
@@ -26,19 +26,9 @@ const Head = styled.h1`
   box-sizing: border-box;
   text-align: center;
 `
-// const AppWrapper = styled.div`
-//   font-family: Arial, Helvetica, sans-serif;
-//   background-color: rgb(252, 218, 155);
-//   width: 100%;
-//   min-height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// `
-
 
 const App: React.FC = () => {
-  const [status, setStatus] = useState<string>("All");
+  const [filter, setFilter] = useState<string>("All");
   const [disableInputButton, setDisableInputButton] = useState<boolean>(false);
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [todoIndexOf, setTodoIndexOf] = useState<number>(0);
@@ -59,24 +49,11 @@ const App: React.FC = () => {
   useEffect((): void => {
     filterHandler();
     saveLocalTodos();
-  }, [status, todos]);
+  }, [filter, todos]);
 
 
   const filterHandler = (): void => {
-    
-    // dispatch( filterTodos(todos, status) );
-    switch (status) {
-      case "Completed":
-        dispatch( filterTodos(todos.filter((item: ITodo) => item.completed === true)) );
-        break;
-      case "Uncompleted":
-        dispatch( filterTodos(todos.filter((item: ITodo) => item.completed === false)) );
-
-        break;
-      default:
-        dispatch(filterTodos(todos));
-        break;
-    }
+    dispatch( filterTodos(todos, filter) );
   }
 
   // Save to local
@@ -108,7 +85,6 @@ const App: React.FC = () => {
   };
 
   return (
-    // <AppWrapper>
     <div className='appWrapper'>
       <header className='header'>
         <Statistic />
@@ -117,7 +93,7 @@ const App: React.FC = () => {
         </Head>
       </header>
       <TodoInputBar
-        setStatus={setStatus}
+        setFilter={setFilter}
         disableInputButton={disableInputButton}
         setActive={setModalActive}
         active={modalActive}
@@ -128,9 +104,7 @@ const App: React.FC = () => {
         todoIndexOf={todoIndexOf}
         setTodoIndexOf={setTodoIndexOf}
       />
-
     </div>
-    // </AppWrapper>
   );
 }
 

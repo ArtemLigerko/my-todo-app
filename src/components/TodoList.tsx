@@ -3,13 +3,12 @@ import React from "react";
 //Components:
 import Todo from './Todo';
 //Types:
-import { ITodo } from './types/ITodo';
+// import { ITodo } from './types/ITodo';
 //Redux:
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 
 interface ITodoList {
-    // completedTodos: ITodo[];
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>;
     disableInputButton: boolean;
     todoIndexOf: number;
@@ -17,7 +16,6 @@ interface ITodoList {
 }
 
 const TodoList: React.FC<ITodoList> = ({
-    // completedTodos,
     setDisableInputButton,
     disableInputButton,
     todoIndexOf,

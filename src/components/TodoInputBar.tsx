@@ -20,7 +20,7 @@ import { ITodo, ITodoFetch } from "./types/ITodo";
 import { useTypedDispatch } from '../hooks/useTypedDispatch';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
-import { filterTodos } from "../store/reducers/todosFilterReducer";
+// import { filterTodos } from "../store/reducers/todosFilterReducer";
 import {
     addTodo,
     clearTodos,
@@ -30,14 +30,14 @@ import {
 
 
 interface TodoInputBarProps {
-    setStatus: React.Dispatch<React.SetStateAction<string>>;
+    setFilter: React.Dispatch<React.SetStateAction<string>>;
     disableInputButton: boolean;
     setActive: React.Dispatch<React.SetStateAction<boolean>>;
     active: boolean;
 }
 
 const TodoInputBar: React.FC<TodoInputBarProps> = ({
-    setStatus,
+    setFilter,
     disableInputButton,
     setActive,
     active,
@@ -70,7 +70,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
     }
 
     const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-        setStatus(e.target.value);
+        setFilter(e.target.value);
     }
 
     const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {

@@ -6,29 +6,22 @@ const FILTER: string = "FILTER";
 
 interface todosFilterAction {  //если в action поступают данные разных типов, то необходимо создавать interface для каждого action
     type: string;
-    payload: ITodo[];
+    todos: ITodo[];
+    filter: string;
 }
-// interface todosFilterAction {  //если в action поступают данные разных типов, то необходимо создавать interface для каждого action
-//     type: string;
-//     todos: ITodo[];
-//     status: string;
-// }
 
 export const todosFilterReducer = (state = initialState, action: todosFilterAction): ITodo[] => {
     switch (action.type) {
         case FILTER:
 
-            // switch (action.status) {
-            //     case "Completed":
-            //         return action.todos.filter((item: ITodo) => item.completed === true);
-            //     case "Uncompleted":
-            //         return action.todos.filter((item: ITodo) => item.completed === false);
-            //     default:
-            //         return action.todos;
-            //         break;
-            // }
-            
-            return action.payload;
+            switch (action.filter) {
+                case "Completed":
+                    return action.todos.filter((item: ITodo) => item.completed === true);
+                case "Uncompleted":
+                    return action.todos.filter((item: ITodo) => item.completed === false);
+                default:
+                    return action.todos;
+            }
 
         default:
             return state;
@@ -36,6 +29,5 @@ export const todosFilterReducer = (state = initialState, action: todosFilterActi
 }
 
 //Actions
-export const filterTodos = (payload: ITodo[]) => ({ type: FILTER, payload });
-// export const filterTodos = (payload: ITodo[]) => ({ type: FILTER, todos, status });
+export const filterTodos = (todos: ITodo[], filter: string) => ({ type: FILTER, todos, filter });
 
