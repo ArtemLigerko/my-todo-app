@@ -20,10 +20,6 @@ interface putTodos {
     type: TodosActionTypes.PUT_TODOS;
     payload: ITodo[];
 }
-interface getLocalStorageTodos {
-    type: TodosActionTypes.GET_LOCALSTORAGE_TODOS;
-    payload: ITodo[];
-}
 interface AddTodo {
     type: TodosActionTypes.ADD_TODO;
     payload: string;
@@ -56,7 +52,7 @@ interface FilteredTodos {
 }
 
 
-type TodoAction = putTodos | getLocalStorageTodos | AddTodo | FetchTodo | ClearTodos |
+type TodoAction = putTodos | AddTodo | FetchTodo | ClearTodos |
     DoneTodo | DeleteTodo | EditTodo | FilteredTodos;
 
 
@@ -65,9 +61,6 @@ const initialState: ITodo[] = [];
 export const todos = (state = initialState, action: TodoAction): ITodo[] => {
     switch (action.type) {
         case TodosActionTypes.PUT_TODOS:
-            return action.payload;
-
-        case TodosActionTypes.GET_LOCALSTORAGE_TODOS:
             return action.payload;
 
         case TodosActionTypes.ADD_TODO:
@@ -136,10 +129,6 @@ export const todos = (state = initialState, action: TodoAction): ITodo[] => {
 //Actions
 export const putTodos = (payload: ITodo[]) => ({
     type: TodosActionTypes.PUT_TODOS,
-    payload
-});
-export const getLocalStorageTodos = (payload: ITodo[]) => ({
-    type: TodosActionTypes.GET_LOCALSTORAGE_TODOS,
     payload
 });
 export const addTodo = (payload: string) => ({

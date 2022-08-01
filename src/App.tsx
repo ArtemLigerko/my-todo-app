@@ -14,7 +14,7 @@ import { useActions } from './hooks/useActions';
 //Redux:
 import { useTypedDispatch } from "./hooks/useTypedDispatch";
 import { useTypedSelector } from './hooks/useTypedSelector';
-import { getLocalStorageTodos } from './store/reducers/todosReducer';
+import { putTodos } from './store/reducers/todosReducer';
 import { filterTodos } from './store/reducers/todosFilterReducer';
 
 //Style:
@@ -70,7 +70,7 @@ const App: React.FC = () => {
       localStorage.setItem("todos", JSON.stringify([]));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      dispatch(getLocalStorageTodos(todoLocal));
+      dispatch(putTodos(todoLocal));
     }
 
     //Redux
