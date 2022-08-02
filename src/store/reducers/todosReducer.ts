@@ -4,7 +4,6 @@ import { ITodo } from "../../components/types/ITodo";
 //Types
 enum TodosActionTypes {
     PUT_TODOS = "PUT_TODOS",
-    GET_LOCALSTORAGE_TODOS = "GET_LOCALSTORAGE_TODOS",
     ADD_TODO = "ADD_TODO",
     FETCH_TODOS = "FETCH_TODOS",
     CLEAR_TODOS = "CLEAR_TODOS",
@@ -12,11 +11,11 @@ enum TodosActionTypes {
     DELETE_TODO = "DELETE_TODO",
     EDIT_TODO = "EDIT_TODO",
     MOVE_TODOS = "MOVE_TODOS",
-    FILTERED_TODOS = "FILTERED_TODOS",
+    SEARCH_FILTERED_TODOS = "SEARCH_FILTERED_TODOS",
 }       // для типизации на замену typeof ADD_TODO...
 
 //Types
-interface putTodos {
+interface PutTodos {
     type: TodosActionTypes.PUT_TODOS;
     payload: ITodo[];
 }
@@ -46,14 +45,10 @@ interface EditTodo {
     edit: boolean;
     editText: string;
 }
-interface FilteredTodos {
-    type: TodosActionTypes.FILTERED_TODOS;
-    payload: ITodo[];
-}
 
 
-type TodoAction = putTodos | AddTodo | FetchTodo | ClearTodos |
-    DoneTodo | DeleteTodo | EditTodo | FilteredTodos;
+type TodoAction = PutTodos | AddTodo | FetchTodo | ClearTodos |
+    DoneTodo | DeleteTodo | EditTodo;
 
 
 const initialState: ITodo[] = [];
@@ -118,8 +113,7 @@ export const todos = (state = initialState, action: TodoAction): ITodo[] => {
                 }
                 return item;
             });
-        case TodosActionTypes.FILTERED_TODOS:
-            return
+
 
         default:
             return state;
@@ -157,8 +151,5 @@ export const editTodo = (id: number, text: string, edit: boolean, editText: stri
     edit,
     editText
 });
-export const filteredTodos = (payload: ITodo[]) => ({
-    type: TodosActionTypes.FILTERED_TODOS,
-    payload
-})
+
 

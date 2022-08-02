@@ -100,6 +100,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 active={active}
                 setActive={setActive}
             >
+            </InputModal>
                 <div>
                     <InputTodoBar
                         value={inputText}
@@ -118,7 +119,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                         +
                     </AddTodoButton>
                 </div>
-            </InputModal>
 
 
             <OptionButtonsWrapper>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TodoInputBar from './components/TodoInputBar';
 import TodoList from './components/TodoList';
 import Statistic from './components/Statistic';
+import SearchBar from './components/SearchBar'
 //Styles:
 import styled from 'styled-components';
 import './App.scss';
@@ -53,7 +54,7 @@ const App: React.FC = () => {
 
 
   const filterHandler = (): void => {
-    dispatch( filterTodos(todos, filter) );
+    dispatch(filterTodos(todos, filter));
   }
 
   // Save to local
@@ -86,8 +87,9 @@ const App: React.FC = () => {
 
   return (
     <div className='appWrapper'>
+      <Statistic />
+      <SearchBar />
       <header className='header'>
-        <Statistic />
         <Head>
           Artem's Todo App
         </Head>
