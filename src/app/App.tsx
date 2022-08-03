@@ -64,9 +64,9 @@ const App: React.FC = () => {
       localStorage.setItem("counter", JSON.stringify({}));
     } else {
       let counterLocalRedux = JSON.parse(localStorage.getItem("counter"));
-      createCount(counterLocalRedux.counterCreated);
-      updateCount(counterLocalRedux.counterUpdated);
-      deleteCount(counterLocalRedux.counterDeleted);
+      dispatch(createCount(counterLocalRedux.counterCreated));
+      dispatch(updateCount(counterLocalRedux.counterUpdated));
+      dispatch(deleteCount(counterLocalRedux.counterDeleted));
     }
   };
 
