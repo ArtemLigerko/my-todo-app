@@ -7,8 +7,9 @@ import './styles/SearchBar.scss';
 // import { ITodo } from './types/ITodo';
 //Redux:
 import { useTypedDispatch } from '../hooks/useTypedDispatch';
-import { searchFilterAction } from '../store/reducers/todosFilterReducer';
 import { useTypedSelector } from "../hooks/useTypedSelector";
+//Redux-Actions:
+import { searchFilteredTodos } from '../store/reducers/todosSearchFilterReducer';
 
 
 interface SearchBar {
@@ -17,11 +18,11 @@ interface SearchBar {
 
 const SearchBar: React.FC<SearchBar> = () => {
 
+    const filteredTodos = useTypedSelector(state => state.todosFilter);
     const dispatch = useTypedDispatch();
-    const todos = useTypedSelector(state => state.todosFilter)
 
     const inputSearchTextHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        dispatch(searchFilterAction(todos, e.target.value));
+        dispatch(searchFilteredTodos(filteredTodos, e.target.value));
     }
 
 

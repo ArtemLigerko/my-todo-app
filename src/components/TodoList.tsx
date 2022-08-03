@@ -6,6 +6,8 @@ import Todo from './Todo';
 // import { ITodo } from './types/ITodo';
 //Redux:
 import { useTypedSelector } from "../hooks/useTypedSelector";
+//Redux-Actions:
+// import { searchFilteredTodos } from '../store/reducers/todosSearchFilterReducer';
 
 
 interface ITodoList {
@@ -23,7 +25,8 @@ const TodoList: React.FC<ITodoList> = ({
 }) => {
 
     const filteredTodos = useTypedSelector(state => state.todosFilter);
-
+    // const filteredTodos = useTypedSelector(state => state.todosSearchFilter);
+    
     return (
         <div>
             <div className="todoListWrapper">

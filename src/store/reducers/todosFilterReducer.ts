@@ -4,7 +4,6 @@ const initialState: ITodo[] = [];
 
 enum TodosFilterTypes {
     FILTER = "FILTER",
-    SEARCH_FILTER = "SEARCH_FILTERED_TODOS",
 }
 
 
@@ -14,13 +13,8 @@ interface ITodosFilter {  //если в action поступают данные �
     filter: string;
 }
 
-interface ISearchFilter {
-    type: string;
-    todos: ITodo[];
-    searchText: string;
-}
 
-type TodosFilter = ITodosFilter | ISearchFilter;
+type TodosFilter = ITodosFilter;
 
 export const todosFilterReducer = (state = initialState, action: TodosFilter): ITodo[] => {
     switch (action.type) {
@@ -35,10 +29,6 @@ export const todosFilterReducer = (state = initialState, action: TodosFilter): I
                     return action.todos;
             }
 
-        case TodosFilterTypes.SEARCH_FILTER:
-            console.log(action.searchText);
-            return state.filter((todo: ITodo) => todo.text.indexOf(action.searchText) > 0);
-
         default:
             return state;
     }
@@ -49,8 +39,3 @@ export const filterTodos = (todos: ITodo[], filter: string) => ({
     type: TodosFilterTypes.FILTER, 
     todos, 
     filter });
-export const searchFilterAction = (todos: ITodo[], searchText: string) => ({
-    type: TodosFilterTypes.SEARCH_FILTER,
-    todos,
-    searchText
-});

@@ -20,7 +20,7 @@ const Statistic: React.FC = () => {
                 updated: <b>{counterUpdated}</b>;
                 deleted: <b>{counterDeleted}</b>;
             </div>
-            <div>v2.0.5</div>
+            <div>v2.0.7</div>
         </StatisticBar>
     )
 }

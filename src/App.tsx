@@ -88,7 +88,7 @@ const App: React.FC = () => {
   return (
     <div className='appWrapper'>
       <Statistic />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <header className='header'>
         <Head>
           Artem's Todo App
