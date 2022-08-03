@@ -1,11 +1,12 @@
 //Redux
 import { applyMiddleware, legacy_createStore } from "redux";
 //Redux-Toolkit
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
 import { configureStore } from "@reduxjs/toolkit";
-//RootReducer
+//Redux-Reducers
 import { rootReducer } from './reducers'
+// import { statisticReducer } from "./reducers/statisticSlice";
+// import thunk from "redux-thunk";
+// import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
 
 
 // export const store = legacy_createStore(
@@ -17,5 +18,6 @@ export const store = configureStore({
     reducer: rootReducer,
 })
 
+export type RootState = ReturnType<typeof store.getState>;
 
 export type TypedDispatch = typeof store.dispatch;  //https://redux.js.org/usage/usage-with-typescript

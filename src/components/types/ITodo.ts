@@ -14,7 +14,3 @@ export interface ITodoFetch {
     createdAt: Date | string;
 }
 
-// "id":1,
-// "text":"Nunc purus. Phasellus in felis.",
-// "isCompleted":true,
-// "createdAt":"6/29/2022"

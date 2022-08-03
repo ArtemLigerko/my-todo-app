@@ -1,32 +1,21 @@
 //React:
 import React, { useState, useEffect } from 'react';
 //Components:
-import TodoInputBar from './components/TodoInputBar';
-import TodoList from './components/TodoList';
-import Statistic from './components/Statistic';
-import SearchBar from './components/SearchBar'
+import TodoInputBar from '../components/TodoInputBar';
+import TodoList from '../components/TodoList';
+import Statistic from '../components/Statistic';
+import SearchBar from '../components/SearchBar'
 //Styles:
-import styled from 'styled-components';
 import './App.scss';
-//Hooks:
-import { useActions } from './hooks/useActions';
-//Types:
-// import { ITodo } from './components/types/ITodo';
+import { Head } from './App.styles'
 //Redux:
-import { useTypedDispatch } from "./hooks/useTypedDispatch";
-import { useTypedSelector } from './hooks/useTypedSelector';
-import { putTodos } from './store/reducers/todosReducer';
-import { filterTodos } from './store/reducers/todosFilterReducer';
+// import { useSelector, useDispatch } from 'react-redux'; //ReduxSlice
+import { useTypedDispatch } from "../hooks/useTypedDispatch";
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { createCount, updateCount, deleteCount } from '../store/reducers/statisticSlice';
+import { putTodos } from '../store/reducers/todosReducer';
+import { filterTodos } from '../store/reducers/todosFilterReducer';
 
-//Style:
-const Head = styled.h1`
-  color: #A52A2A;
-  // color: rgb(255, 255, 255);
-  font-size: 3rem;
-  margin: 30px 0px 30px;
-  box-sizing: border-box;
-  text-align: center;
-`
 
 const App: React.FC = () => {
   const [filter, setFilter] = useState<string>("All");
@@ -36,10 +25,6 @@ const App: React.FC = () => {
 
   const dispatch = useTypedDispatch();
   const todos = useTypedSelector(state => state.todos);
-
-  const { addCreateCountAction } = useActions(); //Redux
-  const { addUpdateCountAction } = useActions(); //Redux
-  const { addDeleteCountAction } = useActions(); //Redux
 
   //RUN ONCE when the app starts
   useEffect((): void => {
@@ -79,9 +64,9 @@ const App: React.FC = () => {
       localStorage.setItem("counter", JSON.stringify({}));
     } else {
       let counterLocalRedux = JSON.parse(localStorage.getItem("counter"));
-      addCreateCountAction(counterLocalRedux.counterCreated);
-      addUpdateCountAction(counterLocalRedux.counterUpdated);
-      addDeleteCountAction(counterLocalRedux.counterDeleted);
+      createCount(counterLocalRedux.counterCreated);
+      updateCount(counterLocalRedux.counterUpdated);
+      deleteCount(counterLocalRedux.counterDeleted);
     }
   };
 

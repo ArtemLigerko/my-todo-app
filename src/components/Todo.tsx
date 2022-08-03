@@ -14,7 +14,7 @@ import { ITodo } from './types/ITodo';
 //Redux:
 import { useTypedDispatch } from "../hooks/useTypedDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useActions } from "../hooks/useActions";
+import { updateCount, deleteCount } from '../store/reducers/statisticSlice';
 import {
     putTodos,
     doneTodo,
@@ -41,25 +41,22 @@ const Todo: React.FC<ITodoProps> = ({
     const [editText, setEditText] = useState<string>('');
 
     const dispatch = useTypedDispatch();
-    const { addDeleteCountAction } = useActions();
-    const { addUpdateCountAction } = useActions();
-    const todos = useTypedSelector(state => state.todos)
+    const todos = useTypedSelector(state => state.todos);
 
     const completedHandler = (): void => {
         dispatch(doneTodo(todo.id));
-        // console.log(todo.id);
     }
 
     const deleteHandler = (): void => {
         dispatch(deleteTodo(todo.id));
-        addDeleteCountAction(1);
+        dispatch(deleteCount(1));
     }
 
     const handleEditClick = (): void => {
         setEditText(todo.text);
         dispatch(editTodo(todo.id, todo.text, todo.edit, editText));        //Redux
         setDisableInputButton(!disableInputButton);
-        addUpdateCountAction(editText !== todo.text && todo.edit ? 1 : 0);  //Redux
+        dispatch(updateCount(editText !== todo.text && todo.edit ? 1 : 0));  //Redux
 
     }
 
