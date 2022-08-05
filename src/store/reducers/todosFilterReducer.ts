@@ -35,7 +35,7 @@ export const todosFilterReducer = (state = initialState, action: TodosFilter): I
 }
 
 //Actions
-export const filterTodos = (todos: ITodo[], filter: string) => ({ 
+export const todosFilter = (todos: ITodo[], filter: string) => ({ 
     type: TodosFilterTypes.FILTER, 
     todos, 
     filter });

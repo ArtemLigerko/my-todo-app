@@ -101,25 +101,25 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 active={active}
                 setActive={setActive}
             >
-                <div>
-                    <InputTodoBar
-                        value={inputText}
-                        onChange={inputTextHandler}
-                        onKeyPress={(e) => {
-                            if (e.key === 'Enter') { submitHandler(e); }
-                        }}
-                        type="text"
-                        placeholder="type you task..."
-                    />
-                    <AddTodoButton
-                        onClick={submitHandler}
-                        type="submit"
-                        disabled={disableInputButton}
-                    >
-                        +
-                    </AddTodoButton>
-                </div>
             </InputModal>
+            <div>
+                <InputTodoBar
+                    value={inputText}
+                    onChange={inputTextHandler}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') { submitHandler(e); }
+                    }}
+                    type="text"
+                    placeholder="type you task..."
+                />
+                <AddTodoButton
+                    onClick={submitHandler}
+                    type="submit"
+                    disabled={disableInputButton}
+                >
+                    +
+                </AddTodoButton>
+            </div>
 
 
             <OptionButtonsWrapper>
