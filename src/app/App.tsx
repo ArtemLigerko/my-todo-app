@@ -40,8 +40,8 @@ const App: React.FC = () => {
 
 
   const filterHandler = (): void => {
-    dispatch(todosFilter(todos, filter)); //Redux-Core
-    // dispatch(todosFilter({todos, filter})); //Slice
+    // dispatch(todosFilter(todos, filter)); //Redux-Core
+    dispatch(todosFilter(todos, filter)); //Slice
   }
 
   // Save to local

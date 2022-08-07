@@ -8,7 +8,7 @@ const initialState: ITodo[] = [];
 
 interface ITodosFilter {  //если в action поступают данные разных типов, то необходимо создавать interface для каждого action
     todos: ITodo[];
-    filter: string;
+    // filter?: string;
 }
 
 
@@ -16,20 +16,22 @@ export const todosFilterSlice = createSlice({
     name: 'todos',
     initialState,
     reducers: {
-        todosFilterActionSlice: (state, action: PayloadAction<any>) => {
-            const { todos, filter } = action.payload;
-            switch (filter) {
-                case "Completed":
-                    return state = todos.filter((item: ITodo) => item.completed === true);
-                case "Uncompleted":
-                    return state = todos.filter((item: ITodo) => item.completed === false);
-                default:
-                    return state = todos;
+        todosFilter:
+            (state, action: PayloadAction<ITodosFilter>) => {
+                // console.log(filter, todos);
+                // switch (filter) {
+                //     case "Completed":
+                //         state = todos.filter((item: ITodo) => item.completed === true).slice();
+                //     case "Uncompleted":
+                //         state = todos.filter((item: ITodo) => item.completed === false).slice();
+                //     default:
+                //         state = todos.slice();
+                // }
+                // state = action.payload;
             }
-        }
     }
 });
 
-export const { todosFilterActionSlice } = todosFilterSlice.actions;
+export const { todosFilter } = todosFilterSlice.actions;
 
 export default todosFilterSlice.reducer;
