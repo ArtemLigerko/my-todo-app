@@ -13,9 +13,10 @@ import { Head } from './App.styles'
 import { useTypedDispatch } from "../hooks/useTypedDispatch";
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { createCount, updateCount, deleteCount } from '../store/reducers/statisticSlice';
-import { putTodos } from '../store/reducers/todosReducer';
-import { todosFilter } from '../store/reducers/todosFilterReducer';
-// import { todosFilter } from '../store/reducers/todosFilterSlice';
+// import { putTodos } from '../store/reducers/todosReducer';
+import { putTodos } from '../store/reducers/todosSlice';
+// import { todosFilter } from '../store/reducers/todosFilterReducer';
+import { todosFilter } from '../store/reducers/todosFilterSlice';
 
 
 const App: React.FC = () => {
@@ -41,7 +42,9 @@ const App: React.FC = () => {
 
   const filterHandler = (): void => {
     // dispatch(todosFilter(todos, filter)); //Redux-Core
-    dispatch(todosFilter(todos, filter)); //Slice
+    // dispatch(todosFilter(todos, filter)); //Slice
+    dispatch(todosFilter({todos: todos, filter: filter}));
+    console.log(todos);
   }
 
   // Save to local

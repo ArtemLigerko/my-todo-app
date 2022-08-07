@@ -2,20 +2,24 @@
 import { combineReducers, applyMiddleware } from "redux";
 //Reducers:
 // import { statisticReducer } from "./statisticReducer";
-import statisticSliceReducer from "./statisticSlice";
-import { todosFilterReducer } from "./todosFilterReducer";
-import todosFilterSliceReducer from "./todosFilterSlice";
-import { todosSearchFilterReducer } from './todosSearchFilterReducer';
-import { todos } from "./todosReducer";
+// import { todosFilterReducer } from "./todosFilterReducer";
+// import { todosSearchFilterReducer } from './todosSearchFilterReducer';
+// import { todos } from "./todosReducer";
+//Redux-Slice
+import statisticSlice from "./statisticSlice";
+import todosSlice from "./todosSlice";
+import todosFilterSlice from "./todosFilterSlice";
+
  
 
 export const rootReducer = combineReducers({
     // statistic: statisticReducer,
-    statistic: statisticSliceReducer,
-    todos: todos,
-    todosFilter: todosFilterReducer,
-    // todosFilter: todosFilterSliceReducer,
-    todosSearchFilter: todosSearchFilterReducer,
+    // todos: todos,
+    // todosFilter: todosFilterReducer,
+    // todosSearchFilter: todosSearchFilterReducer,
+    statistic: statisticSlice,
+    todos: todosSlice,
+    todosFilter: todosFilterSlice,
 });
 
 

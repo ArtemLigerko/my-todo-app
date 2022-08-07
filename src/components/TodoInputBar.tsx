@@ -26,11 +26,17 @@ import {
     updateCount,
     deleteCount
 } from '../store/reducers/statisticSlice';
+// import {
+//     addTodo,
+//     clearTodos,
+//     fetchTodo,
+// } from '../store/reducers/todosReducer';
 import {
     addTodo,
     clearTodos,
-    fetchTodo,
-} from '../store/reducers/todosReducer';
+    fetchTodo
+} from '../store/reducers/todosSlice';
+import { todosFilter } from '../store/reducers/todosFilterSlice';
 
 
 
@@ -72,6 +78,7 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
 
     const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         setFilter(e.target.value);
+        // dispatch(todosFilter({todos: todos, filter: e.target.value}));
     }
 
     const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {

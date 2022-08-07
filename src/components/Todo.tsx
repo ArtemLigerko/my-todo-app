@@ -20,7 +20,7 @@ import {
     doneTodo,
     deleteTodo,
     editTodo,
-} from '../store/reducers/todosReducer';
+} from '../store/reducers/todosSlice';
 
 interface ITodoProps {
     todo: ITodo;
@@ -54,10 +54,13 @@ const Todo: React.FC<ITodoProps> = ({
 
     const handleEditClick = (): void => {
         setEditText(todo.text);
-        dispatch(editTodo(todo.id, todo.text, todo.edit, editText));        //Redux
+        dispatch(editTodo({
+            id: todo.id, 
+            text: todo.text, 
+            isEdit: todo.edit, 
+            editText: editText}));        //Redux
         setDisableInputButton(!disableInputButton);
         dispatch(updateCount(editText !== todo.text && todo.edit ? 1 : 0));  //Redux
-
     }
 
     const inputEditTextHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
