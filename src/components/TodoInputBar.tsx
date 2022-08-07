@@ -16,27 +16,19 @@ import {
 } from './styles/TodoInputBar';
 //Types:
 import { ITodo, ITodoFetch } from "./types/ITodo";
-//Redux:
+//Redux-Hooks:
 import { useTypedDispatch } from '../hooks/useTypedDispatch';
 import { useTypedSelector } from "../hooks/useTypedSelector";
-// import { useActions } from "../hooks/useActions";
-// import { filterTodos } from "../store/reducers/todosFilterReducer";
+//Redux-Slice
 import {
     createCount,
-    updateCount,
     deleteCount
 } from '../store/reducers/statisticSlice';
-// import {
-//     addTodo,
-//     clearTodos,
-//     fetchTodo,
-// } from '../store/reducers/todosReducer';
 import {
     addTodo,
     clearTodos,
     fetchTodo
 } from '../store/reducers/todosSlice';
-import { todosFilter } from '../store/reducers/todosFilterSlice';
 
 
 
@@ -78,7 +70,6 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
 
     const filterHandler: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         setFilter(e.target.value);
-        // dispatch(todosFilter({todos: todos, filter: e.target.value}));
     }
 
     const handleFetchTodos = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -108,7 +99,27 @@ const TodoInputBar: React.FC<TodoInputBarProps> = ({
                 active={active}
                 setActive={setActive}
             >
+                <div>
+                    <InputTodoBar
+                        value={inputText}
+                        onChange={inputTextHandler}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') { submitHandler(e); }
+                        }}
+                        type="text"
+                        placeholder="type you task..."
+                    />
+                    <AddTodoButton
+                        onClick={submitHandler}
+                        type="submit"
+                        disabled={disableInputButton}
+                    >
+                        +
+                    </AddTodoButton>
+                </div>
             </InputModal>
+
+
             <div>
                 <InputTodoBar
                     value={inputText}

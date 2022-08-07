@@ -5,9 +5,9 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { ITodo } from "../../components/types/ITodo";
 
 
-interface ITodosFilter {  //если в action поступают данные разных типов, то необходимо создавать interface для каждого action
-    todos?: ITodo[];
-    filter?: string;
+interface ITodosFilter {  
+    todos: ITodo[];
+    filter: string;
 }
 
 const initialState: ITodo[] = [];
@@ -21,13 +21,12 @@ export const todosFilterSlice = createSlice({
             const { todos, filter } = action.payload;
             switch (filter) {
                 case "Completed":
-                    return state = todos.filter((item: ITodo) => item.completed === true).slice();
+                    return state = todos.filter((item: ITodo) => item.completed === true);
                 case "Uncompleted":
-                    return state = todos.filter((item: ITodo) => item.completed === false).slice();
+                    return state = todos.filter((item: ITodo) => item.completed === false);
                 default:
-                    return state = todos.slice();
+                    return state = todos;
             }
-            // return state;
         }
     }
 });

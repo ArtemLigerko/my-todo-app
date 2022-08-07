@@ -11,11 +11,6 @@ interface IEditTodo {
     isEdit: boolean;
     editText: string;
 }
-// interface ITodosFilter { 
-//     todos: ITodo[];
-//     filterItem: any;
-// }
-
 
 const initialState: ITodo[] = [];
 
@@ -25,7 +20,7 @@ export const todosSlice = createSlice({
     reducers:
     {
         putTodos: (state, action: PayloadAction<ITodo[]>) => {
-            return state = action.payload.slice();
+            return state = action.payload;
         },
         addTodo: (state, action: PayloadAction<string>) => {
             state.push(
@@ -57,12 +52,12 @@ export const todosSlice = createSlice({
                 }
                 return item;
             })
-            return state = doneTodos.slice();
+            return state = doneTodos;
         },
 
         deleteTodo: (state, action: PayloadAction<Number>) => {
             const deleteTodos = state.filter(el => el.id !== action.payload);
-            return state = deleteTodos.slice();
+            return state = deleteTodos;
         },
 
         editTodo: (state, action: PayloadAction<IEditTodo>) => {
@@ -83,21 +78,8 @@ export const todosSlice = createSlice({
                 }
                 return item;
             });
-            return state = editTodos.slice();
+            return state = editTodos;
         },
-
-        // todosFilter:
-        // (state, action: PayloadAction<string>) => {
-        //     console.log(action.payload);
-        //     switch (action.payload) {
-        //         case "Completed":
-        //             return state.filter((item: ITodo) => item.completed === true);
-        //         case "Uncompleted":
-        //             return state.filter((item: ITodo) => item.completed === false);
-        //         default:
-        //             return state;
-        //     }
-        // }
     },
 });
 
@@ -109,7 +91,6 @@ export const {
     doneTodo,
     deleteTodo,
     editTodo,
-    // todosFilter,
 } = todosSlice.actions;
 
 export default todosSlice.reducer;

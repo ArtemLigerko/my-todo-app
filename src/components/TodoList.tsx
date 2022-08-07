@@ -2,13 +2,8 @@
 import React from "react";
 //Components:
 import Todo from './Todo';
-//Types:
-// import { ITodo } from './types/ITodo';
-//Redux:
+//Redux-Hooks:
 import { useTypedSelector } from "../hooks/useTypedSelector";
-//Redux-Actions:
-// import { searchFilteredTodos } from '../store/reducers/todosSearchFilterReducer';
-
 
 interface ITodoList {
     setDisableInputButton: React.Dispatch<React.SetStateAction<boolean>>;
