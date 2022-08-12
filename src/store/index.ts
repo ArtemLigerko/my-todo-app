@@ -10,8 +10,8 @@ import {
     PERSIST,
     PURGE,
     REGISTER,
-    WebStorage,
  } from 'redux-persist';
+import { WebStorage } from "redux-persist/es/types";
 import storage from 'redux-persist/lib/storage';
 //Redux-Reducers
 import { rootReducer } from './reducers'
