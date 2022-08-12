@@ -9,13 +9,8 @@ import SearchBar from '../components/SearchBar'
 import './App.scss';
 import { Head } from './App.styles'
 //Redux:
-// import { useSelector, useDispatch } from 'react-redux'; //ReduxSlice
 import { useTypedDispatch } from "../hooks/useTypedDispatch";
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { createCount, updateCount, deleteCount } from '../store/reducers/statisticSlice';
-// import { putTodos } from '../store/reducers/todosReducer';
-import { putTodos } from '../store/reducers/todosSlice';
-// import { todosFilter } from '../store/reducers/todosFilterReducer';
 import { todosFilter } from '../store/reducers/todosFilterSlice';
 
 
@@ -28,52 +23,16 @@ const App: React.FC = () => {
   const dispatch = useTypedDispatch();
   const todos = useTypedSelector(state => state.todos);
 
-  //RUN ONCE when the app starts
-  useEffect((): void => {
-    getLocalTodos();
-  }, []);
-
-  // Use Effect
+  //UseEffect
   useEffect((): void => {
     filterHandler();
-    saveLocalTodos();
   }, [filter, todos]);
 
 
   const filterHandler = (): void => {
-    // dispatch(todosFilter(todos, filter)); //Redux-Core
-    // dispatch(todosFilter(todos, filter)); //Slice
     dispatch(todosFilter({todos: todos, filter: filter}));
-    console.log(todos);
   }
 
-  // Save to local
-  const statisticState = useTypedSelector(state => state.statistic);  //Redux
-
-  const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-    localStorage.setItem("counter", JSON.stringify(statisticState)); //Redux
-  };
-
-
-  const getLocalTodos = () => {
-    if (localStorage.getItem("todos") === null) {
-      localStorage.setItem("todos", JSON.stringify([]));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      dispatch(putTodos(todoLocal));
-    }
-
-    //Redux
-    if (localStorage.getItem("counter") === null) {
-      localStorage.setItem("counter", JSON.stringify({}));
-    } else {
-      let counterLocalRedux = JSON.parse(localStorage.getItem("counter"));
-      dispatch(createCount(counterLocalRedux.counterCreated));
-      dispatch(updateCount(counterLocalRedux.counterUpdated));
-      dispatch(deleteCount(counterLocalRedux.counterDeleted));
-    }
-  };
 
   return (
     <div className='appWrapper'>
